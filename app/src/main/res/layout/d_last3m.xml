@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical|center_horizontal"
+    android:padding="10dip">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_gravity="center_vertical|center_horizontal">
+
+        <ImageView
+            android:layout_width="32dip"
+            android:layout_height="32dip"
+            android:src="@drawable/sfa_last3m"
+            android:layout_marginRight="10dip"
+            android:elevation="1dp"
+            android:layout_gravity="center_vertical|center_horizontal" />
+
+        <TextView
+            android:text="Daftar Order 3 Bulan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="normal|bold"
+            android:textColorLink="@android:color/black"
+            android:textColor="@android:color/black"
+            android:elevation="1dp" />
+    </LinearLayout>
+
+    <HorizontalScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:paddingBottom="10dip"
+        android:paddingTop="5dip">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dip">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="180dip"
+                    android:layout_height="match_parent"
+                    android:background="#006666"
+                    android:paddingRight="1dip"
+                    android:layout_marginRight="1dip"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:layout_gravity="center">
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Produk"
+                        android:padding="2dip"
+                        android:textColor="@android:color/white"
+                        android:layout_gravity="center"
+                        android:gravity="center_vertical|center_horizontal" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="70dip"
+                    android:layout_height="match_parent"
+                    android:background="#006666"
+                    android:paddingRight="1dip"
+                    android:layout_marginRight="1dip"
+                    android:gravity="center_vertical|center_horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="M-3"
+                        android:padding="2dip"
+                        android:textColor="@android:color/white"
+                        android:id="@+id/DStock_M3" />
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="70dip"
+                    android:layout_height="match_parent"
+                    android:background="#006666"
+                    android:paddingRight="1dip"
+                    android:layout_marginRight="1dip"
+                    android:gravity="center_vertical|center_horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="M-2"
+                        android:padding="2dip"
+                        android:textColor="@android:color/white"
+                        android:id="@+id/DStock_M2" />
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="70dip"
+                    android:layout_height="match_parent"
+                    android:background="#006666"
+                    android:paddingRight="1dip"
+                    android:layout_marginRight="1dip"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:layout_gravity="center">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="M-1"
+                        android:padding="2dip"
+                        android:textColor="@android:color/white"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:id="@+id/DStock_M1" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <ListView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/DStock_LsView" />
+
+        </LinearLayout>
+    </HorizontalScrollView>
+</LinearLayout>

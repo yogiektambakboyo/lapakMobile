@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dip"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dip"
+        app:cardCornerRadius="3dip"
+        app:cardElevation="5dip"
+        app:contentPadding="5dip">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/LQuestion_QuestionLy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dip"
+                android:gravity="center_horizontal|center_vertical"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:id="@+id/LQuestion_Question"
+                    android:layout_width="200dip"
+                    android:layout_height="40dip"
+                    android:layout_marginRight="10dip"
+                    android:text="TextView"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
+
+                <LinearLayout
+                    android:id="@+id/LQuestion_QuestionChoiceLy"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    android:gravity="right"
+                    android:orientation="horizontal">
+
+                    <com.nex3z.togglebuttongroup.SingleSelectToggleGroup
+                            android:id="@+id/group_choices"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginRight="5dip">
+
+
+                    </com.nex3z.togglebuttongroup.SingleSelectToggleGroup>
+
+                    <ImageView
+                            android:id="@+id/LQuestion_RemarkImg"
+                            android:layout_width="32dip"
+                            android:layout_height="32dip"
+                            android:contentDescription="Input Catatan"
+                            android:visibility="visible"
+                            app:srcCompat="@drawable/pstp_note"/>
+
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/LQuestion_QuestionRemarkLy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Remark :"
+                    android:textColor="@color/material_blue_grey_80"
+                    android:textStyle="italic" />
+
+                <EditText
+                    android:id="@+id/LQuestion_QuestionRemark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Masukkan catatan disini"
+                    android:inputType="text"
+                    android:maxLength="200"
+                    android:maxLines="2"
+                    android:textColor="@color/material_blue_grey_80"
+                    android:textSize="12sp"
+                    android:textStyle="italic" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

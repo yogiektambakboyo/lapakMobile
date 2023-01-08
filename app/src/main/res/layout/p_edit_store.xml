@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#006666"
+            android:paddingTop="5dip"
+            android:paddingBottom="5dip"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/EditStore_Icon"
+                android:layout_width="48dip"
+                android:layout_height="48dip"
+                android:layout_marginLeft="5dip"
+                android:src="@drawable/sfa_dbedit" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dip"
+                android:layout_marginRight="5dip"
+                android:text="Perubahan Data"
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:gravity="center_vertical|right">
+
+                <ImageView
+                    android:layout_width="32dip"
+                    android:layout_height="32dip"
+                    android:id="@+id/EditStore_Simpan"
+                    android:src="@drawable/ic_action_save"
+                    android:padding="2dip"
+                    android:layout_marginRight="10dip" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="10dip"
+                android:paddingRight="10dip">
+
+                <TextView
+                    android:id="@+id/EditStore_Status"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dip"
+                    android:layout_marginTop="10dip"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="Status"
+                    android:textColor="@android:color/holo_red_light"
+                    android:textStyle="italic"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dip"
+                    android:layout_marginTop="10dip"
+                    android:gravity="center_vertical"
+                    android:text="* Harus diisi dan hanya gunakan alfanumerik saja"
+                    android:textColor="@android:color/holo_red_light"
+                    android:textStyle="italic" />
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#006666"
+                    android:layout_gravity="center_vertical|center_horizontal">
+
+                    <TextView
+                        android:text="Identitas"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:paddingTop="5dip"
+                        android:paddingBottom="5dip"
+                        android:paddingLeft="5dip"
+                        android:textColor="@android:color/white"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="15dip"
+                    android:layout_marginBottom="10dip">
+
+                    <TextView
+                        android:layout_width="100dip"
+                        android:layout_height="wrap_content"
+                        android:text="Kode Toko *"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:layout_width="100dip"
+                        android:layout_height="wrap_content"
+                        android:text="-"
+                        android:textColor="@android:color/black"
+                        android:id="@+id/EditStore_TxtKode"
+                        android:textStyle="normal|bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="100dip"
+                        android:layout_height="wrap_content"
+                        android:text="KTP *"
+                        android:textColor="@android:color/black" />
+
+                    <EditText
+                        android:id="@+id/EditStore_NetizenId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:elevation="1dp"
+                        android:hint="Isi dengan no KTP"
+                        android:inputType="number"
+                        android:maxLength="30"
+                        android:singleLine="true" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:text="Foto KTP/SIM *"
+                        android:textColor="@android:color/black"
+                        android:layout_width="110dip" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/EditStore_BtnAmbilKTP"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dip"
+                        android:elevation="1dp"
+                        android:text="Galeri" />
+
+                    <Button
+                        android:id="@+id/EditStore_BtnCaptureKTP"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dip"
+                        android:elevation="1dp"
+                        android:text="Capture" />
+
+                    <Button
+                        android:id="@+id/EditStore_BtnSimpanKTP"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dip"
+                        android:text="UPLOAD"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dip">
+
+                    <TextView
+                        android:text="-"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/EditStore_TxtKTP"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|center_horizontal" />
+
+                    <ImageView
+                        android:layout_width="150dip"
+                        android:layout_height="100dip"
+                        android:src="@drawable/sfa_pelanggan"
+                        android:id="@+id/EditStore_ImgKTP"
+                        android:layout_weight="1"
+                        android:layout_gravity="center_vertical|center_horizontal" />
+                </LinearLayout>
+
+                
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+</RelativeLayout>

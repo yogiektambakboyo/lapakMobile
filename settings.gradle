@@ -1,0 +1,38 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        maven { url "https://jitpack.io" }
+        mavenCentral()
+        maven {
+            url "https://maven.google.com/"
+        }
+        maven {
+            url 'https://maven.fabric.io/public'
+        }
+        maven {
+            url "https://highsoft.bintray.com/Highcharts"
+        }
+        jcenter()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        maven { url "https://jitpack.io" }
+        mavenCentral()
+        maven {
+            url "https://maven.google.com/"
+        }
+        maven {
+            url 'https://maven.fabric.io/public'
+        }
+        maven {
+            url "https://highsoft.bintray.com/Highcharts"
+        }
+        jcenter()
+    }
+}
+rootProject.name = "SMD SForce"
+include ':app'

@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/sv_backgorund"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/p_sinkron">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dip"
+        app:cardCornerRadius="15dip"
+        app:cardElevation="15dip">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dip"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="10dip">
+
+                <ImageView
+                    android:layout_width="32dip"
+                    android:layout_height="32dip"
+                    android:background="@drawable/sfa_calendar"
+                    android:elevation="1dp" />
+
+                <TextView
+                    android:id="@+id/Sinkron_Info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dip"
+                    android:text="Tgl Transaksi : "
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="7dip"
+                android:gravity="center_vertical|center_horizontal"
+                android:orientation="horizontal"
+                android:paddingLeft="15dip"
+                android:paddingRight="15dip"
+                android:paddingTop="10dip">
+
+                <ImageView
+                    android:id="@+id/Login_IconUser"
+                    android:layout_width="32dip"
+                    android:layout_height="32dip"
+                    android:layout_gravity="center"
+                    android:src="@drawable/sfa_user" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/Login_luser"
+                    android:layout_width="170dip"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingLeft="10dip">
+
+                    <EditText
+                        android:id="@+id/Sinkron_Username"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Username"
+                        android:inputType="text|textCapSentences|textCapWords|textCapCharacters"
+                        android:singleLine="true"
+                        android:textColor="#3399FF" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="7dip"
+                android:gravity="center_vertical|center_horizontal"
+                android:orientation="horizontal"
+                android:paddingLeft="15dip"
+                android:paddingRight="15dip">
+
+                <ImageView
+                    android:id="@+id/Login_IconPassword"
+                    android:layout_width="32dip"
+                    android:layout_height="32dip"
+                    android:src="@drawable/sfa_pass" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/login_lpass"
+                    android:layout_width="170dip"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:paddingLeft="10dip">
+
+                    <EditText
+                        android:id="@+id/Sinkron_Password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Password"
+                        android:inputType="text|textCapSentences|textCapWords|textCapCharacters"
+                        android:password="true"
+                        android:singleLine="true"
+                        android:textColor="#3399FF" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center_vertical|center_horizontal"
+                android:orientation="horizontal"
+                android:paddingBottom="5dip"
+                android:paddingLeft="10dip"
+                android:paddingTop="10dip">
+
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/Sinkron_CloseTheday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:text="Akhiri Training"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dip"
+                android:layout_marginTop="10dip"
+                android:gravity="center_vertical|center_horizontal"
+                android:orientation="horizontal">
+
+                <ProgressBar
+                    android:id="@+id/Sinkron_Pb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dip"
+                    android:indeterminate="false" />
+
+                <TextView
+                    android:id="@+id/Sinkron_TxtLoading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mohon Tunggu. . ."
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dip"
+                android:gravity="center_vertical|center_horizontal"
+                android:orientation="horizontal"
+                android:paddingBottom="10dip"
+                android:paddingLeft="5dip"
+                android:paddingRight="5dip"
+                android:paddingTop="10dip">
+
+                <Button
+                    android:id="@+id/Sinkron_Download"
+                    style="@style/btnStyleWhite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dip"
+                    android:text="Download" />
+
+                <Button
+                    android:id="@+id/Sinkron_Sync"
+                    style="@style/btnStyleWhite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dip"
+                    android:text="Mulai Sinkron" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

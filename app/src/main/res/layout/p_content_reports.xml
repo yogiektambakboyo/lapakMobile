@@ -1,0 +1,749 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/app_bar_activity__reports">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/Report_LyDayReports"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dip"
+                android:layout_marginRight="10dip"
+                android:layout_marginTop="5dip"
+                android:orientation="horizontal"
+                android:paddingBottom="5dip"
+                android:paddingTop="5dip">
+
+                <TextView
+                    android:layout_width="150dip"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/rounded_corner"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:paddingBottom="5dip"
+                    android:paddingTop="5dip"
+                    android:text="Parameter"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="5dip"
+                    android:background="@drawable/rounded_corner"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:paddingBottom="5dip"
+                    android:paddingTop="5dip"
+                    android:text="Nilai"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dip"
+                android:layout_marginRight="10dip"
+                android:background="@drawable/rounded_corner_blue_1"
+                android:orientation="horizontal"
+                android:paddingLeft="5dip">
+
+                <TextView
+                    android:layout_width="150dip"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:allowUndo="false"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="5dip"
+                    android:paddingTop="5dip"
+                    android:text="Collecting Vol"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:id="@+id/Report_DayR_ValueCollect"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="5dip"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:paddingBottom="5dip"
+                    android:paddingTop="5dip"
+                    android:text="Value"
+                    android:textColor="@android:color/black" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dip"
+                android:layout_marginRight="10dip"
+                android:orientation="horizontal"
+                android:paddingLeft="5dip">
+
+                <TextView
+                    android:layout_width="150dip"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:allowUndo="false"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="5dip"
+                    android:paddingTop="5dip"
+                    android:text="Calls"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:id="@+id/Report_DayR_ValueCall"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="5dip"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:paddingBottom="5dip"
+                    android:paddingTop="5dip"
+                    android:text="Value"
+                    android:textColor="@android:color/black" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dip"
+                android:layout_marginRight="10dip"
+                android:background="@drawable/rounded_corner_blue_1"
+                android:orientation="horizontal"
+                android:paddingLeft="5dip">
+
+                <TextView
+                    android:layout_width="150dip"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:allowUndo="false"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="5dip"
+                    android:paddingTop="5dip"
+                    android:text="Productive Calls"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:id="@+id/Report_DayR_ValuePCall"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="5dip"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:paddingBottom="5dip"
+                    android:paddingTop="5dip"
+                    android:text="Value"
+                    android:textColor="@android:color/black" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dip"
+                android:layout_marginRight="10dip"
+                android:orientation="horizontal"
+                android:paddingLeft="5dip">
+
+                <TextView
+                    android:layout_width="150dip"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:allowUndo="false"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="5dip"
+                    android:paddingTop="5dip"
+                    android:text="Uncall"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:id="@+id/Report_DayR_ValueUnCall"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="5dip"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:paddingBottom="5dip"
+                    android:paddingTop="5dip"
+                    android:text="Value"
+                    android:textColor="@android:color/black" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dip"
+                android:layout_marginLeft="15dip"
+                android:text="* nilai dalam ribuan : Actual/Gross/Target (Gross/Target %)"
+                android:textSize="11sp"
+                android:textStyle="italic"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/Report_LyOrderReports"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:layout_marginLeft="5dip"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="5dip"
+                        android:layout_marginTop="5dip"
+                        android:background="@drawable/rounded_corner_blue_1"
+                        android:orientation="horizontal"
+                        android:padding="5dip">
+
+                        <TextView
+                            android:layout_width="90dip"
+                            android:layout_height="wrap_content"
+                            android:text="Filter"
+                            android:textColor="@android:color/black"
+                            android:textStyle="bold" />
+
+                        <Spinner
+                            android:id="@+id/Report_LyOrderReportSpnFilter"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dip"
+                    android:layout_marginTop="5dip"
+                    android:background="@drawable/rounded_corner_blue_1"
+                    android:orientation="horizontal"
+                    android:padding="5dip">
+
+                    <TextView
+                        android:layout_width="90dip"
+                        android:layout_height="wrap_content"
+                        android:text="Collected"
+                        android:textColor="@android:color/black"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/Report_LyOrderReportTotalValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0.0"
+                        android:textColor="@android:color/black"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+
+                    <LinearLayout
+                        android:layout_width="180dip"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="5dip"
+                        android:layout_marginTop="5dip"
+                        android:background="@drawable/rounded_corner_blue_1"
+                        android:orientation="horizontal"
+                        android:padding="5dip">
+
+                        <TextView
+                            android:layout_width="90dip"
+                            android:layout_height="wrap_content"
+                            android:text="Voucher"
+                            android:textColor="@android:color/black"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/Report_LyOrderReportTotalVoucher"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0.0"
+                            android:textColor="@android:color/black"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="180dip"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="5dip"
+                        android:layout_marginTop="5dip"
+                        android:background="@drawable/rounded_corner_blue_1"
+                        android:orientation="horizontal"
+                        android:padding="5dip">
+
+                        <TextView
+                            android:layout_width="90dip"
+                            android:layout_height="wrap_content"
+                            android:text="Cash"
+                            android:textColor="@android:color/black"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/Report_LyOrderReportTotalValueCash"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0.0"
+                            android:textColor="@android:color/black"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="5dip"
+                        android:background="@drawable/rounded_corner_blue_1"
+                        android:orientation="horizontal"
+                        android:padding="5dip"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="120dip"
+                            android:layout_height="wrap_content"
+                            android:text="Avg #SKU"
+                            android:textColor="@android:color/black"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/Report_LyOrderReportAverageSKU"
+                            android:layout_width="50dip"
+                            android:layout_height="wrap_content"
+                            android:text="0.0"
+                            android:textColor="@android:color/black"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="100dip"
+                            android:layout_height="wrap_content"
+                            android:text="Total SKU "
+                            android:textColor="@android:color/black"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/Report_LyOrderReportTotalSKU"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0.0"
+                            android:textColor="@android:color/black"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="180dip"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="5dip"
+                        android:layout_marginTop="5dip"
+                        android:background="@drawable/rounded_corner_blue_1"
+                        android:orientation="horizontal"
+                        android:padding="5dip">
+
+                        <TextView
+                            android:layout_width="90dip"
+                            android:layout_height="wrap_content"
+                            android:text="Cheque/BG"
+                            android:textColor="@android:color/black"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/Report_LyOrderReportTotalValueCheque"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0.0"
+                            android:textColor="@android:color/black"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="180dip"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="5dip"
+                        android:layout_marginTop="5dip"
+                        android:background="@drawable/rounded_corner_blue_1"
+                        android:orientation="horizontal"
+                        android:padding="5dip">
+
+                        <TextView
+                            android:layout_width="90dip"
+                            android:layout_height="wrap_content"
+                            android:text="Transfer"
+                            android:textColor="@android:color/black"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/Report_LyOrderReportTotalValueTransfer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0.0"
+                            android:textColor="@android:color/black"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="180dip"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="5dip"
+                        android:layout_marginTop="5dip"
+                        android:background="@drawable/rounded_corner_blue_1"
+                        android:orientation="horizontal"
+                        android:padding="5dip">
+
+                        <TextView
+                            android:layout_width="90dip"
+                            android:layout_height="wrap_content"
+                            android:text="Stempel"
+                            android:textColor="@android:color/black"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/Report_LyOrderReportTotalStamp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0.0"
+                            android:textColor="@android:color/black"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="180dip"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="5dip"
+                        android:layout_marginTop="5dip"
+                        android:background="@drawable/rounded_corner_blue_1"
+                        android:orientation="horizontal"
+                        android:padding="5dip">
+
+                        <TextView
+                            android:layout_width="90dip"
+                            android:layout_height="wrap_content"
+                            android:text="TT"
+                            android:textColor="@android:color/black"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/Report_LyOrderReportTotalTT"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0.0"
+                            android:textColor="@android:color/black"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/Report_LyOrderTgl"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dip"
+                    android:layout_marginTop="5dip"
+                    android:background="@drawable/rounded_corner_blue_1"
+                    android:orientation="horizontal"
+                    android:padding="5dip"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="120dip"
+                        android:layout_height="wrap_content"
+                        android:text="Tanggal"
+                        android:textColor="@android:color/black"
+                        android:textStyle="bold" />
+
+                    <Spinner
+                        android:id="@+id/Report_LyOrderReportSpnTgl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:spinnerMode="dialog" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dip"
+                            android:layout_marginRight="10dip"
+                            android:layout_marginTop="5dip"
+                            android:orientation="horizontal"
+                            android:paddingBottom="5dip"
+                            android:paddingTop="5dip">
+
+                            <TextView
+                                android:layout_width="30dip"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginRight="5dip"
+                                android:background="@drawable/rounded_corner"
+                                android:gravity="center_vertical|center_horizontal"
+                                android:paddingBottom="5dip"
+                                android:paddingTop="5dip"
+                                android:text="No"
+                                android:textColor="@android:color/white"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="200dip"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:background="@drawable/rounded_corner"
+                                android:gravity="center_vertical|center_horizontal"
+                                android:paddingBottom="5dip"
+                                android:paddingTop="5dip"
+                                android:text="Nama Toko"
+                                android:textColor="@android:color/white"
+                                android:textStyle="bold" />
+
+
+                            <TextView
+                                android:layout_width="100dip"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="5dip"
+                                android:background="@drawable/rounded_corner"
+                                android:gravity="center_vertical|center_horizontal"
+                                android:paddingBottom="5dip"
+                                android:paddingTop="5dip"
+                                android:text="Total Faktur"
+                                android:textColor="@android:color/white"
+                                android:textStyle="bold"
+                                android:visibility="visible" />
+
+                            <TextView
+                                android:layout_width="100dip"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="5dip"
+                                android:background="@drawable/rounded_corner"
+                                android:gravity="center_vertical|center_horizontal"
+                                android:paddingBottom="5dip"
+                                android:paddingTop="5dip"
+                                android:text="Target"
+                                android:textColor="@android:color/white"
+                                android:textStyle="bold" />
+
+
+
+                            <TextView
+                                android:layout_width="100dip"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dip"
+                                android:background="@drawable/rounded_corner"
+                                android:gravity="center_vertical|center_horizontal"
+                                android:paddingBottom="5dip"
+                                android:paddingTop="5dip"
+                                android:text="Collected"
+                                android:textColor="@android:color/white"
+                                android:textStyle="bold"
+                                android:visibility="visible" />
+
+
+
+                            <TextView
+                                android:id="@+id/Report_Order_NoFakturLabel"
+                                android:layout_width="200dip"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="5dip"
+                                android:background="@drawable/rounded_corner"
+                                android:gravity="center_vertical|center_horizontal"
+                                android:paddingBottom="5dip"
+                                android:paddingTop="5dip"
+                                android:text="No Faktur"
+                                android:textColor="@android:color/white"
+                                android:textStyle="bold"
+                                android:visibility="gone" />
+                        </LinearLayout>
+
+                        <ListView
+                            android:id="@+id/Report_LyOrderReportLs"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                </HorizontalScrollView>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/Report_LyCaptureReports"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dip"
+                android:layout_margin="5dip">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dip"
+                    android:background="@drawable/rounded_corner_blue_1"
+                    android:padding="5dip">
+
+                    <TextView
+                        android:layout_width="120dip"
+                        android:layout_height="wrap_content"
+                        android:text="Photo Capture"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:layout_width="50dip"
+                        android:layout_height="wrap_content"
+                        android:text="0/0"
+                        android:id="@+id/Report_LyCaptureReportsCaptureTotal"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/black" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dip"
+                            android:layout_marginRight="10dip"
+                            android:paddingTop="5dip"
+                            android:paddingBottom="5dip"
+                            android:layout_marginTop="5dip">
+
+                            <TextView
+                                android:layout_width="30dip"
+                                android:layout_height="wrap_content"
+                                android:text="No"
+                                android:layout_gravity="center"
+                                android:gravity="center_vertical|center_horizontal"
+                                android:background="@drawable/rounded_corner"
+                                android:textColor="@android:color/white"
+                                android:textStyle="bold"
+                                android:paddingTop="5dip"
+                                android:paddingBottom="5dip"
+                                android:layout_marginRight="5dip" />
+
+                            <TextView
+                                android:layout_width="200dip"
+                                android:layout_height="wrap_content"
+                                android:text="Nama Toko"
+                                android:layout_gravity="center"
+                                android:gravity="center_vertical|center_horizontal"
+                                android:background="@drawable/rounded_corner"
+                                android:textColor="@android:color/white"
+                                android:textStyle="bold"
+                                android:paddingTop="5dip"
+                                android:paddingBottom="5dip" />
+                            <TextView
+                                android:layout_width="100dip"
+                                android:layout_height="wrap_content"
+                                android:text="Status"
+                                android:layout_gravity="center"
+                                android:gravity="center_vertical|center_horizontal"
+                                android:background="@drawable/rounded_corner"
+                                android:textColor="@android:color/white"
+                                android:textStyle="bold"
+                                android:paddingTop="5dip"
+                                android:paddingBottom="5dip"
+                                android:layout_marginLeft="5dip" />
+
+                        </LinearLayout>
+
+                        <ListView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/Report_LyCaptureReportsLs" />
+                    </LinearLayout>
+                </HorizontalScrollView>
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </LinearLayout>
+</RelativeLayout>

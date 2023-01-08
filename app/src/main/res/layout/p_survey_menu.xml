@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="25dip"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#006666"
+            android:gravity="center_vertical"
+            android:paddingTop="2dip"
+            android:paddingBottom="2dip">
+
+            <ImageView
+                android:layout_width="48dip"
+                android:layout_height="48dip"
+                android:id="@+id/SurveyMenu_Icon"
+                android:layout_marginLeft="5dip"
+                android:src="@drawable/sfa_report_little" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Daftar Survei"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_marginLeft="5dip"
+                android:layout_marginRight="5dip" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="right"
+                android:layout_gravity="right">
+
+                <ImageView
+                    android:layout_width="32dip"
+                    android:background="@drawable/sfa_dashboard"
+                    android:id="@+id/SurveyMenu_DashBoard"
+                    android:layout_marginRight="10dip"
+                    android:layout_marginTop="5dip"
+                    android:layout_marginBottom="5dip"
+                    android:padding="5dip"
+                    android:layout_height="32dip" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/SurveyMenu_Ls"
+                android:layout_marginTop="10dip"
+                android:layout_marginLeft="5dip"
+                android:layout_marginRight="5dip" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
+

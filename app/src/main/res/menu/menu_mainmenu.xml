@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/login_maps"
+        android:icon="@drawable/sfa_maps"
+        android:title="Maps"
+        android:visible="false"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/login_logout"
+        android:icon="@drawable/ic_action_not_secure"
+        app:showAsAction="ifRoom"
+        android:title="Log Out"/>
+
+</menu>

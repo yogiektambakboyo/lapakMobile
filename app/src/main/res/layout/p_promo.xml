@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#006666"
+            android:paddingTop="5dip"
+            android:paddingBottom="5dip"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="32dip"
+                android:layout_height="32dip"
+                android:id="@+id/Promo_Icon"
+                android:layout_marginLeft="5dip"
+                android:src="@drawable/sfa_promo" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Promo"
+                android:id="@+id/textView16"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_marginLeft="5dip"
+                android:layout_marginRight="5dip" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:gravity="center_vertical|right">
+
+                <ImageView
+                    android:layout_width="32dip"
+                    android:layout_height="32dip"
+                    android:id="@+id/Promo_NavPresentation"
+                    android:src="@drawable/sfa_arrow"
+                    android:padding="2dip"
+                    android:layout_marginRight="10dip" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <HorizontalScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/horizontalScrollView2"
+            android:layout_marginTop="5dip">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dip"
+                    android:layout_marginBottom="5dip"
+                    android:layout_marginLeft="5dip"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:background="#006666"
+                    android:paddingTop="5dip"
+                    android:paddingBottom="5dip">
+
+                    <TextView
+                        android:layout_width="180dip"
+                        android:layout_height="wrap_content"
+                        android:text="Produk"
+                        android:layout_marginRight="5dip"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/black"
+                        android:layout_gravity="center"
+                        android:gravity="center_vertical|center_horizontal" />
+
+                    <TextView
+                        android:layout_width="32dip"
+                        android:layout_height="wrap_content"
+                        android:text="OC"
+                        android:paddingLeft="5dip"
+                        android:paddingRight="5dip"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/black"
+                        android:gravity="center_vertical|center_horizontal" />
+
+                    <TextView
+                        android:layout_width="32dip"
+                        android:layout_height="wrap_content"
+                        android:text="OP"
+                        android:paddingLeft="5dip"
+                        android:paddingRight="5dip"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/black"
+                        android:gravity="center_vertical|center_horizontal" />
+
+                    <TextView
+                        android:layout_width="48dip"
+                        android:layout_height="wrap_content"
+                        android:text="SIH"
+                        android:paddingRight="5dip"
+                        android:paddingLeft="5dip"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/black"
+                        android:gravity="center_vertical|center_horizontal" />
+
+                    <TextView
+                        android:layout_width="100dip"
+                        android:layout_height="wrap_content"
+                        android:text="Total"
+                        android:paddingLeft="5dip"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/black"
+                        android:gravity="center_vertical|center_horizontal" />
+
+                </LinearLayout>
+
+                <ListView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:id="@+id/Promo_Ls"
+                    android:layout_marginTop="15dip" />
+            </LinearLayout>
+        </HorizontalScrollView>
+
+    </LinearLayout>
+
+</RelativeLayout>

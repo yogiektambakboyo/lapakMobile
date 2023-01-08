@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="5dip"
+    android:paddingBottom="5dip">
+
+    <TextView
+        android:id="@+id/LPromo_Product"
+        android:layout_width="20dip"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dip"
+        android:layout_marginRight="5dip"
+        android:text="1"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:visibility="visible" />
+
+    <TextView
+        android:id="@+id/LPromo_Code"
+        android:layout_width="150dip"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="5dip"
+        android:textColor="@android:color/black"
+        android:visibility="visible" />
+
+    <TextView
+        android:id="@+id/LPromo_Desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Promo Desc"
+        android:textColor="@android:color/black"
+        android:textSize="14sp"
+        android:visibility="visible" />
+
+    <TextView
+        android:id="@+id/LPromo_OC"
+        android:layout_width="32dip"
+        android:layout_height="wrap_content"
+        android:paddingLeft="5dip"
+        android:paddingRight="5dip"
+        android:text="OC"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/LPromo_OP"
+        android:layout_width="32dip"
+        android:layout_height="wrap_content"
+        android:paddingLeft="5dip"
+        android:paddingRight="5dip"
+        android:text="OP"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/LPromo_SIH"
+        android:layout_width="48dip"
+        android:layout_height="wrap_content"
+        android:paddingLeft="5dip"
+        android:paddingRight="5dip"
+        android:text="SIH"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/LPromo_Total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="5dip"
+        android:text="Total"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:visibility="gone" />
+</LinearLayout>

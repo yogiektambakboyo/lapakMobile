@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">kakikupos.com</domain>
+        <domain includeSubdomains="true">103.52.146.199:8080</domain>
+        <domain includeSubdomains="true">kakikupos.com:8081</domain>
+        <domain includeSubdomains="true">1103.179.56.157:8081</domain>
+    </domain-config>
+</network-security-config>

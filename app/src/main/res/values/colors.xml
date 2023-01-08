@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <color name="colorPrimary">#68D2DF</color>
+  <color name="colorPrimaryDark">#05C3DE</color>
+  <color name="colorAccent">#008EAA</color>
+  <color name="colorWhite">#FFFFFF</color>
+  <color name="colorBlack">#000000</color>
+  <color name="colorGrey">#BBBBBB</color>
+  <color name="colorRed">#D81C60</color>
+  <color name="colorYellow">#FFD700</color>
+  <color name="colorGreen">#228B22</color>
+  <color name="chart_value_1">#2d4302</color>
+  <color name="chart_value_2">#75a80d</color>
+  <color name="chart_value_3">#8fc026</color>
+  <color name="purple_200">#CE93D8</color>
+  <color name="purple_500">#9C27B0</color>
+  <color name="purple_700">#7B1FA2</color>
+  <color name="teal_200">#80CBC4</color>
+  <color name="teal_700">#00796B</color>
+</resources>

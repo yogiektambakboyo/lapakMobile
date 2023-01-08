@@ -1,0 +1,65 @@
+<resources>
+    <!-- The class name to the ScrollingChildBehavior required for AppBarLayout -->
+    <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
+    <string name="app_name">SMD Sforce</string>
+    <string name="fa_download">&#xf019;</string>
+    <string name="fa_lock">&#xf023;</string>
+    <string name="title_activity_activity__main_menu">Dashboard</string>
+    <string name="title_activity_activity__day_planning">Training Plan</string>
+    <string name="title_activity_activity__planning">Planning</string>
+    <string name="title_activity_activity__closing">Closing</string>
+    <string name="title_activity_activity__closingasm">Closing</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_search">Cari Pelanggan</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_activity__day_planning__target">Rencana Harian</string>
+    <string name="title_activity_activity__sinkron">Sinkronisasi</string>
+    <string name="title_activity_activity__coverage">Kunjungan Toko</string>
+    <string name="title_activity_activity__coverage_store">Kunjungan Toko</string>
+    <string name="title_activity_activity__coverage_menu">Menu Kunjungan</string>
+    <string name="title_activity_activity__reports">Laporan</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="error_msg">Hi User Supervision, Application has crash. Please Send this error message to developer!!</string>
+    <string name="title_activity__maps">Tracking Maps</string>
+    <string name="scanning">Scanning Device&#8230;</string>
+    <string name="select_device">Select the connected device</string>
+    <string name="none_paired">No matching devices</string>
+    <string name="none_found">No device found</string>
+    <string name="title_activity__survey">Survey</string>
+    <string name="title_activity__planning">Planning</string>
+    <string name="title_activity__survey_menu">Menu Survey</string>
+    <string name="title_activity__stock_menu">Menu Cek Stok</string>
+    <string name="title_activity__survey_dash_board">Survey DashBoard</string>
+    <string name="title_activity__maps__capture">Capture Location</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="Preparation">PREPARATION</string>
+    <string name="Review">REVIEW</string>
+    <string name="yes">YES</string>
+    <string name="no">NO</string>
+    <string name="notyet">-</string>
+    <string name="title_activity_activity__review">Review</string>
+    <string-array name="planets">
+        <item>Bumi</item>
+        <item>Mars</item>
+    </string-array>
+    <string name="title_activity__reporting">Report</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="please_wait">Harap Tunggu</string>
+
+    <string name="menu_home">Store Performance</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_tools">Tools</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Send</string>
+    <string name="title_activity__review_history">Activity_ReviewHistory</string>
+    <string name="menu_reviewasm">History Review ASM</string>
+    <string name="banner_ad_unit_id">ca-app-pub-1150718501997530/5678684003</string>
+    <string name="exo2">exo_2.ttf</string>
+
+</resources>
+

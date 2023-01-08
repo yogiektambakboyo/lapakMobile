@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="280dip"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical|center_horizontal">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical|center_horizontal"
+        android:paddingTop="5dip"
+        android:paddingBottom="5dip"
+        android:layout_gravity="right">
+
+        <ImageView
+            android:layout_width="32dip"
+            android:layout_height="32dip"
+            android:id="@+id/Planning_InfoBtnProfile"
+            android:src="@drawable/sfa_profil"
+            android:layout_marginRight="25dip" />
+
+        <ImageView
+            android:id="@+id/Planning_ImgBtn"
+            android:layout_width="32dip"
+            android:layout_height="32dip"
+            android:layout_marginRight="25dip"
+            android:src="@drawable/sfa_image"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/Planning_InfoBtnHistory"
+            android:layout_width="32dip"
+            android:layout_height="32dip"
+            android:layout_marginRight="5dip"
+            app:srcCompat="@drawable/pstp_folder" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Planning_InfoLyProfile"
+        android:paddingLeft="5dip"
+        android:paddingRight="5dip">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical|center_horizontal"
+            android:paddingTop="5dip"
+            android:paddingBottom="5dip"
+            android:background="@drawable/rounded_corner">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dip"
+                android:layout_marginRight="5dip"
+                android:gravity="left|center_vertical"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/Planning_InfoNama"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nama"
+                    android:textColor="@android:color/white"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dip"
+            android:paddingRight="5dip"
+            android:paddingBottom="5dip"
+            android:paddingTop="3dip"
+            android:background="@drawable/rounded_corner_blue_1"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="100dip"
+                android:layout_height="wrap_content"
+                android:text="Nama"
+                android:textSize="12sp"
+                android:textColor="@android:color/black" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="5dip"
+            android:paddingRight="5dip"
+            android:paddingBottom="5dip">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="Retailer List"
+                android:textColor="@android:color/black"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/Planning_Search"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dip"
+                android:layout_marginRight="5dip"
+                android:hint="Cari nama toko disini"
+                android:inputType="textPersonName"
+                android:textSize="12sp" />
+
+            <ProgressBar
+                android:id="@+id/Planning_Loading"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_corner_blue_1"
+            android:orientation="horizontal"
+            android:paddingLeft="5dip"
+            android:paddingRight="5dip"
+            android:paddingBottom="5dip">
+
+            <ListView
+                android:id="@+id/Planning_ListRetailer"
+                android:layout_width="match_parent"
+                android:layout_height="300dip" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical|center_horizontal"
+            android:paddingTop="5dip"
+            android:paddingBottom="5dip">
+
+            <Button
+                android:id="@+id/Planning_BtnClose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TUTUP" />
+
+            <Button
+                android:id="@+id/Planning_BtnVisit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SUBMIT" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Planning_InfoLyHistory"
+        android:paddingLeft="5dip"
+        android:paddingRight="5dip"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical|center_horizontal"
+            android:paddingTop="5dip"
+            android:paddingBottom="5dip"
+            android:background="@drawable/rounded_corner"
+            android:layout_marginBottom="5dip">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="History"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/Planning_InfoListView" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/Planning_InfoLyImage"
+        android:layout_gravity="center"
+        android:gravity="center_vertical|center_horizontal">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_corner"
+            android:layout_gravity="center"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_margin="5dip"
+            android:paddingTop="5dip"
+            android:paddingBottom="5dip">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Foto Toko"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="200dip"
+            android:layout_height="150dip"
+            android:id="@+id/Planning_Image"
+            android:layout_gravity="center"
+            android:padding="5dip"
+            android:src="@drawable/sfa_pelanggan" />
+    </LinearLayout>
+
+</LinearLayout>

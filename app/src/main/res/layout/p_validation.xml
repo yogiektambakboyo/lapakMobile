@@ -1,0 +1,663 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".intent.Activity_Validation">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dip">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dip"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dip"
+                        android:text="Toko"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/Validation_Store"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="5dip"
+                    android:layout_marginBottom="10dip"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="3dip"
+                            android:text="1."
+                            android:textColor="@color/colorBlack" />
+
+                        <TextView
+                            android:id="@+id/Validation_Q1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Apakah keberadaan fisik toko ada?"
+                            android:textColor="@color/colorBlack" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <RadioGroup
+                                android:id="@+id/Validation_RGQ1"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1">
+
+                                <RadioButton
+                                    android:id="@+id/Validation_Q1T"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Ya" />
+
+                                <RadioButton
+                                    android:id="@+id/Validation_Q1F"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Tidak" />
+                            </RadioGroup>
+
+                            <TextView
+                                android:id="@+id/Validation_Q1Remark"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Silahkan ambil 1 foto toko dgn klik ikon kamera disamping"
+                                android:textSize="12sp" />
+
+                        </LinearLayout>
+
+                        <ImageView
+                            android:id="@+id/Validation_Q1Pic"
+                            android:layout_width="200dip"
+                            android:layout_height="90dip"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/sfa_camera" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/Validation_LyQ2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="10dip"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="3dip"
+                            android:text="2."
+                            android:textColor="@color/colorBlack" />
+
+                        <TextView
+                            android:id="@+id/Validation_Q2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dip"
+                            android:text="Apakah nama toko sudah sesuai dengan aktual?"
+                            android:textColor="@color/colorBlack" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <RadioGroup
+                            android:id="@+id/Validation_RGQ2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <RadioButton
+                                android:id="@+id/Validation_Q2T"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Ya" />
+
+                            <RadioButton
+                                android:id="@+id/Validation_Q2F"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Tidak" />
+                        </RadioGroup>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/Validation_LyQ2Rev"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Silahkan isi nama toko yang sesuai :" />
+
+                        <EditText
+                            android:id="@+id/Validation_Q2Rev"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:inputType="textCapCharacters"
+                            android:textAllCaps="true"
+                            android:hint="Masukkan huruf besar/Kapital"
+                            android:maxLength="250"
+                            android:singleLine="true" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/Validation_LyQ3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="10dip"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="3dip"
+                            android:text="3."
+                            android:textColor="@color/colorBlack" />
+
+                        <TextView
+                            android:id="@+id/Validation_Q3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dip"
+                            android:text="Apakah alamat toko sudah sesuai dengan aktual?"
+                            android:textColor="@color/colorBlack" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <RadioGroup
+                            android:id="@+id/Validation_RGQ3"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <RadioButton
+                                android:id="@+id/Validation_Q3T"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Ya" />
+
+                            <RadioButton
+                                android:id="@+id/Validation_Q3F"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Tidak" />
+                        </RadioGroup>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/Validation_LyQ3Rev"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:visibility="visible">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Silahkan isi alamat yg memuat Nama Jalan dan [Nomor Toko/RT RW]" />
+
+                        <EditText
+                            android:id="@+id/Validation_Q3Rev"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:hint="Masukkan huruf besar/Kapital"
+                            android:inputType="text|textCapCharacters"
+                            android:maxLength="250"
+                            android:singleLine="true"
+                            android:textAllCaps="true" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Provinsi" />
+
+                        <Spinner
+                            android:id="@+id/Validation_Q3RevSpn1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Kota/Kabupaten" />
+
+                        <Spinner
+                            android:id="@+id/Validation_Q3RevSpn2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Kecamatan" />
+
+                        <Spinner
+                            android:id="@+id/Validation_Q3RevSpn3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Kelurahan/Desa" />
+
+                        <Spinner
+                            android:id="@+id/Validation_Q3RevSpn4"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/Validation_LyQ4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="10dip"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="3dip"
+                                android:text="4."
+                                android:textColor="@color/colorBlack" />
+
+                            <TextView
+                                android:id="@+id/Validation_Q4"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="5dip"
+                                android:text="Apakah posisi geolocation(longlat) toko kurang dari 300 meter?"
+                                android:textColor="@color/colorBlack" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="15dip"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/Validation_Q4GeoMst"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Master : -"
+                                    android:textSize="12sp" />
+
+                                <TextView
+                                    android:id="@+id/Validation_Q4GeoAct"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Actual Call : -"
+                                    android:textSize="12sp" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:background="@color/colorRed"
+                                    android:orientation="vertical"
+                                    android:padding="5dip">
+
+                                    <TextView
+                                        android:id="@+id/Validation_Q4Remark"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="Posisi anda saat ini berjarak 0 meter dari master geolocation toko"
+                                        android:textColor="@color/colorWhite"
+                                        android:textSize="12sp" />
+                                </LinearLayout>
+                            </LinearLayout>
+
+                            <ImageView
+                                android:id="@+id/Validation_GeoRefresh"
+                                android:layout_width="90dip"
+                                android:layout_height="30dip"
+                                android:layout_gravity="center"
+                                android:layout_margin="3dip"
+                                android:layout_marginRight="10dip"
+                                android:layout_weight="1"
+                                app:srcCompat="@drawable/refresh" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <RadioGroup
+                            android:id="@+id/Validation_RGQ4"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <RadioButton
+                                android:id="@+id/Validation_Q4T"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Ya" />
+
+                            <RadioButton
+                                android:id="@+id/Validation_Q4F"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Tidak" />
+                        </RadioGroup>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/Validation_LyQ5"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="10dip"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="3dip"
+                            android:text="5."
+                            android:textColor="@color/colorBlack" />
+
+                        <TextView
+                            android:id="@+id/Validation_Q5"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dip"
+                            android:text="Apakah segment toko sudah sesuai?"
+                            android:textColor="@color/colorBlack" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <RadioGroup
+                            android:id="@+id/Validation_RGQ5"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <RadioButton
+                                android:id="@+id/Validation_Q5T"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Ya" />
+
+                            <RadioButton
+                                android:id="@+id/Validation_Q5F"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Tidak" />
+                        </RadioGroup>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/Validation_LyQ5Rev"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:visibility="visible">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Silahkan pilih yang sesuai :" />
+
+                        <Spinner
+                            android:id="@+id/Validation_Q5Spn"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                        <EditText
+                            android:id="@+id/Validation_Q5Rev"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:maxLength="200"
+                            android:inputType="textPersonName"
+                            android:singleLine="true"
+                            android:visibility="gone" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/Validation_LyQ6"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="10dip"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="3dip"
+                            android:text="6."
+                            android:textColor="@color/colorBlack" />
+
+                        <TextView
+                            android:id="@+id/Validation_Q6"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dip"
+                            android:text="Apakah nomor telepon toko sudah sesuai?"
+                            android:textColor="@color/colorBlack" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <RadioGroup
+                            android:id="@+id/Validation_RGQ6"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <RadioButton
+                                android:id="@+id/Validation_Q6T"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Ya" />
+
+                            <RadioButton
+                                android:id="@+id/Validation_Q6F"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Tidak" />
+                        </RadioGroup>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/Validation_LyQ6Rev"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Silahkan isi no. telepon/handphone yang sesuai :" />
+
+                        <EditText
+                            android:id="@+id/Validation_Q6Rev1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:hint="Contoh  : 08xxx/031xxx/628xxx"
+                            android:inputType="text|number"
+                            android:maxLength="25"
+                            android:singleLine="true" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Silahkan isi no. whatsapp yang sesuai :" />
+
+                        <EditText
+                            android:id="@+id/Validation_Q6Rev2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:hint="Contoh : 628xxxxxxxxxx"
+                            android:inputType="text|number"
+                            android:maxLength="14"
+                            android:singleLine="true" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/Validation_LyNotes"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dip"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/Validation_TitleNotes"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Catatan  : "
+                        android:textColor="@color/colorBlack" />
+
+                    <EditText
+                        android:id="@+id/Validation_Notes"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="Masukkan keterangan disini"
+                        android:inputType="textMultiLine|textPersonName"
+                        android:maxLength="250"
+                        android:maxLines="5"
+                        android:minLines="4" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/Validation_Save"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="SIMPAN" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

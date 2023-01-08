@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="25dip">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#006666"
+            android:gravity="center_vertical"
+            android:baselineAligned="false"
+            android:paddingTop="5dip"
+            android:paddingBottom="5dip">
+
+            <ImageView
+                android:layout_width="48dip"
+                android:layout_height="48dip"
+                android:id="@+id/Initiative_Icon"
+                android:layout_marginLeft="5dip"
+                android:src="@drawable/sfa_idea" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="iFast Famous"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_marginLeft="10dip"
+                android:layout_marginRight="5dip" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:gravity="center_vertical|right">
+
+                <ImageView
+                    android:layout_width="48dip"
+                    android:layout_height="48dip"
+                    android:id="@+id/Initiative_NavInitiative"
+                    android:src="@drawable/sfa_arrow"
+                    android:padding="2dip"
+                    android:layout_marginRight="10dip" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <ListView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/Initiative_Ls"
+            android:layout_marginTop="15dip" />
+
+    </LinearLayout>
+
+</RelativeLayout>

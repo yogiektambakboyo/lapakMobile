@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dip"
+        android:layout_marginLeft="5dip">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="150dip"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingBottom="5dip"
+            android:paddingTop="5dip">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Retailer Name"
+                android:textColor="@android:color/black"
+                android:id="@+id/L_SinkronAlasan_RetailerName" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Retailer Code"
+                android:textColor="@android:color/black"
+                android:id="@+id/L_SinkronAlasan_RetailerCode"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="200dip"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingTop="5dip"
+            android:paddingBottom="5dip"
+            android:layout_marginLeft="5dip">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Reason"
+                android:paddingLeft="10dip"
+                android:textColor="@android:color/black"
+                android:id="@+id/L_SinkronAlasan_Reason" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

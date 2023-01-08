@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingBottom="5dip"
+            android:paddingTop="5dip">
+
+            <ImageView
+                android:id="@+id/CallAnalys_Icon"
+                android:layout_width="48dip"
+                android:layout_height="48dip"
+                android:layout_marginLeft="5dip"
+                android:src="@drawable/sfa_report_1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dip"
+                android:layout_marginRight="5dip"
+                android:text="Analisa Kunjungan"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|right">
+
+            <ImageView
+                android:layout_width="32dip"
+                android:layout_height="32dip"
+                android:id="@+id/CallAnalys_Life"
+                android:src="@drawable/sfa_life"
+                android:layout_marginRight="5dip"
+                android:layout_marginTop="5dip" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dip"
+            android:paddingBottom="5dip"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:layout_width="72dip"
+                android:layout_height="72dip"
+                android:id="@+id/CallAnalys_ImgStar"
+                android:layout_marginTop="10dip" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dip">
+
+            <TextView
+                android:layout_width="170dip"
+                android:layout_height="wrap_content"
+                android:text="Durasi Kunjungan "
+                android:paddingLeft="5dip"
+                android:paddingTop="5dip"
+                android:paddingBottom="5dip"
+                android:textColor="@android:color/black" />
+
+            <Chronometer
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/CallAnalys_Chrono" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00:00:00"
+                android:id="@+id/CallAnalys_Durasi"
+                android:textColor="@android:color/black"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="170dip"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dip"
+                android:paddingLeft="5dip"
+                android:paddingTop="5dip"
+                android:text="Vol Index (Act/Trgt)"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/CallAnalys_CollectRate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="0/0 (0 %)"
+                android:textColor="@android:color/black" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="170dip"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dip"
+                android:paddingLeft="5dip"
+                android:paddingTop="5dip"
+                android:text="Tunai"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/CallAnalys_CashRate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="0/0 (0%)"
+                android:textColor="@android:color/black" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="170dip"
+                android:layout_height="wrap_content"
+                android:text="SBD Merch. Rate "
+                android:paddingBottom="5dip"
+                android:paddingLeft="5dip"
+                android:paddingTop="5dip"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0/0 (0%)"
+                android:id="@+id/CallAnalys_SBDRate"
+                android:textColor="@android:color/black" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="170dip"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dip"
+                android:paddingLeft="5dip"
+                android:paddingTop="5dip"
+                android:text="Transfer"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/CallAnalys_TransferRate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="0/0 (0%)"
+                android:textColor="@android:color/black" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="170dip"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dip"
+                android:paddingLeft="5dip"
+                android:paddingTop="5dip"
+                android:text="Voucher"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/CallAnalys_VoucherRate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="0/0 (0%)"
+                android:textColor="@android:color/black" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="170dip"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dip"
+                android:paddingLeft="5dip"
+                android:paddingTop="5dip"
+                android:text="Retur"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/CallAnalys_Retur"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="0/0 (0%)"
+                android:textColor="@android:color/black" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="170dip"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dip"
+                android:paddingLeft="5dip"
+                android:paddingTop="5dip"
+                android:text="Cheque/Bilyet Giro"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/CallAnalys_ChequeRate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="0/0 (0%)"
+                android:textColor="@android:color/black" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="170dip"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dip"
+                android:paddingLeft="5dip"
+                android:paddingTop="5dip"
+                android:text="Outstanding"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/CallAnalys_NotCollect"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="0/0 (0%)"
+                android:textColor="@android:color/black" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|left"
+            android:paddingLeft="5dip"
+            android:id="@+id/CallAnalys_LyAlasan">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="130dip"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Alasan Tidak Prod."
+                    android:textColor="@android:color/black" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical">
+
+                <Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/CallAnalys_SpnAlasan" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center_vertical|center_horizontal"
+            android:padding="5dip"
+            android:layout_marginTop="10dip">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Batal"
+                android:id="@+id/CallAnalys_BtnBatal"
+                android:paddingRight="10dip"
+                android:layout_marginRight="10dip" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tutup Kunjungan"
+                android:id="@+id/CallAnalys_BtnSimpan"
+                android:paddingLeft="10dip"
+                android:layout_marginLeft="10dip" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
