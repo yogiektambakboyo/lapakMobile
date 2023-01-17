@@ -36,6 +36,27 @@
             android:theme="@style/AppThemeCustom"
             android:label="@string/newtrip"/>
         <activity
+            android:name=".intent.Activity_VisitClose"
+            android:exported="false"
+            android:theme="@style/AppThemeCustom"
+            android:label="Tutup Kunjungan"/>
+        <activity
+            android:name=".intent.Activity_NewVisit"
+            android:exported="false"
+            android:theme="@style/AppThemeCustom"
+            android:label="Kunjungan"/>
+
+        <activity
+            android:name=".intent.Activity_VisitMenu"
+            android:exported="false"
+            android:theme="@style/AppThemeCustom"
+            android:label="Menu Kunjungan"/>
+        <activity
+            android:name=".intent.Activity_Visit"
+            android:exported="false"
+            android:theme="@style/AppThemeCustom"
+            android:label="Kunjungan Toko"/>
+        <activity
             android:name=".intent.Activity_ResetPassword"
             android:exported="false"
             android:label="@string/resetpassword" />

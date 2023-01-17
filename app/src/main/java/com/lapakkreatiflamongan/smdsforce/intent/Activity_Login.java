@@ -134,13 +134,13 @@ public class Activity_Login extends AppCompatActivity {
     private final String TAG_FORCE_UPDATE = "FORCE_UPD";
     private final String TAG_LEADER = "leader";
     private String BASE_URL = "http://kakikupos.com:8081/";
-    private String VERSION_APK = "0.0.1";
+    private String VERSION_APK = "0.0.2";
     final String dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/picFolderSuperVision/";
     private final String DB_MASTER = "MASTER";
     private final String TAG_SELLERCODE = "sellercode";
     private final String TAG_SELLERNAME = "sellername";
 
-    String LeaderName = "",Force_Upd = "0", Version_Upd = "0.0.1", Link = "", Desc = "", ReadMeLink = "", LinkWeb = "http://sfa.borwita.co.id/supervision/", LinkUpload = "http://sfa.borwita.co.id:3000/api/upload/photo", LinkUploadPHP = "http://sfa.borwita.co.id/supervision/api/v1/uploadfile.php";
+    String LeaderName = "",Force_Upd = "0", Version_Upd = "0.0.2", Link = "", Desc = "", ReadMeLink = "", LinkWeb = "http://sfa.borwita.co.id/supervision/", LinkUpload = "http://sfa.borwita.co.id:3000/api/upload/photo", LinkUploadPHP = "http://sfa.borwita.co.id/supervision/api/v1/uploadfile.php";
 
     String RegisteredLogin = "0", WeekNumber = "1";
     private int dpScreen = 0;
@@ -332,7 +332,7 @@ public class Activity_Login extends AppCompatActivity {
                             .setCancelable(false)
                             .setIcon(android.R.drawable.ic_dialog_alert)
                             .show();
-                } else if ((!Version_Upd.equals("0.0.0")) && (!Version_Upd.equals(VERSION_APK))) {
+                } else if (1>2 &&(!Version_Upd.equals("0.0.0")) && (!Version_Upd.equals(VERSION_APK))) {
                     if (Force_Upd.equals("1")) {
                         new AlertDialog.Builder(Activity_Login.this)
                                 .setTitle("Information")
@@ -402,7 +402,7 @@ public class Activity_Login extends AppCompatActivity {
                     } else if (InputPasword.getText().toString().trim().length() <= 0) {
                         InputPasword.setError("Isi dahulu password!!!");
                     } else {
-                        if (!Version_Upd.equals(VERSION_APK)) {
+                        if (!Version_Upd.equals(VERSION_APK) && 1>2) {
                             DialodKonfirmasiUpdate(Version_Upd);
                         } else {
 

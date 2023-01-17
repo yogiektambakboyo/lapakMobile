@@ -107,7 +107,7 @@ public class Activity_MainMenu extends AppCompatActivity {
     private final String TAG_SELLERCODE = "sellercode";
     private final String TAG_SELLERNAME = "sellername";
     private final String TAG_WEEKNUMBER = "weekno";
-    private String VERSION_APK = "0.0.1";
+    private String VERSION_APK = "0.0.2";
 
     private String BASE_URL = "http://kakikupos.com:8081/";
 
@@ -186,7 +186,9 @@ public class Activity_MainMenu extends AppCompatActivity {
         MainMenu_CvVisit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(Activity_MainMenu.this, "Fitur masih dalam pengembangan", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(),Activity_Visit.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
             }
         });
         MainMenu_CvTripNew.setOnClickListener(new View.OnClickListener() {

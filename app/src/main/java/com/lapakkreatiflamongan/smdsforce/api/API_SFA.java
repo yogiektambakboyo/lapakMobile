@@ -7,6 +7,8 @@ import com.lapakkreatiflamongan.smdsforce.schema.Col_ActiveTrip;
 import com.lapakkreatiflamongan.smdsforce.schema.Col_ChangePassword;
 import com.lapakkreatiflamongan.smdsforce.schema.Col_StoreMaster;
 import com.lapakkreatiflamongan.smdsforce.schema.Col_StoreReg;
+import com.lapakkreatiflamongan.smdsforce.schema.Col_StoreVisit;
+import com.lapakkreatiflamongan.smdsforce.schema.Col_VisitActive;
 import com.lapakkreatiflamongan.smdsforce.schema.DataTimeCall;
 import com.lapakkreatiflamongan.smdsforce.schema.Data_Channel;
 import com.lapakkreatiflamongan.smdsforce.schema.Data_Complaint;
@@ -57,9 +59,23 @@ public interface API_SFA {
 
     @Headers({ "User-Agent:5uPErV1sIon_8CP_m0biL3" })
     @FormUrlEncoded
+    @POST("getStoreVisitToday")
+    Call<Col_StoreVisit> getStoreVisitToday(@Field("sales_id") String sales_id);
+
+    @Headers({ "User-Agent:5uPErV1sIon_8CP_m0biL3" })
+    @FormUrlEncoded
+    @POST("getVisitActive")
+    Call<Col_VisitActive> getVisitActive(@Field("sales_id") String sales_id, @Field("customer_id") String customer_id);
+
+    @Headers({ "User-Agent:5uPErV1sIon_8CP_m0biL3" })
+    @FormUrlEncoded
+    @POST("updateVisitActive")
+    Call<String> updateVisitActive(@Field("sales_id") String sales_id, @Field("customer_id") String customer_id, @Field("is_checkout") String is_checkout);
+
+    @Headers({ "User-Agent:5uPErV1sIon_8CP_m0biL3" })
+    @FormUrlEncoded
     @POST("getActiveTripAll")
     Call<Col_ActiveTrip> getActiveTripAll(@Field("sales_id") String sales_id);
-
 
     @Headers({ "User-Agent:5uPErV1sIon_8CP_m0biL3" })
     @FormUrlEncoded
@@ -102,6 +118,18 @@ public interface API_SFA {
             @Field("georeverse") String georeverse,
             @Field("photo") String photo,
             @Field("notes") String notes
+    );
+
+    @Headers({ "User-Agent:5uPErV1sIon_8CP_m0biL3" })
+    @FormUrlEncoded
+    @POST("insertStoreVisit")
+    Call<String> insertVisit(
+            @Field("sales_id") String sales_id,
+            @Field("customer_id") String customer_id,
+            @Field("longitude") String longitude,
+            @Field("latitude") String latitude,
+            @Field("georeverse") String georeverse,
+            @Field("photo") String photo
     );
 
     @Headers({ "User-Agent:5uPErV1sIon_8CP_m0biL3" })

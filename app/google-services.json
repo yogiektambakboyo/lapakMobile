@@ -1,0 +1,114 @@
+{
+  "project_info": {
+    "project_number": "398094117638",
+    "firebase_url": "https://super-vision-444de.firebaseio.com",
+    "project_id": "super-vision-444de",
+    "storage_bucket": "super-vision-444de.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:398094117638:android:1f449aa0fb788b21",
+        "android_client_info": {
+          "package_name": "app.bcp.supervision"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "398094117638-tqnigiehqsalgii34f0mmom5nn6pe7ac.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "app.bcp.supervision",
+            "certificate_hash": "c0fc9c625bb13e14969780466da26fb5414cf487"
+          }
+        },
+        {
+          "client_id": "398094117638-comlpaa2jdarua6htsc9nt7lrru4c2fc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXtne7Vrq0pcP9uRICKUqcKokrN3IT6gw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "398094117638-comlpaa2jdarua6htsc9nt7lrru4c2fc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:398094117638:android:f99cdc9372892b0ed6cc87",
+        "android_client_info": {
+          "package_name": "com.dfa.flutterchatdemo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "398094117638-he9f79qc4voao7iphiqvgp2eugjnms8a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dfa.flutterchatdemo",
+            "certificate_hash": "02b6007ac9d47b1c6e5c4ac9bd92595fb22f0bd6"
+          }
+        },
+        {
+          "client_id": "398094117638-comlpaa2jdarua6htsc9nt7lrru4c2fc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXtne7Vrq0pcP9uRICKUqcKokrN3IT6gw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "398094117638-comlpaa2jdarua6htsc9nt7lrru4c2fc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:398094117638:android:d13b2e1f6139d91dd6cc87",
+        "android_client_info": {
+          "package_name": "com.lapakkreatiflamongan.smdsforce"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "398094117638-comlpaa2jdarua6htsc9nt7lrru4c2fc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXtne7Vrq0pcP9uRICKUqcKokrN3IT6gw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "398094117638-comlpaa2jdarua6htsc9nt7lrru4c2fc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
