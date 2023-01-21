@@ -13,13 +13,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 
 import com.lapakkreatiflamongan.smdsforce.R;
 import com.lapakkreatiflamongan.smdsforce.api.API_SFA;
-import com.lapakkreatiflamongan.smdsforce.schema.Col_StoreVisit;
 import com.lapakkreatiflamongan.smdsforce.schema.Col_VisitActive;
-import com.lapakkreatiflamongan.smdsforce.schema.Data_StoreVisit;
 import com.lapakkreatiflamongan.smdsforce.schema.Data_VisitActive;
 
 import java.text.DateFormat;
@@ -49,7 +46,7 @@ public class Activity_VisitClose extends AppCompatActivity {
     private final String TAG_LOGINTIME = "logintime";
     private final String TAG_SELLERCODE = "sellercode";
     private final String TAG_SELLERNAME = "sellername";
-    private String VERSION_APK = "0.0.2";
+    private String VERSION_APK = "0.0.3";
     private final String TAG_CUSTOMERID = "customer_id";
     private final String TAG_CUSTOMERNAME = "customer_name";
     private String BASE_URL = "http://kakikupos.com:8081/";

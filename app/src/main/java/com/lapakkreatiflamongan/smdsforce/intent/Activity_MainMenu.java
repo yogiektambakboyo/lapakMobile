@@ -1,7 +1,6 @@
 package com.lapakkreatiflamongan.smdsforce.intent;
 
 import android.Manifest;
-import android.animation.Animator;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
@@ -9,44 +8,28 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.location.Address;
 import android.location.Location;
-import android.os.Build;
 import android.os.Bundle;
 import android.telephony.SubscriptionInfo;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.ProgressBar;
-import android.widget.Spinner;
-import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.daimajia.androidanimations.library.Techniques;
-import com.daimajia.androidanimations.library.YoYo;
-
-import com.github.ybq.android.spinkit.SpinKitView;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DateFormat;
@@ -55,17 +38,10 @@ import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
-import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import com.lapakkreatiflamongan.smdsforce.BuildConfig;
@@ -73,22 +49,12 @@ import com.lapakkreatiflamongan.smdsforce.R;
 import com.lapakkreatiflamongan.smdsforce.api.API_SFA;
 import com.lapakkreatiflamongan.smdsforce.schema.Col_ActiveTrip;
 import com.lapakkreatiflamongan.smdsforce.schema.Data_ActiveTrip;
-import com.lapakkreatiflamongan.smdsforce.schema.Data_Sales_Spinner;
-import com.lapakkreatiflamongan.smdsforce.schema.Data_Time;
-import com.lapakkreatiflamongan.smdsforce.schema.Data_Value;
-import com.lapakkreatiflamongan.smdsforce.schema.Data_Value_Detail;
-import com.lapakkreatiflamongan.smdsforce.schema.Data_Value_Detail_IFF;
-import com.lapakkreatiflamongan.smdsforce.schema.Data_Value_Detail_Numbered;
-import com.lapakkreatiflamongan.smdsforce.schema.Data_summaryMTD;
 import com.lapakkreatiflamongan.smdsforce.utils.UtilsHelper;
-import io.github.inflationx.calligraphy3.CalligraphyConfig;
-import io.github.inflationx.calligraphy3.CalligraphyInterceptor;
-import io.github.inflationx.viewpump.ViewPump;
+
 import io.github.inflationx.viewpump.ViewPumpContextWrapper;
 import io.nlopez.smartlocation.OnLocationUpdatedListener;
 import io.nlopez.smartlocation.OnReverseGeocodingListener;
 import io.nlopez.smartlocation.SmartLocation;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -107,7 +73,7 @@ public class Activity_MainMenu extends AppCompatActivity {
     private final String TAG_SELLERCODE = "sellercode";
     private final String TAG_SELLERNAME = "sellername";
     private final String TAG_WEEKNUMBER = "weekno";
-    private String VERSION_APK = "0.0.2";
+    private String VERSION_APK = "0.0.3";
 
     private String BASE_URL = "http://kakikupos.com:8081/";
 
@@ -582,10 +548,6 @@ public class Activity_MainMenu extends AppCompatActivity {
                 ShowDialogLogOut();
                 break;
             case R.id.login_maps:
-                callTracingLog("Show Maps");
-                Intent intent = new Intent(Activity_MainMenu.this,Activity_Maps.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
                 break;
             default:break;
         }

@@ -49,7 +49,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/LTrip_Id"
+                    android:id="@+id/LStore_Name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
@@ -59,7 +59,7 @@
                     android:textSize="14sp" />
 
                 <TextView
-                    android:id="@+id/LTrip_Time"
+                    android:id="@+id/LStore_Address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
@@ -67,7 +67,7 @@
                     android:textSize="12sp" />
 
                 <TextView
-                    android:id="@+id/LTrip_Duration"
+                    android:id="@+id/LStore_Channel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Segment"

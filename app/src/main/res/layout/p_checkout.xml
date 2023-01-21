@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".intent.Activity_Checkout">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="406dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="5dip"
+            android:layout_marginTop="5dip"
+            android:layout_marginEnd="5dip"
+            android:orientation="vertical">
+
+            <com.github.ybq.android.spinkit.SpinKitView
+                android:id="@+id/CheckOut_Loading"
+                style="@style/SpinKitView.Large.Circle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:SpinKit_Color="@color/colorAccent" />
+
+            <ListView
+                android:id="@+id/CheckOut_List"
+                android:layout_width="match_parent"
+                android:layout_height="400dp" >
+
+            </ListView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dip"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="130dip"
+                        android:layout_height="wrap_content"
+                        android:text="Total"
+                        android:textColor="@color/colorBlack" />
+
+                    <TextView
+                        android:id="@+id/CheckOut_Total"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Rp. 0"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="130dip"
+                        android:layout_height="wrap_content"
+                        android:text="Tgl Pengiriman"
+                        android:textColor="@color/colorBlack" />
+
+                    <EditText
+                        android:id="@+id/CheckOut_DeliveryDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        tools:ignore="TouchTargetSizeCheck" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="130dip"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="Catatan"
+                        android:textColor="@color/colorBlack" />
+
+                    <EditText
+                        android:id="@+id/CheckOut_Notes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="80dip"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:hint="Masukkan Catatan "
+                        android:inputType="textPersonName"
+                        android:maxLines="3"
+                        android:minLines="3" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="bottom|end"
+            android:orientation="vertical"
+            android:padding="25dp">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/CheckOut_FabCreate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:background="@color/blue"
+                android:clickable="true"
+                android:src="@drawable/shopping_basket"
+                app:backgroundTint="@color/teal_200"
+                tools:ignore="SpeakableTextPresentCheck"
+                tools:src="@drawable/shopping_basket" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -14,11 +14,8 @@ import android.content.res.Configuration;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
-import android.net.Network;
-import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -38,8 +35,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -50,18 +45,10 @@ import androidx.work.WorkManager;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
-import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
-import com.google.android.gms.common.GooglePlayServicesRepairableException;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.common.util.concurrent.ListenableFuture;
 
-import com.jaredrummler.android.device.DeviceName;
 
 import java.io.File;
-import java.io.IOException;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -73,16 +60,12 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 import com.lapakkreatiflamongan.smdsforce.BuildConfig;
-import com.lapakkreatiflamongan.smdsforce.schema.Data_Position;
 import com.lapakkreatiflamongan.smdsforce.service.Worker_RealtimeTracking;
 import com.lapakkreatiflamongan.smdsforce.utils.Fn_DBHandler;
 import com.lapakkreatiflamongan.smdsforce.R;
 import com.lapakkreatiflamongan.smdsforce.utils.TelephonyInfo;
 import com.lapakkreatiflamongan.smdsforce.api.API_SFA;
 import com.lapakkreatiflamongan.smdsforce.schema.Data_Login;
-import io.github.inflationx.calligraphy3.CalligraphyConfig;
-import io.github.inflationx.calligraphy3.CalligraphyInterceptor;
-import io.github.inflationx.viewpump.ViewPump;
 import io.github.inflationx.viewpump.ViewPumpContextWrapper;
 import io.nlopez.smartlocation.OnLocationUpdatedListener;
 import io.nlopez.smartlocation.SmartLocation;
@@ -134,13 +117,13 @@ public class Activity_Login extends AppCompatActivity {
     private final String TAG_FORCE_UPDATE = "FORCE_UPD";
     private final String TAG_LEADER = "leader";
     private String BASE_URL = "http://kakikupos.com:8081/";
-    private String VERSION_APK = "0.0.2";
+    private String VERSION_APK = "0.0.3";
     final String dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/picFolderSuperVision/";
     private final String DB_MASTER = "MASTER";
     private final String TAG_SELLERCODE = "sellercode";
     private final String TAG_SELLERNAME = "sellername";
 
-    String LeaderName = "",Force_Upd = "0", Version_Upd = "0.0.2", Link = "", Desc = "", ReadMeLink = "", LinkWeb = "http://sfa.borwita.co.id/supervision/", LinkUpload = "http://sfa.borwita.co.id:3000/api/upload/photo", LinkUploadPHP = "http://sfa.borwita.co.id/supervision/api/v1/uploadfile.php";
+    String LeaderName = "",Force_Upd = "0", Version_Upd = "0.0.3", Link = "", Desc = "", ReadMeLink = "", LinkWeb = "http://sfa.borwita.co.id/supervision/", LinkUpload = "http://sfa.borwita.co.id:3000/api/upload/photo", LinkUploadPHP = "http://sfa.borwita.co.id/supervision/api/v1/uploadfile.php";
 
     String RegisteredLogin = "0", WeekNumber = "1";
     private int dpScreen = 0;
@@ -261,7 +244,7 @@ public class Activity_Login extends AppCompatActivity {
             ActivityManager.MemoryInfo memInfo = new ActivityManager.MemoryInfo();
             actManager.getMemoryInfo(memInfo);
             ramCapacity = "" + ((memInfo.totalMem) / 0x100000);
-            deviceTipe = DeviceName.getDeviceName();
+            deviceTipe = "";
 
 
 
@@ -378,14 +361,7 @@ public class Activity_Login extends AppCompatActivity {
             btnSubmit = (Button) findViewById(R.id.Login_Submit);
             btnSubmit.setText("Login");
             TxtForgotPassword = findViewById(R.id.Login_ResetPassword);
-            TxtForgotPassword.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(Activity_Login.this,Activity_ResetPassword.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(intent);
-                }
-            });
+
 
             InputUserName = (EditText) findViewById(R.id.Login_username);
             if (checkPref(TAG_LASTLOGIN)) {

@@ -17,14 +17,10 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.github.ybq.android.spinkit.SpinKitView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.lapakkreatiflamongan.smdsforce.R;
-import com.lapakkreatiflamongan.smdsforce.adapter.Adapter_Registration;
 import com.lapakkreatiflamongan.smdsforce.adapter.Adapter_StoreVisit;
 import com.lapakkreatiflamongan.smdsforce.api.API_SFA;
-import com.lapakkreatiflamongan.smdsforce.schema.Col_StoreReg;
 import com.lapakkreatiflamongan.smdsforce.schema.Col_StoreVisit;
-import com.lapakkreatiflamongan.smdsforce.schema.Data_StoreReg;
 import com.lapakkreatiflamongan.smdsforce.schema.Data_StoreVisit;
 
 import java.text.DecimalFormat;
@@ -52,7 +48,7 @@ public class Activity_Visit extends AppCompatActivity {
     private final String TAG_LOGINTIME = "logintime";
     private final String TAG_SELLERCODE = "sellercode";
     private final String TAG_SELLERNAME = "sellername";
-    private String VERSION_APK = "0.0.2";
+    private String VERSION_APK = "0.0.3";
     private String BASE_URL = "http://kakikupos.com:8081/";
 
     DecimalFormat formatter;

@@ -27,10 +27,6 @@
         android:theme="@style/Theme.SMDSForce"
         tools:targetApi="31">
         <activity
-            android:name=".intent.Activity_RequestEdit"
-            android:exported="false"
-            android:label="@string/requestedit"/>
-        <activity
             android:name=".intent.Activity_NewTrip"
             android:exported="false"
             android:theme="@style/AppThemeCustom"
@@ -40,6 +36,16 @@
             android:exported="false"
             android:theme="@style/AppThemeCustom"
             android:label="Tutup Kunjungan"/>
+        <activity
+            android:name=".intent.Activity_Order"
+            android:exported="false"
+            android:theme="@style/AppThemeCustom"
+            android:label="Pesanan"/>
+        <activity
+            android:name=".intent.Activity_Checkout"
+            android:exported="false"
+            android:theme="@style/AppThemeCustom"
+            android:label="Pesanan"/>
         <activity
             android:name=".intent.Activity_NewVisit"
             android:exported="false"
@@ -56,21 +62,6 @@
             android:exported="false"
             android:theme="@style/AppThemeCustom"
             android:label="Kunjungan Toko"/>
-        <activity
-            android:name=".intent.Activity_ResetPassword"
-            android:exported="false"
-            android:label="@string/resetpassword" />
-        <activity
-            android:name=".intent.Activity_ChangePassword"
-            android:exported="false"
-            android:label="@string/changepassword" />
-        <activity
-            android:name=".intent.Activity_Settings"
-            android:label="@string/setting" />
-        <activity
-            android:name=".intent.Activity_Validation"
-            android:exported="false"
-            android:theme="@style/AppThemeCustom" />
         <activity
             android:name=".intent.Activity_Trip"
             android:theme="@style/AppThemeCustom" />
@@ -91,9 +82,6 @@
 
 
         <activity
-            android:name=".intent.Activity_Maps"
-            android:label="@string/title_activity__maps" />
-        <activity
             android:name=".intent.Activity_Loading"
             android:theme="@style/AppThemeCustomLogin"
             android:exported="true">
@@ -103,7 +91,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".intent.Activity_Main" />
         <activity
             android:name=".intent.Activity_Login"
             android:theme="@style/AppThemeCustomLogin" />

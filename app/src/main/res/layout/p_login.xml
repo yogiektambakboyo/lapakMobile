@@ -82,7 +82,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Version "
-                    android:textColor="@color/material_blue_grey_80"
+                    android:textColor="@color/blue"
                     android:textIsSelectable="false"
                     android:textSize="12sp"
                     android:textStyle="normal|bold|italic" />

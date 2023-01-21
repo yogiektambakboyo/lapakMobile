@@ -32,7 +32,6 @@ import java.util.Locale;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.lapakkreatiflamongan.smdsforce.R;
-import com.lapakkreatiflamongan.smdsforce.adapter.Adapter_StoreMaster;
 import com.lapakkreatiflamongan.smdsforce.adapter.Adapter_Trip;
 import com.lapakkreatiflamongan.smdsforce.adapter.Adapter_TripDetail;
 import com.lapakkreatiflamongan.smdsforce.api.API_SFA;
@@ -56,7 +55,7 @@ public class Activity_Trip extends AppCompatActivity {
     private final String TAG_LOGINTIME = "logintime";
     private final String TAG_SELLERCODE = "sellercode";
     private final String TAG_SELLERNAME = "sellername";
-    private String VERSION_APK = "0.0.2";
+    private String VERSION_APK = "0.0.3";
     private String BASE_URL = "http://kakikupos.com:8081/";
 
     DecimalFormat formatter;

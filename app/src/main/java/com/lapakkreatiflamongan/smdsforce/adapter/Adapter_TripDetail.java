@@ -71,9 +71,9 @@ public class Adapter_TripDetail extends BaseAdapter {
             holder = new Adapter_TripDetail.ViewHolder();
             view = inflater.inflate(R.layout.l_trip, null);
             // Locate the TextViews in listview_item.xml
-            holder.Name = (TextView) view.findViewById(R.id.LTrip_Id);
-            holder.Address = (TextView) view.findViewById(R.id.LTrip_Time);
-            holder.Channel = (TextView) view.findViewById(R.id.LTrip_Duration);
+            holder.Name = (TextView) view.findViewById(R.id.LTrip_Name);
+            holder.Address = (TextView) view.findViewById(R.id.LTrip_Address);
+            holder.Channel = (TextView) view.findViewById(R.id.LTrip_Channel);
             view.setTag(holder);
         } else {
             holder = (ViewHolder) view.getTag();

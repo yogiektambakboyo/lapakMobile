@@ -5,24 +5,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
-import com.github.ybq.android.spinkit.SpinKitView;
 import com.lapakkreatiflamongan.smdsforce.R;
-import com.lapakkreatiflamongan.smdsforce.adapter.Adapter_StoreVisit;
 import com.lapakkreatiflamongan.smdsforce.api.API_SFA;
-import com.lapakkreatiflamongan.smdsforce.schema.Col_StoreVisit;
 import com.lapakkreatiflamongan.smdsforce.schema.Col_VisitActive;
-import com.lapakkreatiflamongan.smdsforce.schema.Data_StoreVisit;
 import com.lapakkreatiflamongan.smdsforce.schema.Data_VisitActive;
 
 import java.text.DecimalFormat;
@@ -49,7 +41,7 @@ public class Activity_VisitMenu extends AppCompatActivity {
     private final String TAG_LOGINTIME = "logintime";
     private final String TAG_SELLERCODE = "sellercode";
     private final String TAG_SELLERNAME = "sellername";
-    private String VERSION_APK = "0.0.2";
+    private String VERSION_APK = "0.0.3";
     private final String TAG_CUSTOMERNAME = "customer_name";
 
     private String BASE_URL = "http://kakikupos.com:8081/";
@@ -107,7 +99,15 @@ public class Activity_VisitMenu extends AppCompatActivity {
         Cv_Order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(Activity_VisitMenu.this, "Menu pesanan masih dalam pengembangan", Toast.LENGTH_SHORT).show();
+                if (dataVisitActive != null) {
+                    if (dataVisitActive.size() <= 0) {
+                        Toast.makeText(Activity_VisitMenu.this, "Silahkan melakukan Foto Kunjungan Toko dahulu", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Intent intent = new Intent(Activity_VisitMenu.this,Activity_Order.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
+                    }
+                }
             }
         });
 

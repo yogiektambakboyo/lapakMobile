@@ -8,7 +8,6 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.lapakkreatiflamongan.smdsforce.R;
-import com.lapakkreatiflamongan.smdsforce.schema.Data_ActiveTrip;
 import com.lapakkreatiflamongan.smdsforce.schema.Data_StoreReg;
 
 import java.text.DecimalFormat;
@@ -72,9 +71,9 @@ public class Adapter_Registration extends BaseAdapter {
             holder = new Adapter_Registration.ViewHolder();
             view = inflater.inflate(R.layout.l_trip, null);
             // Locate the TextViews in listview_item.xml
-            holder.Name = (TextView) view.findViewById(R.id.LTrip_Id);
-            holder.Address = (TextView) view.findViewById(R.id.LTrip_Time);
-            holder.Channel = (TextView) view.findViewById(R.id.LTrip_Duration);
+            holder.Name = (TextView) view.findViewById(R.id.LTrip_Name);
+            holder.Address = (TextView) view.findViewById(R.id.LTrip_Address);
+            holder.Channel = (TextView) view.findViewById(R.id.LTrip_Channel);
             view.setTag(holder);
         } else {
             holder = (ViewHolder) view.getTag();
