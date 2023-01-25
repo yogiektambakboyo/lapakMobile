@@ -254,22 +254,22 @@
                     android:padding="10dp">
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="160dip"
                         android:layout_height="200dp"
                         android:layout_gravity="top"
-                        android:layout_marginLeft="10dip"
+                        android:layout_marginRight="10dp"
                         android:gravity="center_horizontal|center_vertical"
                         android:orientation="vertical">
 
                         <androidx.cardview.widget.CardView
                             android:id="@+id/MainMenu_CvRegister"
-                            android:layout_width="190dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:padding="5dp"
                             card_view:cardUseCompatPadding="true">
 
                             <LinearLayout
-                                android:layout_width="match_parent"
+                                android:layout_width="150dip"
                                 android:layout_height="match_parent"
                                 android:layout_margin="5dp"
                                 android:orientation="vertical"
@@ -286,7 +286,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:gravity="left"
-                                    android:text="Pendaftaran Toko"
+                                    android:text="Daftar Toko"
                                     android:textSize="20sp"
                                     android:textStyle="bold" />
 
@@ -298,6 +298,50 @@
                         </androidx.cardview.widget.CardView>
 
                     </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="200dip"
+                        android:layout_marginLeft="10dp"
+                        android:orientation="vertical">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/MainMenu_CvReport"
+                            android:layout_width="160dp"
+                            android:layout_height="match_parent"
+                            android:padding="5dp"
+                            card_view:cardUseCompatPadding="true">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_margin="5dp"
+                                android:orientation="vertical"
+                                android:padding="5dp">
+
+                                <ImageView
+                                    android:layout_width="80dp"
+                                    android:layout_height="100dp"
+                                    android:layout_gravity="center_horizontal"
+                                    android:layout_marginBottom="10dp"
+                                    card_view:srcCompat="@drawable/research" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="left"
+                                    android:text="Laporan"
+                                    android:textSize="20sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Pencapaian penjualan " />
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+                    </LinearLayout>
+
                 </LinearLayout>
 
             </LinearLayout>

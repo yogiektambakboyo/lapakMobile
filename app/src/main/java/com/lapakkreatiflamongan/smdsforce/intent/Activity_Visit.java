@@ -48,7 +48,7 @@ public class Activity_Visit extends AppCompatActivity {
     private final String TAG_LOGINTIME = "logintime";
     private final String TAG_SELLERCODE = "sellercode";
     private final String TAG_SELLERNAME = "sellername";
-    private String VERSION_APK = "0.0.3";
+    private String VERSION_APK = "0.0.6";
     private String BASE_URL = "http://kakikupos.com:8081/";
 
     DecimalFormat formatter;
@@ -108,7 +108,7 @@ public class Activity_Visit extends AppCompatActivity {
 
         formatter = (DecimalFormat) NumberFormat.getCurrencyInstance(Locale.GERMANY);
         formatter.setDecimalFormatSymbols(symbol);
-        formatter.setMaximumFractionDigits(1);
+        formatter.setMaximumFractionDigits(0);
 
         Intent intent = getIntent();
         procentTimeGone = intent.getStringExtra("data");

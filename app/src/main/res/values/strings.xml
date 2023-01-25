@@ -50,7 +50,7 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="please_wait">Please Wait</string>
 
-    <string name="menu_home">Store Performance</string>
+    <string name="menu_home">Laporan</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
     <string name="menu_tools">Tools</string>
@@ -65,5 +65,6 @@
     <string name="resetpassword">Reset Password</string>
     <string name="requestedit">Perubahan Data</string>
     <string name="newtrip">New Trip</string>
+    <string name="title_activity_report">Activity_Report</string>
 </resources>
 

@@ -73,7 +73,7 @@ public class Activity_MainMenu extends AppCompatActivity {
     private final String TAG_SELLERCODE = "sellercode";
     private final String TAG_SELLERNAME = "sellername";
     private final String TAG_WEEKNUMBER = "weekno";
-    private String VERSION_APK = "0.0.3";
+    private String VERSION_APK = "0.0.6";
 
     private String BASE_URL = "http://kakikupos.com:8081/";
 
@@ -100,7 +100,7 @@ public class Activity_MainMenu extends AppCompatActivity {
 
     LinearLayout MainMenu_LyActiveTrip;
     TextView MainMenu_TxtActiveTripLabel,MainMenu_TxtActiveTripGeo;
-    CardView MainMenu_CvTripNew,MainMenu_CvVisit,MainMenu_CvActiveTrip,MainMenu_CvRegister;
+    CardView MainMenu_CvTripNew,MainMenu_CvVisit,MainMenu_CvReport,MainMenu_CvActiveTrip,MainMenu_CvRegister;
     SwipeRefreshLayout SWRefresh;
     Dialog dialog;
 
@@ -148,6 +148,16 @@ public class Activity_MainMenu extends AppCompatActivity {
         MainMenu_CvRegister = findViewById(R.id.MainMenu_CvRegister);
         MainMenu_CvVisit = findViewById(R.id.MainMenu_CvVisit);
         MainMenu_CvTripNew = findViewById(R.id.MainMenu_CvTripNew);
+        MainMenu_CvReport = findViewById(R.id.MainMenu_CvReport);
+
+        MainMenu_CvReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),Activity_Report.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
 
         MainMenu_CvVisit.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -117,13 +117,13 @@ public class Activity_Login extends AppCompatActivity {
     private final String TAG_FORCE_UPDATE = "FORCE_UPD";
     private final String TAG_LEADER = "leader";
     private String BASE_URL = "http://kakikupos.com:8081/";
-    private String VERSION_APK = "0.0.3";
+    private String VERSION_APK = "0.0.6";
     final String dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/picFolderSuperVision/";
     private final String DB_MASTER = "MASTER";
     private final String TAG_SELLERCODE = "sellercode";
     private final String TAG_SELLERNAME = "sellername";
 
-    String LeaderName = "",Force_Upd = "0", Version_Upd = "0.0.3", Link = "", Desc = "", ReadMeLink = "", LinkWeb = "http://sfa.borwita.co.id/supervision/", LinkUpload = "http://sfa.borwita.co.id:3000/api/upload/photo", LinkUploadPHP = "http://sfa.borwita.co.id/supervision/api/v1/uploadfile.php";
+    String LeaderName = "",Force_Upd = "0", Version_Upd = "0.0.6", Link = "", Desc = "", ReadMeLink = "", LinkWeb = "http://sfa.borwita.co.id/supervision/", LinkUpload = "http://sfa.borwita.co.id:3000/api/upload/photo", LinkUploadPHP = "http://sfa.borwita.co.id/supervision/api/v1/uploadfile.php";
 
     String RegisteredLogin = "0", WeekNumber = "1";
     private int dpScreen = 0;

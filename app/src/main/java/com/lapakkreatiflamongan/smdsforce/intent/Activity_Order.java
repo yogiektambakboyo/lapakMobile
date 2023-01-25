@@ -51,7 +51,7 @@ public class Activity_Order extends AppCompatActivity {
     private final String TAG_LOGINTIME = "logintime";
     private final String TAG_SELLERCODE = "sellercode";
     private final String TAG_SELLERNAME = "sellername";
-    private String VERSION_APK = "0.0.3";
+    private String VERSION_APK = "0.0.6";
     private String BASE_URL = "http://kakikupos.com:8081/";
 
     DecimalFormat formatter;
@@ -114,9 +114,7 @@ public class Activity_Order extends AppCompatActivity {
 
         formatter = (DecimalFormat) NumberFormat.getCurrencyInstance(Locale.GERMANY);
         formatter.setDecimalFormatSymbols(symbol);
-        formatter.setMaximumFractionDigits(1);
-
-        Intent intent = getIntent();
+        formatter.setMaximumFractionDigits(0);
 
         dialog = new Dialog(Activity_Order.this);
         dialog.setContentView(R.layout.d_logindownload);
@@ -131,7 +129,11 @@ public class Activity_Order extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setData();
+                if (adapter.getTotalSKU()<=0){
+                    Toast.makeText(Activity_Order.this, "Silahkan masukkan minimal 1 barang yang akan dibeli", Toast.LENGTH_SHORT).show();
+                }else{
+                    setData();
+                }
             }
         });
 
@@ -195,15 +197,16 @@ public class Activity_Order extends AppCompatActivity {
                     }else{
                         if (col.getStatus().equals("1")){
                             List<Data_Product> data = col.getData();
+                            for (int i = 0; i < data.size(); i++) {
+                                data.get(i).setCustomers_id(getPref(TAG_CUSTOMERID));
+                                data.get(i).setSales_id(getPref(TAG_SPVCODE));
+                                data.get(i).setOrder_no(Order_No);
+                                data.get(i).setTotal(""+Integer.parseInt(data.get(i).getPrice())*Integer.parseInt(data.get(i).getQty()));
+                            }
+
                             adapter = new Adapter_Product(getApplicationContext(),data);
                             listViewTrip.setAdapter(adapter);
 
-                            for (int i = 0; i < adapter.getData().size(); i++) {
-                                adapter.getData().get(i).setCustomers_id(getPref(TAG_CUSTOMERID));
-                                adapter.notifyDataSetChanged();
-                                adapter.getData().get(i).setSales_id(getPref(TAG_SPVCODE));
-                                adapter.notifyDataSetChanged();
-                            }
                             adapter.setTotal();
                             adapter.notifyDataSetChanged();
                             TxtInfo.setText("Total : "+adapter.getTotalSKU()+" SKU/ Rp. "+formatter.format(adapter.getTotal()));
@@ -214,6 +217,22 @@ public class Activity_Order extends AppCompatActivity {
                                     Dialog dialog = new Dialog(Activity_Order.this);
                                     dialog.setContentView(R.layout.d_order);
 
+                                    adapter.getItem(i).getId();
+                                    adapter.getItem(i).getSeq();
+                                    adapter.getItem(i).getSales_id();
+                                    adapter.getItem(i).getCustomers_id();
+                                    adapter.getItem(i).getTotal();
+                                    adapter.getItem(i).getPrice();
+                                    adapter.getItem(i).getOrder_no();
+
+                                   /* Toast.makeText(Activity_Order.this, "Product "+adapter.getItem(i).getId(), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(Activity_Order.this, "Seq "+adapter.getItem(i).getSeq(), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(Activity_Order.this, "Sales "+adapter.getItem(i).getSales_id(), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(Activity_Order.this, "Customer "+adapter.getItem(i).getCustomers_id(), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(Activity_Order.this, "total "+adapter.getItem(i).getTotal(), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(Activity_Order.this, "Price "+adapter.getItem(i).getPrice(), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(Activity_Order.this, "Order No "+adapter.getItem(i).getOrder_no(), Toast.LENGTH_SHORT).show();
+*/
                                     TextView TxtName,TxtPrice,TxtTotal;
                                     EditText InputQty;
                                     Button BtnCancel,BtnSave;
@@ -349,13 +368,6 @@ public class Activity_Order extends AppCompatActivity {
 
     public void setData(){
         dialog.show();
-        for (int i = 0; i < adapter.getData().size(); i++) {
-            Toast.makeText(this, "Id "+adapter.getData().get(i).getId(), Toast.LENGTH_SHORT).show();
-            Toast.makeText(this, "Customer Id "+adapter.getData().get(i).getCustomers_id(), Toast.LENGTH_SHORT).show();
-            Toast.makeText(this, "Sales Id "+adapter.getData().get(i).getSales_id(), Toast.LENGTH_SHORT).show();
-            Toast.makeText(this, "Seq "+adapter.getData().get(i).getSeq(), Toast.LENGTH_SHORT).show();
-            Toast.makeText(this, "Qty "+adapter.getData().get(i).getQty(), Toast.LENGTH_SHORT).show();
-        }
         Call<Col_ActiveTrip> callData = myAPi.insertOrder(adapter.getData());
         callData.enqueue(new Callback<Col_ActiveTrip>() {
             @Override

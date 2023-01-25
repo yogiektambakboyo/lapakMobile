@@ -2,13 +2,16 @@ package com.lapakkreatiflamongan.smdsforce.intent;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
@@ -41,7 +44,7 @@ public class Activity_VisitMenu extends AppCompatActivity {
     private final String TAG_LOGINTIME = "logintime";
     private final String TAG_SELLERCODE = "sellercode";
     private final String TAG_SELLERNAME = "sellername";
-    private String VERSION_APK = "0.0.3";
+    private String VERSION_APK = "0.0.6";
     private final String TAG_CUSTOMERNAME = "customer_name";
 
     private String BASE_URL = "http://kakikupos.com:8081/";
@@ -144,7 +147,7 @@ public class Activity_VisitMenu extends AppCompatActivity {
 
         formatter = (DecimalFormat) NumberFormat.getCurrencyInstance(Locale.GERMANY);
         formatter.setDecimalFormatSymbols(symbol);
-        formatter.setMaximumFractionDigits(1);
+        formatter.setMaximumFractionDigits(0);
 
         Intent intent = getIntent();
         procentTimeGone = intent.getStringExtra("data");
@@ -233,6 +236,14 @@ public class Activity_VisitMenu extends AppCompatActivity {
                 Toast.makeText(Activity_VisitMenu.this, "Ambil Data Gagal : "+ERROR_500, Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode== KeyEvent.KEYCODE_BACK){
+            Toast.makeText(this, "Silahkan selesaikan kunjungan lewat menu tutup kunjungan", Toast.LENGTH_SHORT).show();
+        }
+        return false;
     }
 
 }

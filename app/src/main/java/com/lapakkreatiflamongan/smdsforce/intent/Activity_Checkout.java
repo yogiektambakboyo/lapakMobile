@@ -1,5 +1,6 @@
 package com.lapakkreatiflamongan.smdsforce.intent;
 
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -12,6 +13,7 @@ import android.util.TypedValue;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -55,7 +57,7 @@ public class Activity_Checkout extends AppCompatActivity {
     private final String TAG_LOGINTIME = "logintime";
     private final String TAG_SELLERCODE = "sellercode";
     private final String TAG_SELLERNAME = "sellername";
-    private String VERSION_APK = "0.0.3";
+    private String VERSION_APK = "0.0.6";
     private String BASE_URL = "http://kakikupos.com:8081/";
 
     DecimalFormat formatter;
@@ -90,6 +92,7 @@ public class Activity_Checkout extends AppCompatActivity {
     Adapter_Product adapter;
     EditText InputNotes,InputDeliveryDate;
     TextView TxtInfo;
+    final Calendar myCalendar= Calendar.getInstance();
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -110,6 +113,24 @@ public class Activity_Checkout extends AppCompatActivity {
         InputNotes       = findViewById(R.id.CheckOut_Notes);
 
         InputDeliveryDate.setText(getToday());
+        DatePickerDialog.OnDateSetListener date =new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int day) {
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH,month);
+                myCalendar.set(Calendar.DAY_OF_MONTH,day);
+                String myFormat="YYYY-MM-dd";
+                SimpleDateFormat dateFormat=new SimpleDateFormat(myFormat, Locale.US);
+                InputDeliveryDate.setText(dateFormat.format(myCalendar.getTime()));
+            }
+        };
+        InputDeliveryDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new DatePickerDialog(Activity_Checkout.this,date,myCalendar.get(Calendar.YEAR),myCalendar.get(Calendar.MONTH),myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+
         loader.setVisibility(View.VISIBLE);
 
         symbol = new DecimalFormatSymbols(Locale.GERMANY);
@@ -117,9 +138,8 @@ public class Activity_Checkout extends AppCompatActivity {
 
         formatter = (DecimalFormat) NumberFormat.getCurrencyInstance(Locale.GERMANY);
         formatter.setDecimalFormatSymbols(symbol);
-        formatter.setMaximumFractionDigits(1);
+        formatter.setMaximumFractionDigits(0);
 
-        Intent intent = getIntent();
 
         dialog = new Dialog(Activity_Checkout.this);
         dialog.setContentView(R.layout.d_logindownload);
@@ -264,7 +284,7 @@ public class Activity_Checkout extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                dialog.dismiss();
-                               Intent intent = new Intent(Activity_Checkout.this, Activity_Visit.class);
+                               Intent intent = new Intent(Activity_Checkout.this, Activity_VisitMenu.class);
                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                startActivity(intent);
                             }

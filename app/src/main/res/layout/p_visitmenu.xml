@@ -13,11 +13,10 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="10dip"
-            android:layout_marginStart="5dip"
-            android:layout_marginTop="5dip"
-            android:layout_marginEnd="5dip"
-            android:layout_marginBottom="5dip"
+            android:layout_marginStart="10dip"
+            android:layout_marginTop="10dip"
+            android:layout_marginEnd="10dip"
+            android:layout_marginBottom="10dip"
             android:orientation="vertical"
             android:padding="10dip">
 
@@ -25,6 +24,7 @@
                 android:id="@+id/VisitMenu_PhotoCapture"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:layout_margin="10dip"
                 android:padding="10dip"
                 app:cardCornerRadius="5dp"
@@ -34,14 +34,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dip"
-                    android:gravity="center"
+                    android:gravity="center_horizontal|center_vertical"
                     android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="32dip"
+                        android:layout_height="match_parent"
+                        app:srcCompat="@drawable/sfa_reports_camera" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="10dip"
-                        android:text="Ambil Photo" />
+                        android:text="Ambil Photo"
+                        android:textColor="@color/colorBlack" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -58,14 +64,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dip"
-                    android:gravity="center"
+                    android:gravity="center_horizontal|center_vertical"
                     android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="32dip"
+                        android:layout_height="match_parent"
+                        app:srcCompat="@drawable/sfa_reports_order" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="10dip"
-                        android:text="Pesanan" />
+                        android:text="Pesanan"
+                        android:textColor="@color/colorBlack" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -82,14 +94,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dip"
-                    android:gravity="center"
+                    android:gravity="center_horizontal|center_vertical"
                     android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="32dip"
+                        android:layout_height="match_parent"
+                        app:srcCompat="@drawable/sfa_reports_mtd" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="10dip"
-                        android:text="Tutup Kunjungan" />
+                        android:text="Tutup Kunjungan"
+                        android:textColor="@color/colorBlack" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 

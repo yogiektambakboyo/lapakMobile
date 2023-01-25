@@ -5,6 +5,8 @@ import java.util.List;
 
 import com.lapakkreatiflamongan.smdsforce.schema.Col_ActiveTrip;
 import com.lapakkreatiflamongan.smdsforce.schema.Col_ChangePassword;
+import com.lapakkreatiflamongan.smdsforce.schema.Col_OrderDetail;
+import com.lapakkreatiflamongan.smdsforce.schema.Col_OrderMaster;
 import com.lapakkreatiflamongan.smdsforce.schema.Col_Product;
 import com.lapakkreatiflamongan.smdsforce.schema.Col_StoreMaster;
 import com.lapakkreatiflamongan.smdsforce.schema.Col_StoreReg;
@@ -67,6 +69,16 @@ public interface API_SFA {
 
     @Headers({ "User-Agent:5uPErV1sIon_8CP_m0biL3" })
     @FormUrlEncoded
+    @POST("getOrderToday")
+    Call<Col_OrderMaster> getOrderToday(@Field("sales_id") String sales_id, @Field("dated") String dated);
+
+    @Headers({ "User-Agent:5uPErV1sIon_8CP_m0biL3" })
+    @FormUrlEncoded
+    @POST("getOrderDetail")
+    Call<Col_OrderDetail> getOrderDetail(@Field("order_no") String order_no);
+
+    @Headers({ "User-Agent:5uPErV1sIon_8CP_m0biL3" })
+    @FormUrlEncoded
     @POST("getProductOrderCheckout")
     Call<Col_Product> getProductOrderCheckout(@Field("sales_id") String sales_id, @Field("customer_id") String customer_id);
 
@@ -93,6 +105,7 @@ public interface API_SFA {
     @FormUrlEncoded
     @POST("getActiveTripDetail")
     Call<Col_ActiveTrip> getActiveTripDetail(@Field("sales_id") String sales_id,@Field("trip_id") String trip_id);
+
 
     @Headers({ "User-Agent:5uPErV1sIon_8CP_m0biL3" })
     @FormUrlEncoded

@@ -46,7 +46,7 @@ public class Activity_VisitClose extends AppCompatActivity {
     private final String TAG_LOGINTIME = "logintime";
     private final String TAG_SELLERCODE = "sellercode";
     private final String TAG_SELLERNAME = "sellername";
-    private String VERSION_APK = "0.0.3";
+    private String VERSION_APK = "0.0.6";
     private final String TAG_CUSTOMERID = "customer_id";
     private final String TAG_CUSTOMERNAME = "customer_name";
     private String BASE_URL = "http://kakikupos.com:8081/";
@@ -99,7 +99,6 @@ public class Activity_VisitClose extends AppCompatActivity {
         TxtSales.setText("Rp. 0");
         mChronometer = (Chronometer) findViewById(R.id.Close_Chrono);
 
-
         BtnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -126,7 +125,7 @@ public class Activity_VisitClose extends AppCompatActivity {
 
         formatter = (DecimalFormat) NumberFormat.getCurrencyInstance(Locale.GERMANY);
         formatter.setDecimalFormatSymbols(symbol);
-        formatter.setMaximumFractionDigits(1);
+        formatter.setMaximumFractionDigits(0);
 
         dialog = new Dialog(Activity_VisitClose.this);
         dialog.setContentView(R.layout.d_logindownload);
@@ -184,7 +183,6 @@ public class Activity_VisitClose extends AppCompatActivity {
         return formattedDate;
     }
 
-
     public void getData(){
         dialog.show();
         Call<Col_VisitActive> callData = myAPi.getVisitActive(getPref(TAG_SPVCODE),getPref(TAG_CUSTOMERID));
@@ -209,6 +207,7 @@ public class Activity_VisitClose extends AppCompatActivity {
                             if (dataVisitActive.size()>0){
                                 Today = dataVisitActive.get(0).getTime_start()+":00";
                                 isChekcout = dataVisitActive.get(0).getIs_checkout();
+                                TxtSales.setText("Rp. "+formatter.format(Float.parseFloat(dataVisitActive.get(0).getSales_vol())));
                             }
                         }
 
