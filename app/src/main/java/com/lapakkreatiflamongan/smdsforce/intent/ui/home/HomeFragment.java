@@ -72,7 +72,7 @@ public class HomeFragment extends Fragment {
     private final String TAG_LOGINTIME = "logintime";
     private final String TAG_SELLERCODE = "sellercode";
     private final String TAG_SELLERNAME = "sellername";
-    private String VERSION_APK = "0.0.6";
+    private String VERSION_APK = "0.0.7";
     private String BASE_URL = "http://kakikupos.com:8081/";
 
     DecimalFormat formatter;

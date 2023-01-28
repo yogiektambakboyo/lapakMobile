@@ -59,6 +59,18 @@ public interface API_SFA {
 
     @Headers({ "User-Agent:5uPErV1sIon_8CP_m0biL3" })
     @FormUrlEncoded
+    @POST("getStoreNOO")
+    Call<Col_StoreVisit> getStoreNOO(@Field("sales_id") String sales_id);
+
+    @Headers({ "User-Agent:5uPErV1sIon_8CP_m0biL3" })
+    @FormUrlEncoded
+    @POST("getStoreNOODetail")
+    Call<Col_VisitActive> getStoreNOODetail(@Field("sales_id") String sales_id, @Field("customer_id") String customer_id);
+
+
+
+    @Headers({ "User-Agent:5uPErV1sIon_8CP_m0biL3" })
+    @FormUrlEncoded
     @POST("getVisitActive")
     Call<Col_VisitActive> getVisitActive(@Field("sales_id") String sales_id, @Field("customer_id") String customer_id);
 
@@ -177,6 +189,32 @@ public interface API_SFA {
             @Field("latitude") String latitude,
             @Field("contact_person_level") String contact_person_level,
             @Field("photo") String photo
+    );
+
+
+    @Headers({ "User-Agent:5uPErV1sIon_8CP_m0biL3" })
+    @FormUrlEncoded
+    @POST("updateNOO")
+    Call<String> updateNOO(
+            @Field("customer_id") String customer_id,
+            @Field("sales_id") String sales_id,
+            @Field("name") String name,
+            @Field("address") String address,
+            @Field("phone_no") String phone_no,
+            @Field("city") String city,
+            @Field("credit_limit") String credit_limit,
+            @Field("email") String email,
+            @Field("handphone") String handphone,
+            @Field("whatsapp_no") String whatsapp_no,
+            @Field("citizen_id") String citizen_id,
+            @Field("tax_id") String tax_id,
+            @Field("contact_person") String contact_person,
+            @Field("type") String type,
+            @Field("clasification") String clasification,
+            @Field("contact_person_job_position") String contact_person_job_position,
+            @Field("longitude") String longitude,
+            @Field("latitude") String latitude,
+            @Field("contact_person_level") String contact_person_level
     );
 
 
