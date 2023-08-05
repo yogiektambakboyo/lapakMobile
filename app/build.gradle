@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace 'com.lapakkreatiflamongan.smdsforce'
+    namespace 'com.lapakkreatiflamongan.ccp'
     compileSdk 32
 
     defaultConfig {
-        applicationId "com.lapakkreatiflamongan.smdsforce"
+        applicationId "com.lapakkreatiflamongan.ccp"
         minSdk 25
         targetSdk 32
         versionCode 7

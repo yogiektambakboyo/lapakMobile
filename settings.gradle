@@ -34,5 +34,5 @@ dependencyResolutionManagement {
         jcenter()
     }
 }
-rootProject.name = "SMD SForce"
+rootProject.name = "CCP"
 include ':app'

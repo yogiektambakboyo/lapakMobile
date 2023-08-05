@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -27,7 +26,7 @@
         tools:replace="android:icon"
         tools:targetApi="31">
         <activity
-            android:name=".intent.Activity_Report"
+            android:name="com.lapakkreatiflamongan.ccp.intent.Activity_Report"
             android:exported="false"
             android:label="@string/title_activity_report"
             android:theme="@style/Theme.SMDSForce">
@@ -36,48 +35,58 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".intent.Activity_NewTrip"
+            android:name="com.lapakkreatiflamongan.ccp.intent.Activity_NewTrip"
             android:exported="false"
             android:label="@string/newtrip"
             android:theme="@style/AppThemeCustom" />
         <activity
-            android:name=".intent.Activity_VisitClose"
+            android:name="com.lapakkreatiflamongan.ccp.intent.Activity_NOO"
+            android:exported="false"
+            android:label="New Open Outlet"
+            android:theme="@style/AppThemeCustom" />
+        <activity
+            android:name="com.lapakkreatiflamongan.ccp.intent.Activity_NOOForm"
+            android:exported="false"
+            android:label="NOO"
+            android:theme="@style/AppThemeCustom" />
+        <activity
+            android:name="com.lapakkreatiflamongan.ccp.intent.Activity_VisitClose"
             android:exported="false"
             android:label="Tutup Kunjungan"
             android:theme="@style/AppThemeCustom" />
         <activity
-            android:name=".intent.Activity_Order"
+            android:name="com.lapakkreatiflamongan.ccp.intent.Activity_Order"
             android:exported="false"
             android:label="Pesanan"
             android:theme="@style/AppThemeCustom" />
         <activity
-            android:name=".intent.Activity_Checkout"
+            android:name="com.lapakkreatiflamongan.ccp.intent.Activity_Checkout"
             android:exported="false"
             android:label="Pesanan"
             android:theme="@style/AppThemeCustom" />
         <activity
-            android:name=".intent.Activity_NewVisit"
+            android:name="com.lapakkreatiflamongan.ccp.intent.Activity_NewVisit"
             android:exported="false"
             android:label="Kunjungan"
             android:theme="@style/AppThemeCustom" />
         <activity
-            android:name=".intent.Activity_VisitMenu"
+            android:name="com.lapakkreatiflamongan.ccp.intent.Activity_VisitMenu"
             android:exported="false"
             android:label="Menu Kunjungan"
             android:theme="@style/AppThemeCustom" />
         <activity
-            android:name=".intent.Activity_Visit"
+            android:name="com.lapakkreatiflamongan.ccp.intent.Activity_Visit"
             android:exported="false"
             android:label="Kunjungan Toko"
             android:theme="@style/AppThemeCustom" />
         <activity
-            android:name=".intent.Activity_Trip"
+            android:name="com.lapakkreatiflamongan.ccp.intent.Activity_Trip"
             android:theme="@style/AppThemeCustom" />
         <activity
-            android:name=".intent.Activity_Register"
+            android:name="com.lapakkreatiflamongan.ccp.intent.Activity_Register"
             android:theme="@style/AppThemeCustom" />
         <activity
-            android:name=".intent.Activity_RegForm"
+            android:name="com.lapakkreatiflamongan.ccp.intent.Activity_RegForm"
             android:theme="@style/AppThemeCustom" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -88,7 +97,7 @@
              You can define the keys for the debug and release targets in src/debug/ and src/release/.
         -->
         <activity
-            android:name=".intent.Activity_Loading"
+            android:name="com.lapakkreatiflamongan.ccp.intent.Activity_Loading"
             android:exported="true"
             android:theme="@style/AppThemeCustomLogin">
             <intent-filter>
@@ -98,10 +107,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".intent.Activity_Login"
+            android:name="com.lapakkreatiflamongan.ccp.intent.Activity_Login"
             android:theme="@style/AppThemeCustomLogin" />
         <activity
-            android:name=".intent.Activity_MainMenu"
+            android:name="com.lapakkreatiflamongan.ccp.intent.Activity_MainMenu"
             android:theme="@style/AppThemeCustom" />
     </application>
 

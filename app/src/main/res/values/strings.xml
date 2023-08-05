@@ -1,7 +1,7 @@
 <resources>
     <!-- The class name to the ScrollingChildBehavior required for AppBarLayout -->
     <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
-    <string name="app_name">SMD Sforce</string>
+    <string name="app_name">CCP</string>
     <string name="fa_download">&#xf019;</string>
     <string name="fa_lock">&#xf023;</string>
     <string name="title_activity_activity__main_menu">Dashboard</string>
