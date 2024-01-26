@@ -25,13 +25,6 @@ import co.mobiwise.materialintro.shape.Focus;
 import co.mobiwise.materialintro.shape.FocusGravity;
 import co.mobiwise.materialintro.view.MaterialIntroView;
 
-
-/**
- * Created by handy on 08/01/2020.
- * contact : Handikadwiputradev@gmail.com
- * Project : app.bcp.supervision
- */
-
 public class UtilsHelper {
 
     private Context appContext;
@@ -47,7 +40,6 @@ public class UtilsHelper {
         this.appActivity = appActivity;
     }
 
-    // TODO TUTORIAL : HANDY 08/01/2020
     public MaterialIntroView showTutorial (View target, String id, String text, Boolean performClick, MaterialIntroListener listener) {
         if (target == null) {
             return null;

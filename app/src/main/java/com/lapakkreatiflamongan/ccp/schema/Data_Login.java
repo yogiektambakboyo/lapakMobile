@@ -1,147 +1,147 @@
 package com.lapakkreatiflamongan.ccp.schema;
 
 public class Data_Login {
-    String Username;
-    String Password;
-    String Deviceid;
-    String Version;
-    String Status;
-    String Name;
-    String DownloadDate;
-    String BranchID;
-    String BranchName;
-    String Code;
-    String VersionUpdate;
-    String ForceUpdate;
-    String WeekNo;
-    String Bearer;
-
-    public Data_Login(String username, String password, String deviceid, String version, String status, String name, String downloadDate, String branchID, String branchName, String code, String versionUpdate, String forceUpdate, String weekNo, String bearer) {
-        Username = username;
-        Password = password;
-        Deviceid = deviceid;
-        Version = version;
-        Status = status;
-        Name = name;
-        DownloadDate = downloadDate;
-        BranchID = branchID;
-        BranchName = branchName;
-        Code = code;
-        VersionUpdate = versionUpdate;
-        ForceUpdate = forceUpdate;
-        WeekNo = weekNo;
-        Bearer = bearer;
-    }
-
-    public String getBearer() {
-        return Bearer;
-    }
-
-    public void setBearer(String bearer) {
-        Bearer = bearer;
-    }
-
-    public String getWeekNo() {
-        return WeekNo;
-    }
-
-    public void setWeekNo(String weekNo) {
-        WeekNo = weekNo;
-    }
-
-    public String getVersionUpdate() {
-        return VersionUpdate;
-    }
-
-    public void setVersionUpdate(String versionUpdate) {
-        VersionUpdate = versionUpdate;
-    }
-
-    public String getForceUpdate() {
-        return ForceUpdate;
-    }
-
-    public void setForceUpdate(String forceUpdate) {
-        ForceUpdate = forceUpdate;
-    }
-
-    public String getCode() {
-        return Code;
-    }
-
-    public void setCode(String code) {
-        Code = code;
-    }
+    String username;
+    String password;
+    String deviceid;
+    String version;
+    String status;
+    String name;
+    String downloadDate;
+    String branchid;
+    String branchname;
+    String code;
+    String versionupdate;
+    String forceupdate;
+    String weekno;
+    String bearer;
 
     public String getUsername() {
-        return Username;
+        return username;
     }
 
     public void setUsername(String username) {
-        Username = username;
+        this.username = username;
     }
 
     public String getPassword() {
-        return Password;
+        return password;
     }
 
     public void setPassword(String password) {
-        Password = password;
+        this.password = password;
     }
 
     public String getDeviceid() {
-        return Deviceid;
+        return deviceid;
     }
 
     public void setDeviceid(String deviceid) {
-        Deviceid = deviceid;
+        this.deviceid = deviceid;
     }
 
     public String getVersion() {
-        return Version;
+        return version;
     }
 
     public void setVersion(String version) {
-        Version = version;
+        this.version = version;
     }
 
     public String getStatus() {
-        return Status;
+        return status;
     }
 
     public void setStatus(String status) {
-        Status = status;
+        this.status = status;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public String getDownloadDate() {
-        return DownloadDate;
+        return downloadDate;
     }
 
     public void setDownloadDate(String downloadDate) {
-        DownloadDate = downloadDate;
+        this.downloadDate = downloadDate;
     }
 
-    public String getBranchID() {
-        return BranchID;
+    public String getBranchid() {
+        return branchid;
     }
 
-    public void setBranchID(String branchID) {
-        BranchID = branchID;
+    public void setBranchid(String branchid) {
+        this.branchid = branchid;
     }
 
-    public String getBranchName() {
-        return BranchName;
+    public String getBranchname() {
+        return branchname;
     }
 
-    public void setBranchName(String branchName) {
-        BranchName = branchName;
+    public void setBranchname(String branchname) {
+        this.branchname = branchname;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getVersionupdate() {
+        return versionupdate;
+    }
+
+    public void setVersionupdate(String versionupdate) {
+        this.versionupdate = versionupdate;
+    }
+
+    public String getForceupdate() {
+        return forceupdate;
+    }
+
+    public void setForceupdate(String forceupdate) {
+        this.forceupdate = forceupdate;
+    }
+
+    public String getWeekno() {
+        return weekno;
+    }
+
+    public void setWeekno(String weekno) {
+        this.weekno = weekno;
+    }
+
+    public String getBearer() {
+        return bearer;
+    }
+
+    public void setBearer(String bearer) {
+        this.bearer = bearer;
+    }
+
+    public Data_Login(String username, String password, String deviceid, String version, String status, String name, String downloadDate, String branchid, String branchname, String code, String versionupdate, String forceupdate, String weekno, String bearer) {
+        this.username = username;
+        this.password = password;
+        this.deviceid = deviceid;
+        this.version = version;
+        this.status = status;
+        this.name = name;
+        this.downloadDate = downloadDate;
+        this.branchid = branchid;
+        this.branchname = branchname;
+        this.code = code;
+        this.versionupdate = versionupdate;
+        this.forceupdate = forceupdate;
+        this.weekno = weekno;
+        this.bearer = bearer;
     }
 }

@@ -60,7 +60,9 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 import com.lapakkreatiflamongan.ccp.BuildConfig;
+import com.lapakkreatiflamongan.ccp.schema.Col_Login;
 import com.lapakkreatiflamongan.ccp.service.Worker_RealtimeTracking;
+import com.lapakkreatiflamongan.ccp.utils.Config;
 import com.lapakkreatiflamongan.ccp.utils.Fn_DBHandler;
 import com.lapakkreatiflamongan.ccp.R;
 import com.lapakkreatiflamongan.ccp.utils.TelephonyInfo;
@@ -83,7 +85,7 @@ public class Activity_Login extends AppCompatActivity {
 
     String Bearer="7",LastLogin = "", SPVCode = "", SPVName = "", Status = "0", Password = "", DownloadDate = "", BranchID = "", BranchName = "";
     String deviceID = "undefined", deviceIMEI = "undefined";
-    List<Data_Login> listValLogin = null;
+    Col_Login listValLogin = null;
 
     Button btnSubmit;
     ImageView btnSetting, btnUpdate;
@@ -116,7 +118,6 @@ public class Activity_Login extends AppCompatActivity {
     private final String TAG_VERSION_UPDATE = "VERSION_UPD";
     private final String TAG_FORCE_UPDATE = "FORCE_UPD";
     private final String TAG_LEADER = "leader";
-    private String BASE_URL = "http://kakikupos.com:8081/";
     private String VERSION_APK = "0.0.7";
     final String dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/picFolderSuperVision/";
     private final String DB_MASTER = "MASTER";
@@ -137,13 +138,9 @@ public class Activity_Login extends AppCompatActivity {
     TelephonyInfo telephonyInfo;
     String operatorName = "-", androidVersion = "-", ramCapacity = "-", deviceTipe = "-";
 
-    Retrofit retrofits = new Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(ScalarsConverterFactory.create())
-            .addConverterFactory(GsonConverterFactory.create())
-            .build();
-
-    final API_SFA myAPI = retrofits.create(API_SFA.class);
+    Config config;
+    Retrofit retrofits;
+    API_SFA myAPI;
 
     @Override
     public void onStart() {
@@ -164,10 +161,20 @@ public class Activity_Login extends AppCompatActivity {
         VERSION_APK = BuildConfig.VERSION_NAME;
         buildNo = "" + BuildConfig.VERSION_CODE;
 
+
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
+        config = new Config();
+
+        retrofits = new Retrofit.Builder()
+                .baseUrl(config.getBASE_URL())
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        myAPI = retrofits.create(API_SFA.class);
 
         TelephonyManager Telephonemanager = (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
         operatorName = Telephonemanager.getNetworkOperatorName();
@@ -306,15 +313,18 @@ public class Activity_Login extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Toast.makeText(Activity_Login.this, "login", Toast.LENGTH_SHORT).show();
+
                 if (InputUserName.getText().toString().trim().length() <= 0) {
                     InputUserName.setError("Isi dahulu username!!!");
                 } else if (InputPasword.getText().toString().trim().length() <= 0) {
                     InputPasword.setError("Isi dahulu password!!!");
                 } else {
                     if (!Version_Upd.equals(VERSION_APK) && 1>2) {
+                        Toast.makeText(Activity_Login.this, "test", Toast.LENGTH_SHORT).show();
                         DialodKonfirmasiUpdate(Version_Upd);
                     } else {
-
+                        Toast.makeText(Activity_Login.this, "test login", Toast.LENGTH_SHORT).show();
                         // Download
                         final Dialog dialog = new Dialog(Activity_Login.this);
                         dialog.setContentView(R.layout.d_logindownload);
@@ -333,15 +343,17 @@ public class Activity_Login extends AppCompatActivity {
 
                         session = getSession();
 
-                        Call<List<Data_Login>> call2 = myAPI.Login(InputUserName.getText().toString().trim().toUpperCase(), InputPasword.getText().toString().trim(), VERSION_APK, deviceIMEI,session);
-                        call2.enqueue(new Callback<List<Data_Login>>() {
+                        Call<Col_Login> call2 = myAPI.Login(InputUserName.getText().toString().trim().toUpperCase(), InputPasword.getText().toString().trim(), VERSION_APK, deviceIMEI,session);
+                        call2.enqueue(new Callback<Col_Login>() {
                             @Override
-                            public void onResponse(Call<List<Data_Login>> call, Response<List<Data_Login>> response) {
+                            public void onResponse(Call<Col_Login> call, Response<Col_Login> response) {
                                 TxtStatus.setText("Logging In. . ");
                                 if (response.isSuccessful()) {
                                     listValLogin = response.body();
 
-                                    for (Data_Login d : listValLogin) {
+                                    Log.e( "onResponse: ", response.body().toString() );
+
+                                    for (Data_Login d : listValLogin.getData()) {
                                         Status = d.getStatus();
 
                                         if (Status.equals("1"))  {
@@ -349,9 +361,9 @@ public class Activity_Login extends AppCompatActivity {
                                             SPVName = d.getName();
                                             Password = d.getPassword();
                                             DownloadDate = d.getDownloadDate();
-                                            BranchID = d.getBranchID();
-                                            BranchName = d.getBranchName();
-                                            LeaderName = d.getVersionUpdate();
+                                            BranchID = d.getBranchid();
+                                            BranchName = d.getBranchname();
+                                            LeaderName = d.getVersionupdate();
                                             //Force_Upd = d.getForceUpdate();
                                             LastLogin = d.getUsername();
                                             Bearer = d.getBearer();
@@ -363,7 +375,7 @@ public class Activity_Login extends AppCompatActivity {
                                     }
 
                                     if (Status.equals("1")) {
-                                        setPrefLogin(InputUserName.getText().toString().toUpperCase().trim(), SPVCode, SPVName, DownloadDate, getToday(), BranchID, BranchName, Bearer, Password, BASE_URL, LeaderName);
+                                        setPrefLogin(InputUserName.getText().toString().toUpperCase().trim(), SPVCode, SPVName, DownloadDate, getToday(), BranchID, BranchName, Bearer, Password, "", LeaderName);
                                         setPrefVersionNo(Version_Upd, Force_Upd);
 
                                         Intent in = new Intent(Activity_Login.this, Activity_MainMenu.class);
@@ -373,6 +385,7 @@ public class Activity_Login extends AppCompatActivity {
 
                                 } else {
                                     dialog.dismiss();
+                                    Log.e( "onResponse: ", response.body().toString() );
                                     switch (response.code()) {
                                         case 404:
                                             Toast.makeText(Activity_Login.this, "Login Gagal : "+ERROR_404, Toast.LENGTH_SHORT).show();
@@ -392,8 +405,9 @@ public class Activity_Login extends AppCompatActivity {
                             }
 
                             @Override
-                            public void onFailure(Call<List<Data_Login>> call, Throwable t) {
+                            public void onFailure(Call<Col_Login> call, Throwable t) {
                                 dialog.dismiss();
+                                Log.e( "onResponse: ", "Failed" );
                                 if ((isAirPlaneMode == 1) || (!isMobileDataEnabled())){
                                     Toast.makeText(Activity_Login.this, "Gagal 101 : Cek Koneksi Internet Anda", Toast.LENGTH_SHORT).show();
                                 }else {

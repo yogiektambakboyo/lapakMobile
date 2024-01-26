@@ -4,6 +4,7 @@ package com.lapakkreatiflamongan.ccp.api;
 import java.util.List;
 
 import com.lapakkreatiflamongan.ccp.schema.Col_ActiveTrip;
+import com.lapakkreatiflamongan.ccp.schema.Col_Login;
 import com.lapakkreatiflamongan.ccp.schema.Col_OrderDetail;
 import com.lapakkreatiflamongan.ccp.schema.Col_OrderMaster;
 import com.lapakkreatiflamongan.ccp.schema.Col_Product;
@@ -29,7 +30,7 @@ public interface API_SFA {
     @Headers({ "User-Agent:5uPErV1sIon_8CP_m0biL3" })
     @FormUrlEncoded
     @POST("login")
-    Call<List<Data_Login>> Login(@Field("username") String username, @Field("password") String password, @Field("version") String version, @Field("deviceid") String deviceid, @Field("session") String session);
+    Call<Col_Login> Login(@Field("username") String username, @Field("password") String password, @Field("version") String version, @Field("deviceid") String deviceid, @Field("session") String session);
 
     @Headers({ "User-Agent:SFA_Borwita_Android","Cache-Control: no-cache" })
     @GET("api/v1/sqlite/{file}")
