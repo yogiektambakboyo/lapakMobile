@@ -109,6 +109,7 @@ public class Activity_Visit extends AppCompatActivity {
 
         loader.setVisibility(View.VISIBLE);
 
+
         symbol = new DecimalFormatSymbols(Locale.GERMANY);
         symbol.setCurrencySymbol("");
 

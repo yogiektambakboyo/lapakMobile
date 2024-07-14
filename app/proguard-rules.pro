@@ -28,7 +28,7 @@
     void set*(***);
     *** get*();
 }
--keepclassmembers class app.bcp.** {
+-keepclassmembers class com.lapakkreatiflamongan.** {
     public *;
     protected *;
 }
@@ -58,3 +58,4 @@
 -keep class de.** { *; }
 -keep class us.** { *; }
 -keep class cn.** { *; }
+
