@@ -103,8 +103,8 @@
                 android:layout_width="300dip"
                 android:layout_height="150dip"
                 android:layout_marginBottom="10dip"
-                android:src="@drawable/logo_512"
-                app:srcCompat="@drawable/logo_512" />
+                android:src="@drawable/lapakkreatif_icon_landscape"
+                app:srcCompat="@drawable/lapakkreatif_icon_landscape" />
 
             <LinearLayout
                 android:layout_width="match_parent"

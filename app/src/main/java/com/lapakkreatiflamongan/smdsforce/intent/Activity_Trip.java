@@ -1,11 +1,18 @@
 package com.lapakkreatiflamongan.smdsforce.intent;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.StrictMode;
+import android.provider.Settings;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
@@ -104,6 +111,32 @@ public class Activity_Trip extends AppCompatActivity {
 
         getSupportActionBar().setTitle("Daftar Trip "+getToday());
 
+        int PERMISSION_ALL = 12;
+        String[] PERMISSIONS = {
+                android.Manifest.permission.READ_PHONE_STATE,
+                android.Manifest.permission.ACCESS_FINE_LOCATION,
+                android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                android.Manifest.permission.CAMERA,
+                android.Manifest.permission.INTERNET,
+                android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                android.Manifest.permission.READ_EXTERNAL_STORAGE,
+                android.Manifest.permission.ACCESS_NETWORK_STATE,
+                android.Manifest.permission.ACCESS_WIFI_STATE,
+                android.Manifest.permission.WAKE_LOCK,
+                android.Manifest.permission.CHANGE_NETWORK_STATE
+        };
+
+        if (android.os.Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
+
+        if (!hasPermissions(this, PERMISSIONS)) {
+            ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSION_ALL);
+        }
+
+
+
         listViewTrip  = findViewById(R.id.Trip_List);
         loader          = findViewById(R.id.Trip_Loading);
         InputSearch     = findViewById(R.id.Trip_Search);
@@ -150,6 +183,170 @@ public class Activity_Trip extends AppCompatActivity {
         String Value=SettingPref.getString(KEY, "0");
         return  Value;
     }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case 8: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+
+                } else {
+                    String Msg = "Aplikasi eOrder tidak akan berjalan jika anda tidak memberi izin untuk mengakses Telepon!!!";
+                    new AlertDialog.Builder(Activity_Trip.this)
+                            .setTitle("Information")
+                            .setMessage(Msg)
+                            .setPositiveButton("Tutup", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                                            Uri.fromParts("package", getPackageName(), null));
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    startActivity(intent);
+                                    Activity_Trip.this.finish();
+                                }
+                            })
+                            .setCancelable(false)
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show();
+                }
+                return;
+            }
+
+            case 2: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+
+                } else {
+                    String Msg = "Aplikasi eOrder tidak akan berjalan jika anda tidak memberi izin untuk mengakses Kamera!!! Aktifkan/Centang izin untuk Kamera di Menu Setting > Apps > SMD SForce BCP > Izin/Permission ";
+                    new AlertDialog.Builder(Activity_Trip.this)
+                            .setTitle("Information")
+                            .setMessage(Msg)
+                            .setPositiveButton("Tutup", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                                            Uri.fromParts("package", getPackageName(), null));
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    startActivity(intent);
+                                    Activity_Trip.this.finish();
+                                }
+                            })
+                            .setCancelable(false)
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show();
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+
+            case 1: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+
+                } else {
+                    String Msg = "Aplikasi eOrder tidak akan berjalan jika anda tidak memberi izin untuk mengakses Lokasi!!!";
+                    new AlertDialog.Builder(Activity_Trip.this)
+                            .setTitle("Information")
+                            .setMessage(Msg)
+                            .setPositiveButton("Tutup", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                                            Uri.fromParts("package", getPackageName(), null));
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    startActivity(intent);
+                                    Activity_Trip.this.finish();
+                                }
+                            })
+                            .setCancelable(false)
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show();
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+
+            case 4: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+
+                } else {
+                    String Msg = "Aplikasi eOrder tidak akan berjalan jika anda tidak memberi izin untuk mengakses Penyimpanan!!!";
+                    new AlertDialog.Builder(Activity_Trip.this)
+                            .setTitle("Information")
+                            .setMessage(Msg)
+                            .setPositiveButton("Tutup", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                                            Uri.fromParts("package", getPackageName(), null));
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    startActivity(intent);
+                                    Activity_Trip.this.finish();
+                                }
+                            })
+                            .setCancelable(false)
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show();
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+
+            case 5: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+
+                } else {
+                    String Msg = "Aplikasi eOrder tidak akan berjalan jika anda tidak memberi izin untuk mengakses Penyimpanan!!!";
+                    new AlertDialog.Builder(Activity_Trip.this)
+                            .setTitle("Information")
+                            .setMessage(Msg)
+                            .setPositiveButton("Tutup", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                                            Uri.fromParts("package", getPackageName(), null));
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    startActivity(intent);
+                                    Activity_Trip.this.finish();
+                                }
+                            })
+                            .setCancelable(false)
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show();
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request
+        }
+    }
+
+    public static boolean hasPermissions(Context context, String... permissions) {
+        if (context != null && permissions != null) {
+            for (String permission : permissions) {
+                if (ActivityCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
 
     public int getPrefInt(String KEY){
         SharedPreferences SettingPref = getSharedPreferences(TAG_PREF, Context.MODE_PRIVATE);

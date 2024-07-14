@@ -44,7 +44,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
-import com.lapakkreatiflamongan.smdsforce.BuildConfig;
 import com.lapakkreatiflamongan.smdsforce.R;
 import com.lapakkreatiflamongan.smdsforce.api.API_SFA;
 import com.lapakkreatiflamongan.smdsforce.schema.Col_ActiveTrip;
@@ -400,7 +399,7 @@ public class Activity_MainMenu extends AppCompatActivity {
         formatter = (DecimalFormat) NumberFormat.getCurrencyInstance(Locale.GERMANY);
         formatter.setDecimalFormatSymbols(symbol);
         formatter.setMaximumFractionDigits(0);
-        VERSION_APK = BuildConfig.VERSION_NAME;
+        VERSION_APK = "1.0.0";
         DownloadDate = getDate();
 
         try {
@@ -548,20 +547,6 @@ public class Activity_MainMenu extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_mainmenu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.login_logout:
-                ShowDialogLogOut();
-                break;
-            case R.id.login_maps:
-                break;
-            default:break;
-        }
-
         return true;
     }
 

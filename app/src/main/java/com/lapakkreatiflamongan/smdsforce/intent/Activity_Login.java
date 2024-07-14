@@ -59,7 +59,6 @@ import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
-import com.lapakkreatiflamongan.smdsforce.BuildConfig;
 import com.lapakkreatiflamongan.smdsforce.service.Worker_RealtimeTracking;
 import com.lapakkreatiflamongan.smdsforce.utils.Fn_DBHandler;
 import com.lapakkreatiflamongan.smdsforce.R;
@@ -164,359 +163,269 @@ public class Activity_Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.p_login);
-    /*    ViewPump.init(ViewPump.builder()
-                .addInterceptor(new CalligraphyInterceptor(
-                        new CalligraphyConfig.Builder()
-                                .setDefaultFontPath("fonts/exo_2.ttf")
-                                .setFontAttrId(R.attr.fontPath)
-                                .build()))
-                .build());*/
 
         String buildNo = "-";
-        VERSION_APK = BuildConfig.VERSION_NAME;
-        buildNo = "" + BuildConfig.VERSION_CODE;
-
-
+        VERSION_APK = "1.0.0";
+        buildNo = "8" ;
 
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
 
-        int PERMISSION_ALL = 12;
-        String[] PERMISSIONS = {
-                android.Manifest.permission.READ_PHONE_STATE,
-                android.Manifest.permission.ACCESS_FINE_LOCATION,
-                android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                android.Manifest.permission.CAMERA,
-                android.Manifest.permission.INTERNET,
-                android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                android.Manifest.permission.READ_EXTERNAL_STORAGE,
-                android.Manifest.permission.ACCESS_NETWORK_STATE,
-                android.Manifest.permission.ACCESS_WIFI_STATE,
-                android.Manifest.permission.WAKE_LOCK,
-                android.Manifest.permission.CHANGE_NETWORK_STATE
-        };
+        dbMaster = new Fn_DBHandler(Activity_Login.this, DB_MASTER);
+        final File dbFileMaster = new File(Activity_Login.this.getFilesDir() + "/" + DB_MASTER);
 
-        if (!hasPermissions(this, PERMISSIONS)) {
-            ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSION_ALL);
-            Activity_Login.this.finishAffinity();
-        } else {
-
-
-            TelephonyManager Telephonemanager = (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
-            operatorName = Telephonemanager.getNetworkOperatorName();
-
-            try {
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP_MR1) {
-                    final List<SubscriptionInfo> subscriptionInfos;
-                    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
-                        // TODO: Consider calling
-                        //    ActivityCompat#requestPermissions
-                        // here to request the missing permissions, and then overriding
-                        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                        //                                          int[] grantResults)
-                        // to handle the case where the user grants the permission. See the documentation
-                        // for ActivityCompat#requestPermissions for more details.
-                        return;
-                    }
-
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            dbMaster = new Fn_DBHandler(Activity_Login.this, DB_MASTER);
-            final File dbFileMaster = new File(Activity_Login.this.getFilesDir() + "/" + DB_MASTER);
-
-            if (!dbFileMaster.exists()) {
-                dbMaster.CreateMaster();
-            }
-
-            valid = 0;
-
-            if (operatorName.equals("")) {
-                operatorName = "-";
-            }
-            androidVersion = Build.VERSION.RELEASE;
-
-            ActivityManager actManager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
-            ActivityManager.MemoryInfo memInfo = new ActivityManager.MemoryInfo();
-            actManager.getMemoryInfo(memInfo);
-            ramCapacity = "" + ((memInfo.totalMem) / 0x100000);
-            deviceTipe = "";
-
-
-
-            if (!checkPref(TAG_VERSION_UPDATE)) {
-                setPrefVersionNo(Version_Upd, "0");
-            } else {
-                Version_Upd = getPref(TAG_VERSION_UPDATE);
-                Force_Upd = getPref(TAG_FORCE_UPDATE);
-            }
-
-
-            Configuration config = getResources().getConfiguration();
-            dpScreen = config.screenWidthDp;
-
-            File newdir = new File(dir);
-            if (!newdir.exists()) {
-                newdir.mkdirs();
-            }
-
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-            LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-            try {
-
-                isAutoDate = Settings.System.getInt(getContentResolver(), Settings.Global.AUTO_TIME);
-                isAutoZonaTime = Settings.System.getInt(getContentResolver(), Settings.Global.AUTO_TIME_ZONE);
-                isAirPlaneMode = Settings.System.getInt(getContentResolver(), Settings.Global.AIRPLANE_MODE_ON);
-                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
-                    String Msg = "Aplikasi SMD SForce tidak bisa berjalan jika tidak bisa akses perizinan Telepon, Silahkan aktifkan izin untuk akses telepon";
-                    new AlertDialog.Builder(Activity_Login.this)
-                            .setTitle("Information")
-                            .setMessage(Msg)
-                            .setPositiveButton("Setelan", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
-                                            Uri.fromParts("package", getPackageName(), null));
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                    startActivity(intent);
-                                    Activity_Login.this.finish();
-                                }
-                            })
-                            .setCancelable(false)
-                            .setIcon(android.R.drawable.ic_dialog_alert)
-                            .show();
-                } else if ((isAutoDate == 0) || (isAutoZonaTime == 0) || (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || (isAirPlaneMode == 1) || (!isMobileDataEnabled()))) {
-                    String Msg = "Tanggal di perangkat tidak tersetting automatic, silahkan centang auto datetime time di setting?";
-                    if (isAutoDate == 0) {
-                        Msg = "Tanggal di perangkat tidak tersetting automatic, silahkan centang auto datetime time di setting?";
-                    } else if (isAutoZonaTime == 0) {
-                        Msg = "Zona waktu di perangkat tidak tersetting automatic, silahkan centang auto zona waktu di setting?";
-                    } else if (isAirPlaneMode == 1) {
-                        Msg = "Setting Air plane mode aktif, silahkan non aktifkan dahulu!!!";
-                    } else if (!isMobileDataEnabled()) {
-                        Msg = "Setting mobile data tidak aktif, silahkan aktifkan dahulu!!!";
-                    }
-                    else {
-                        Msg = "GPS tidak aktif, silahkan aktifkan dahulu di setting!!!";
-                    }
-                    new AlertDialog.Builder(Activity_Login.this)
-                            .setTitle("Information")
-                            .setMessage(Msg)
-                            .setPositiveButton("Setelan", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    startActivity(new Intent(android.provider.Settings.ACTION_SETTINGS));
-                                    Activity_Login.this.finish();
-                                    Activity_Login.this.finishAffinity();
-                                }
-                            })
-                            .setCancelable(false)
-                            .setIcon(android.R.drawable.ic_dialog_alert)
-                            .show();
-                } else if (1>2 &&(!Version_Upd.equals("0.0.0")) && (!Version_Upd.equals(VERSION_APK))) {
-                    if (Force_Upd.equals("1")) {
-                        new AlertDialog.Builder(Activity_Login.this)
-                                .setTitle("Information")
-                                .setMessage("Versi yang anda gunakan sudah kadaluarsa, silahkan update App SMD SForce anda ke versi " + Version_Upd + "!!!")
-                                .setPositiveButton("Update", new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.dismiss();
-                                        DialodKonfirmasiUpdate(Version_Upd);
-                                    }
-                                })
-                                .setCancelable(false)
-                                .setIcon(android.R.drawable.ic_dialog_alert)
-                                .show();
-                    } else {
-                        new AlertDialog.Builder(Activity_Login.this)
-                                .setTitle("Information")
-                                .setMessage("Versi yang anda gunakan sudah kadaluarsa, silahkan update App SMD SForce anda ke versi " + Version_Upd + "!!!")
-                                .setPositiveButton("Update", new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.dismiss();
-                                        DialodKonfirmasiUpdate(Version_Upd);
-                                    }
-                                })
-                                .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                        dialogInterface.dismiss();
-                                    }
-                                })
-                                .setCancelable(true)
-                                .setIcon(android.R.drawable.ic_dialog_alert)
-                                .show();
-                    }
-                }
-            } catch (Settings.SettingNotFoundException e) {
-                e.printStackTrace();
-            }
-
-            if (!checkPref(TAG_SELLERCODE)) {
-                setPrefSeller("-", "-");
-            }
-
-
-            btnSubmit = (Button) findViewById(R.id.Login_Submit);
-            btnSubmit.setText("Login");
-            TxtForgotPassword = findViewById(R.id.Login_ResetPassword);
-
-
-            InputUserName = (EditText) findViewById(R.id.Login_username);
-            if (checkPref(TAG_LASTLOGIN)) {
-                LastLogin = getPref(TAG_LASTLOGIN);
-                InputUserName.setText(LastLogin);
-            }
-            InputPasword = (EditText) findViewById(R.id.Login_pass);
-
-            btnSubmit.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (InputUserName.getText().toString().trim().length() <= 0) {
-                        InputUserName.setError("Isi dahulu username!!!");
-                    } else if (InputPasword.getText().toString().trim().length() <= 0) {
-                        InputPasword.setError("Isi dahulu password!!!");
-                    } else {
-                        if (!Version_Upd.equals(VERSION_APK) && 1>2) {
-                            DialodKonfirmasiUpdate(Version_Upd);
-                        } else {
-
-                            // Download
-                            final Dialog dialog = new Dialog(Activity_Login.this);
-                            dialog.setContentView(R.layout.d_logindownload);
-                            dialog.setCancelable(false);
-
-                            final TextView TxtStatus = (TextView) dialog.findViewById(R.id.Login_DStatus);
-                            TxtStatus.setText("Mohon Tunggu. . ");
-
-                            dialog.show();
-
-                            OkHttpClient client = new OkHttpClient.Builder()
-                                    .connectTimeout(60, TimeUnit.SECONDS)
-                                    .readTimeout(60, TimeUnit.SECONDS)
-                                    .writeTimeout(60, TimeUnit.SECONDS)
-                                    .build();
-
-                            session = getSession();
-
-                            Call<List<Data_Login>> call2 = myAPI.Login(InputUserName.getText().toString().trim().toUpperCase(), InputPasword.getText().toString().trim(), VERSION_APK, deviceIMEI,session);
-                            call2.enqueue(new Callback<List<Data_Login>>() {
-                                @Override
-                                public void onResponse(Call<List<Data_Login>> call, Response<List<Data_Login>> response) {
-                                    TxtStatus.setText("Logging In. . ");
-                                    if (response.isSuccessful()) {
-                                        listValLogin = response.body();
-
-                                        for (Data_Login d : listValLogin) {
-                                            Status = d.getStatus();
-
-                                            if (Status.equals("1"))  {
-                                                SPVCode = d.getCode();
-                                                SPVName = d.getName();
-                                                Password = d.getPassword();
-                                                DownloadDate = d.getDownloadDate();
-                                                BranchID = d.getBranchID();
-                                                BranchName = d.getBranchName();
-                                                LeaderName = d.getVersionUpdate();
-                                                //Force_Upd = d.getForceUpdate();
-                                                LastLogin = d.getUsername();
-                                                Bearer = d.getBearer();
-
-                                            } else {
-                                                dialog.dismiss();
-                                                Toast.makeText(Activity_Login.this, "Login Gagal (01) : Username/Password Salah!!!", Toast.LENGTH_SHORT).show();
-                                            }
-                                        }
-
-                                        if (Status.equals("1")) {
-                                            setPrefLogin(InputUserName.getText().toString().toUpperCase().trim(), SPVCode, SPVName, DownloadDate, getToday(), BranchID, BranchName, Bearer, Password, BASE_URL, LeaderName);
-                                            setPrefVersionNo(Version_Upd, Force_Upd);
-
-                                            Intent in = new Intent(Activity_Login.this, Activity_MainMenu.class);
-                                            in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                            startActivity(in);
-                                        }
-
-                                    } else {
-                                        dialog.dismiss();
-                                        switch (response.code()) {
-                                            case 404:
-                                                Toast.makeText(Activity_Login.this, "Login Gagal : "+ERROR_404, Toast.LENGTH_SHORT).show();
-                                                break;
-                                            case 500:
-                                                Toast.makeText(Activity_Login.this, "Login Gagal : "+ERROR_500, Toast.LENGTH_SHORT).show();
-                                                break;
-                                            case 502:
-                                                Toast.makeText(Activity_Login.this, "Login Gagal : "+ERROR_502, Toast.LENGTH_SHORT).show();
-                                                break;
-                                            default:
-                                                Toast.makeText(Activity_Login.this, "Login Gagal : "+ERROR_500, Toast.LENGTH_SHORT).show();
-                                                break;
-                                        }
-                                    }
-
-                                }
-
-                                @Override
-                                public void onFailure(Call<List<Data_Login>> call, Throwable t) {
-                                    dialog.dismiss();
-                                    if ((isAirPlaneMode == 1) || (!isMobileDataEnabled())){
-                                        Toast.makeText(Activity_Login.this, "Gagal 101 : Cek Koneksi Internet Anda", Toast.LENGTH_SHORT).show();
-                                    }else {
-                                        Toast.makeText(Activity_Login.this, "Gagal 500 : Internal Server Error", Toast.LENGTH_SHORT).show();
-                                    }
-
-                                }
-
-
-                            });
-                        }
-                    }
-                }
-            });
-
-            SmartLocation.with(Activity_Login.this).location().oneFix().start(new OnLocationUpdatedListener() {
-                @Override
-                public void onLocationUpdated(Location location) {
-                    if (location != null){
-                    }
-                }
-            });
-            TxtVersion = (TextView) findViewById(R.id.Login_TxtVersion);
-            TxtVersion.setText("Version " + VERSION_APK + " ( Build No " + buildNo + " )");
-
-            btnSetting = (ImageView) findViewById(R.id.Login_ImgSetting);
-
-
-            btnUpdate = (ImageView) findViewById(R.id.Login_Update);
-            btnUpdate.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    YoYo.with(Techniques.Tada).withListener(new Animator.AnimatorListener() {
-                        @Override
-                        public void onAnimationStart(Animator animator) {
-
-                        }
-
-                        @Override
-                        public void onAnimationEnd(Animator animator) {
-                            DialodKonfirmasiUpdate(Version_Upd);
-                        }
-
-                        @Override
-                        public void onAnimationCancel(Animator animator) {
-
-                        }
-
-                        @Override
-                        public void onAnimationRepeat(Animator animator) {
-
-                        }
-                    }).playOn(btnUpdate);
-                }
-            });
+        if (!dbFileMaster.exists()) {
+            dbMaster.CreateMaster();
         }
+
+
+        if (!checkPref(TAG_VERSION_UPDATE)) {
+            setPrefVersionNo(Version_Upd, "0");
+        } else {
+            Version_Upd = getPref(TAG_VERSION_UPDATE);
+            Force_Upd = getPref(TAG_FORCE_UPDATE);
+        }
+
+        File newdir = new File(dir);
+        if (!newdir.exists()) {
+            newdir.mkdirs();
+        }
+
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        try {
+
+            isAutoDate = Settings.System.getInt(getContentResolver(), Settings.Global.AUTO_TIME);
+            isAutoZonaTime = Settings.System.getInt(getContentResolver(), Settings.Global.AUTO_TIME_ZONE);
+            isAirPlaneMode = Settings.System.getInt(getContentResolver(), Settings.Global.AIRPLANE_MODE_ON);
+            if ((isAutoDate == 0) || (isAutoZonaTime == 0) || (isAirPlaneMode == 1) || (!isMobileDataEnabled())) {
+                String Msg = "Tanggal di perangkat tidak tersetting automatic, silahkan centang auto datetime time di setting?";
+                if (isAutoDate == 0) {
+                    Msg = "Tanggal di perangkat tidak tersetting automatic, silahkan centang auto datetime time di setting?";
+                } else if (isAutoZonaTime == 0) {
+                    Msg = "Zona waktu di perangkat tidak tersetting automatic, silahkan centang auto zona waktu di setting?";
+                } else if (isAirPlaneMode == 1) {
+                    Msg = "Setting Air plane mode aktif, silahkan non aktifkan dahulu!!!";
+                } else if (!isMobileDataEnabled()) {
+                    Msg = "Setting mobile data tidak aktif, silahkan aktifkan dahulu!!!";
+                }
+                else {
+                    Msg = "GPS tidak aktif, silahkan aktifkan dahulu di setting!!!";
+                }
+                new AlertDialog.Builder(Activity_Login.this)
+                        .setTitle("Information")
+                        .setMessage(Msg)
+                        .setPositiveButton("Setelan", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                startActivity(new Intent(android.provider.Settings.ACTION_SETTINGS));
+                                Activity_Login.this.finish();
+                                Activity_Login.this.finishAffinity();
+                            }
+                        })
+                        .setCancelable(false)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+            } else if (1>2 &&(!Version_Upd.equals("0.0.0")) && (!Version_Upd.equals(VERSION_APK))) {
+                if (Force_Upd.equals("1")) {
+                    new AlertDialog.Builder(Activity_Login.this)
+                            .setTitle("Information")
+                            .setMessage("Versi yang anda gunakan sudah kadaluarsa, silahkan update App eOrder anda ke versi " + Version_Upd + "!!!")
+                            .setPositiveButton("Update", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                    DialodKonfirmasiUpdate(Version_Upd);
+                                }
+                            })
+                            .setCancelable(false)
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show();
+                } else {
+                    new AlertDialog.Builder(Activity_Login.this)
+                            .setTitle("Information")
+                            .setMessage("Versi yang anda gunakan sudah kadaluarsa, silahkan update App eOrder anda ke versi " + Version_Upd + "!!!")
+                            .setPositiveButton("Update", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                    DialodKonfirmasiUpdate(Version_Upd);
+                                }
+                            })
+                            .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    dialogInterface.dismiss();
+                                }
+                            })
+                            .setCancelable(true)
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show();
+                }
+            }
+        } catch (Settings.SettingNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        if (!checkPref(TAG_SELLERCODE)) {
+            setPrefSeller("-", "-");
+        }
+        
+        btnSubmit = (Button) findViewById(R.id.Login_Submit);
+        btnSubmit.setText("Login");
+        TxtForgotPassword = findViewById(R.id.Login_ResetPassword);
+
+
+        InputUserName = (EditText) findViewById(R.id.Login_username);
+        if (checkPref(TAG_LASTLOGIN)) {
+            LastLogin = getPref(TAG_LASTLOGIN);
+            InputUserName.setText(LastLogin);
+        }
+        InputPasword = (EditText) findViewById(R.id.Login_pass);
+
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (InputUserName.getText().toString().trim().length() <= 0) {
+                    InputUserName.setError("Isi dahulu username!!!");
+                } else if (InputPasword.getText().toString().trim().length() <= 0) {
+                    InputPasword.setError("Isi dahulu password!!!");
+                } else {
+                    if (!Version_Upd.equals(VERSION_APK) && 1>2) {
+                        DialodKonfirmasiUpdate(Version_Upd);
+                    } else {
+
+                        // Download
+                        final Dialog dialog = new Dialog(Activity_Login.this);
+                        dialog.setContentView(R.layout.d_logindownload);
+                        dialog.setCancelable(false);
+
+                        final TextView TxtStatus = (TextView) dialog.findViewById(R.id.Login_DStatus);
+                        TxtStatus.setText("Mohon Tunggu. . ");
+
+                        dialog.show();
+
+                        OkHttpClient client = new OkHttpClient.Builder()
+                                .connectTimeout(60, TimeUnit.SECONDS)
+                                .readTimeout(60, TimeUnit.SECONDS)
+                                .writeTimeout(60, TimeUnit.SECONDS)
+                                .build();
+
+                        session = getSession();
+
+                        Call<List<Data_Login>> call2 = myAPI.Login(InputUserName.getText().toString().trim().toUpperCase(), InputPasword.getText().toString().trim(), VERSION_APK, deviceIMEI,session);
+                        call2.enqueue(new Callback<List<Data_Login>>() {
+                            @Override
+                            public void onResponse(Call<List<Data_Login>> call, Response<List<Data_Login>> response) {
+                                TxtStatus.setText("Logging In. . ");
+                                if (response.isSuccessful()) {
+                                    listValLogin = response.body();
+
+                                    for (Data_Login d : listValLogin) {
+                                        Status = d.getStatus();
+
+                                        if (Status.equals("1"))  {
+                                            SPVCode = d.getCode();
+                                            SPVName = d.getName();
+                                            Password = d.getPassword();
+                                            DownloadDate = d.getDownloadDate();
+                                            BranchID = d.getBranchID();
+                                            BranchName = d.getBranchName();
+                                            LeaderName = d.getVersionUpdate();
+                                            //Force_Upd = d.getForceUpdate();
+                                            LastLogin = d.getUsername();
+                                            Bearer = d.getBearer();
+
+                                        } else {
+                                            dialog.dismiss();
+                                            Toast.makeText(Activity_Login.this, "Login Gagal (01) : Username/Password Salah!!!", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+
+                                    if (Status.equals("1")) {
+                                        setPrefLogin(InputUserName.getText().toString().toUpperCase().trim(), SPVCode, SPVName, DownloadDate, getToday(), BranchID, BranchName, Bearer, Password, BASE_URL, LeaderName);
+                                        setPrefVersionNo(Version_Upd, Force_Upd);
+
+                                        Intent in = new Intent(Activity_Login.this, Activity_MainMenu.class);
+                                        in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                        startActivity(in);
+                                    }
+
+                                } else {
+                                    dialog.dismiss();
+                                    switch (response.code()) {
+                                        case 404:
+                                            Toast.makeText(Activity_Login.this, "Login Gagal : "+ERROR_404, Toast.LENGTH_SHORT).show();
+                                            break;
+                                        case 500:
+                                            Toast.makeText(Activity_Login.this, "Login Gagal : "+ERROR_500, Toast.LENGTH_SHORT).show();
+                                            break;
+                                        case 502:
+                                            Toast.makeText(Activity_Login.this, "Login Gagal : "+ERROR_502, Toast.LENGTH_SHORT).show();
+                                            break;
+                                        default:
+                                            Toast.makeText(Activity_Login.this, "Login Gagal : "+ERROR_500, Toast.LENGTH_SHORT).show();
+                                            break;
+                                    }
+                                }
+
+                            }
+
+                            @Override
+                            public void onFailure(Call<List<Data_Login>> call, Throwable t) {
+                                dialog.dismiss();
+                                if ((isAirPlaneMode == 1) || (!isMobileDataEnabled())){
+                                    Toast.makeText(Activity_Login.this, "Gagal 101 : Cek Koneksi Internet Anda", Toast.LENGTH_SHORT).show();
+                                }else {
+                                    Toast.makeText(Activity_Login.this, "Gagal 500 : Internal Server Error", Toast.LENGTH_SHORT).show();
+                                }
+
+                            }
+
+
+                        });
+                    }
+                }
+            }
+        });
+
+        SmartLocation.with(Activity_Login.this).location().oneFix().start(new OnLocationUpdatedListener() {
+            @Override
+            public void onLocationUpdated(Location location) {
+                if (location != null){
+                }
+            }
+        });
+        TxtVersion = (TextView) findViewById(R.id.Login_TxtVersion);
+        TxtVersion.setText("Version " + VERSION_APK + " ( Build No " + buildNo + " )");
+
+        btnSetting = (ImageView) findViewById(R.id.Login_ImgSetting);
+
+
+        btnUpdate = (ImageView) findViewById(R.id.Login_Update);
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                YoYo.with(Techniques.Tada).withListener(new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationStart(Animator animator) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animator) {
+                        DialodKonfirmasiUpdate(Version_Upd);
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animator) {
+
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animator) {
+
+                    }
+                }).playOn(btnUpdate);
+            }
+        });
 
         if(!isWorkScheduled(TAG_WORKMANAGERTRACKING)) { // check if your work is not already scheduled
             Log.e("onCreate", "VM Realtim Tracking" );
@@ -561,7 +470,7 @@ public class Activity_Login extends AppCompatActivity {
         params.setMargins(20, 5, 30, 0);
 
         final TextView labelQ = new TextView(this);
-        labelQ.setText("Apakah anda yakin akan memperbaharui aplikasi SMD SForce?");
+        labelQ.setText("Apakah anda yakin akan memperbaharui aplikasi eOrder?");
 
         final TextView labelVersi = new TextView(this);
         labelVersi.setText("Versi APK saat ini : " + VERSION_APK);
@@ -681,7 +590,7 @@ public class Activity_Login extends AppCompatActivity {
 
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("Konfirmasi");
-            builder.setMessage("Apakah anda yakin akan keluar SMD SForce?").setPositiveButton("Ya", dialogClickListener)
+            builder.setMessage("Apakah anda yakin akan keluar eOrder?").setPositiveButton("Ya", dialogClickListener)
                     .setNegativeButton("Tidak", dialogClickListener).show();
         }
         return false;
@@ -786,168 +695,6 @@ public class Activity_Login extends AppCompatActivity {
         SettingPrefEditor.commit();
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode) {
-            case 8: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    // permission was granted, yay! Do the
-                    // contacts-related task you need to do.
-
-                } else {
-                    String Msg = "Aplikasi SMD SForce tidak akan berjalan jika anda tidak memberi izin untuk mengakses Telepon!!!";
-                    new AlertDialog.Builder(Activity_Login.this)
-                            .setTitle("Information")
-                            .setMessage(Msg)
-                            .setPositiveButton("Tutup", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
-                                            Uri.fromParts("package", getPackageName(), null));
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    startActivity(intent);
-                                    Activity_Login.this.finish();
-                                }
-                            })
-                            .setCancelable(false)
-                            .setIcon(android.R.drawable.ic_dialog_alert)
-                            .show();
-                }
-                return;
-            }
-
-            case 2: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    // permission was granted, yay! Do the
-                    // contacts-related task you need to do.
-
-                } else {
-                    String Msg = "Aplikasi SMD SForce tidak akan berjalan jika anda tidak memberi izin untuk mengakses Kamera!!! Aktifkan/Centang izin untuk Kamera di Menu Setting > Apps > SMD SForce BCP > Izin/Permission ";
-                    new AlertDialog.Builder(Activity_Login.this)
-                            .setTitle("Information")
-                            .setMessage(Msg)
-                            .setPositiveButton("Tutup", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
-                                            Uri.fromParts("package", getPackageName(), null));
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    startActivity(intent);
-                                    Activity_Login.this.finish();
-                                }
-                            })
-                            .setCancelable(false)
-                            .setIcon(android.R.drawable.ic_dialog_alert)
-                            .show();
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
-                }
-                return;
-            }
-
-            case 1: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    // permission was granted, yay! Do the
-                    // contacts-related task you need to do.
-
-                } else {
-                    String Msg = "Aplikasi SMD SForce tidak akan berjalan jika anda tidak memberi izin untuk mengakses Lokasi!!!";
-                    new AlertDialog.Builder(Activity_Login.this)
-                            .setTitle("Information")
-                            .setMessage(Msg)
-                            .setPositiveButton("Tutup", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
-                                            Uri.fromParts("package", getPackageName(), null));
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    startActivity(intent);
-                                    Activity_Login.this.finish();
-                                }
-                            })
-                            .setCancelable(false)
-                            .setIcon(android.R.drawable.ic_dialog_alert)
-                            .show();
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
-                }
-                return;
-            }
-
-            case 4: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    // permission was granted, yay! Do the
-                    // contacts-related task you need to do.
-
-                } else {
-                    String Msg = "Aplikasi SMD SForce tidak akan berjalan jika anda tidak memberi izin untuk mengakses Penyimpanan!!!";
-                    new AlertDialog.Builder(Activity_Login.this)
-                            .setTitle("Information")
-                            .setMessage(Msg)
-                            .setPositiveButton("Tutup", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
-                                            Uri.fromParts("package", getPackageName(), null));
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    startActivity(intent);
-                                    Activity_Login.this.finish();
-                                }
-                            })
-                            .setCancelable(false)
-                            .setIcon(android.R.drawable.ic_dialog_alert)
-                            .show();
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
-                }
-                return;
-            }
-
-            case 5: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    // permission was granted, yay! Do the
-                    // contacts-related task you need to do.
-
-                } else {
-                    String Msg = "Aplikasi SMD SForce tidak akan berjalan jika anda tidak memberi izin untuk mengakses Penyimpanan!!!";
-                    new AlertDialog.Builder(Activity_Login.this)
-                            .setTitle("Information")
-                            .setMessage(Msg)
-                            .setPositiveButton("Tutup", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
-                                            Uri.fromParts("package", getPackageName(), null));
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    startActivity(intent);
-                                    Activity_Login.this.finish();
-                                }
-                            })
-                            .setCancelable(false)
-                            .setIcon(android.R.drawable.ic_dialog_alert)
-                            .show();
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
-                }
-                return;
-            }
-
-            // other 'case' lines to check for other
-            // permissions this app might request
-        }
-    }
-
-    public static boolean hasPermissions(Context context, String... permissions) {
-        if (context != null && permissions != null) {
-            for (String permission : permissions) {
-                if (ActivityCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
 
     public void ShowDialog(String Msg) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);

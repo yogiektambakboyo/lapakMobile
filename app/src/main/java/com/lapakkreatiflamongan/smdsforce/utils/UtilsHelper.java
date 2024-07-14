@@ -26,12 +26,6 @@ import co.mobiwise.materialintro.shape.FocusGravity;
 import co.mobiwise.materialintro.view.MaterialIntroView;
 
 
-/**
- * Created by handy on 08/01/2020.
- * contact : Handikadwiputradev@gmail.com
- * Project : app.bcp.supervision
- */
-
 public class UtilsHelper {
 
     private Context appContext;

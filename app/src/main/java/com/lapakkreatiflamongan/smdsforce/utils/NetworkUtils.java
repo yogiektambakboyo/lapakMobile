@@ -9,7 +9,7 @@ public class NetworkUtils {
     public static String code(String code) {
         String result = "";
         if (code.startsWith("5")) {
-            result += "Server Bermasalah.\nHarap hubungi IT Borwita dan jelaskan masalah Anda.\n";
+            result += "Server Bermasalah.\nHarap hubungi IT dan jelaskan masalah Anda.\n";
         } else if (code.startsWith("4")) {
             result += "Koneksi terputus.\nHarap hubungi customer service dan jelaskan masalah Anda.";
         }
