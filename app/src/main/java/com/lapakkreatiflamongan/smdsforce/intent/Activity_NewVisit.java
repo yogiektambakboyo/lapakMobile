@@ -14,7 +14,10 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.location.Address;
 import android.location.Location;
+import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.KeyEvent;
@@ -256,6 +259,26 @@ public class Activity_NewVisit extends AppCompatActivity {
 
             }
         });
+
+        final LocationManager manager = (LocationManager) getSystemService( Context.LOCATION_SERVICE );
+
+        if ( !manager.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
+            String Msg = "Aplikasi eOrder tidak akan berjalan jika anda tidak memberi izin untuk mengakses Lokasi!!!";
+            new AlertDialog.Builder(Activity_NewVisit.this)
+                    .setTitle("Information")
+                    .setMessage(Msg)
+                    .setPositiveButton("Tutup", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                                    Uri.fromParts("package", getPackageName(), null));
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+                        }
+                    })
+                    .setCancelable(false)
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
+        }
 
         SmartLocation.with(getApplicationContext()).location()
                 .oneFix()

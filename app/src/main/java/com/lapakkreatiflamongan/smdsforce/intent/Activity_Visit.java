@@ -2,11 +2,15 @@ package com.lapakkreatiflamongan.smdsforce.intent;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -14,7 +18,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import com.github.ybq.android.spinkit.SpinKitView;
 import com.lapakkreatiflamongan.smdsforce.R;
@@ -126,6 +132,55 @@ public class Activity_Visit extends AppCompatActivity {
 
         getData();
 
+        int PERMISSION_ALL = 8;
+        String[] PERMISSIONS = {
+                android.Manifest.permission.READ_PHONE_STATE,
+                android.Manifest.permission.ACCESS_FINE_LOCATION,
+                android.Manifest.permission.CAMERA,
+                android.Manifest.permission.INTERNET,
+                android.Manifest.permission.ACCESS_NETWORK_STATE,
+                android.Manifest.permission.ACCESS_WIFI_STATE,
+                android.Manifest.permission.WAKE_LOCK,
+                android.Manifest.permission.CHANGE_NETWORK_STATE
+        };
+
+        final LocationManager manager = (LocationManager) getSystemService( Context.LOCATION_SERVICE );
+        boolean isActiveGPS = manager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+
+        if (!hasPermissions(this, PERMISSIONS)) {
+            ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSION_ALL);
+        }else{
+
+            if (!isActiveGPS) {
+                String Msg = "Aplikasi eOrder tidak akan berjalan jika anda tidak menyalakan Lokasi GPS!!!";
+                new AlertDialog.Builder(Activity_Visit.this)
+                        .setTitle("Information")
+                        .setMessage(Msg)
+                        .setPositiveButton("Tutup", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent(Activity_Visit.this, Activity_MainMenu.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(intent);
+                            }
+                        })
+                        .setCancelable(false)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+            }
+        }
+
+    }
+
+    public static boolean hasPermissions(Context context, String... permissions) {
+        if (context != null && permissions != null) {
+            for (String permission : permissions) {
+                if (ActivityCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
+                    Log.e("onCreate ", "hasPermissions: "+permission );
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
 
