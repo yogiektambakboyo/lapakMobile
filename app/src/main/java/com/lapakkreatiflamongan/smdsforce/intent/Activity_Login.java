@@ -60,6 +60,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 import com.lapakkreatiflamongan.smdsforce.service.Worker_RealtimeTracking;
+import com.lapakkreatiflamongan.smdsforce.utils.AppConfig;
 import com.lapakkreatiflamongan.smdsforce.utils.Fn_DBHandler;
 import com.lapakkreatiflamongan.smdsforce.R;
 import com.lapakkreatiflamongan.smdsforce.utils.TelephonyInfo;
@@ -79,9 +80,10 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class Activity_Login extends AppCompatActivity {
     Fn_DBHandler dbMaster;
+    AppConfig appConfig = new AppConfig();
 
     String Bearer="7",LastLogin = "", SPVCode = "", SPVName = "", Status = "0", Password = "", DownloadDate = "", BranchID = "", BranchName = "";
-    String deviceID = "undefined", deviceIMEI = "undefined";
+    String deviceIMEI = "undefined";
     List<Data_Login> listValLogin = null;
 
     Button btnSubmit;
@@ -89,70 +91,21 @@ public class Activity_Login extends AppCompatActivity {
     EditText InputUserName, InputPasword;
     TextView TxtVersion,TxtForgotPassword;
 
-    private final String ERROR_500 = "500 Internal Server Error";
-    private final String ERROR_404 = "404 Request Not Found";
-    private final String ERROR_301 = "301 Moved Permanently";
-    private final String ERROR_400 = "400 Bad Request";
-    private final String ERROR_401 = "401 Unauthorized";
-    private final String ERROR_502 = "502 Bad Gateway";
-
-    private final String TAG_PREF = "SETTING_SUPERVISION_PREF";
-    private final String TAG_ACTIVE = "active";
-    private final String TAG_MESSAGE = "message";
-    private final String TAG_SESSION = "session";
-    private final String TAG_LASTLOGIN = "lastlogin";
-    private final String TAG_WEBSERVICE = "webservice";
-    private final String TAG_DEVICEID = "deviceid";
-    private final String TAG_SPVNAME = "username";
-    private final String TAG_SPVCODE = "usercode";
-    private final String TAG_LOGINTIME = "logintime";
-    private final String TAG_PASSWORD = "password";
-    private final String TAG_DOWNLOADDATE = "downloaddate";
-    private final String TAG_BRANCHID = "branchid";
-    private final String TAG_BRANCHNAME = "branchname";
-    private final String TAG_WEEKNUMBER = "weekno";
-    private final String TAG_BEARER = "bearer";
-    private final String TAG_VERSION_UPDATE = "VERSION_UPD";
-    private final String TAG_FORCE_UPDATE = "FORCE_UPD";
-    private final String TAG_LEADER = "leader";
-    private String BASE_URL = "http://kakikupos.com:8081/";
-    private String VERSION_APK = "0.0.7";
     final String dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/picFolderSuperVision/";
-    private final String DB_MASTER = "MASTER";
-    private final String TAG_SELLERCODE = "sellercode";
-    private final String TAG_SELLERNAME = "sellername";
 
     String LeaderName = "",Force_Upd = "0", Version_Upd = "0.0.7", Link = "", Desc = "", ReadMeLink = "", LinkWeb = "http://sfa.borwita.co.id/supervision/", LinkUpload = "http://sfa.borwita.co.id:3000/api/upload/photo", LinkUploadPHP = "http://sfa.borwita.co.id/supervision/api/v1/uploadfile.php";
 
-    String RegisteredLogin = "0", WeekNumber = "1";
     private int dpScreen = 0;
     int valid = 0;
     int isAutoDate = 0;
     int isAutoZonaTime = 0;
     int isAirPlaneMode = 0;
-
     private  String session = "";
 
-    TelephonyInfo telephonyInfo;
-    String operatorName = "-", androidVersion = "-", ramCapacity = "-", deviceTipe = "-";
-
-    Retrofit retrofits = new Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(ScalarsConverterFactory.create())
-            .addConverterFactory(GsonConverterFactory.create())
-            .build();
-
-    final API_SFA myAPI = retrofits.create(API_SFA.class);
-    private static String ads_id = "-";
+    Retrofit retrofits;
+    API_SFA myAPI;
 
     private String TAG_WORKMANAGERTRACKING = "TRACKING_START";
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        // Read from the database
-        //updateUI(currentUser);
-    }
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -164,28 +117,32 @@ public class Activity_Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.p_login);
 
-        String buildNo = "-";
-        VERSION_APK = "1.0.0";
-        buildNo = "8" ;
 
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
 
-        dbMaster = new Fn_DBHandler(Activity_Login.this, DB_MASTER);
-        final File dbFileMaster = new File(Activity_Login.this.getFilesDir() + "/" + DB_MASTER);
+        retrofits = new Retrofit.Builder()
+                .baseUrl(appConfig.getBASE_URL())
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        myAPI = retrofits.create(API_SFA.class);
+
+        dbMaster = new Fn_DBHandler(Activity_Login.this, appConfig.getDB_MASTER());
+        final File dbFileMaster = new File(Activity_Login.this.getFilesDir() + "/" + appConfig.getDB_MASTER());
 
         if (!dbFileMaster.exists()) {
             dbMaster.CreateMaster();
         }
 
 
-        if (!checkPref(TAG_VERSION_UPDATE)) {
+        if (!checkPref(appConfig.getTAG_VERSION_UPDATE())) {
             setPrefVersionNo(Version_Upd, "0");
         } else {
-            Version_Upd = getPref(TAG_VERSION_UPDATE);
-            Force_Upd = getPref(TAG_FORCE_UPDATE);
+            Version_Upd = getPref(appConfig.getTAG_VERSION_UPDATE());
+            Force_Upd = getPref(appConfig.getTAG_FORCE_UPDATE());
         }
 
         File newdir = new File(dir);
@@ -226,7 +183,7 @@ public class Activity_Login extends AppCompatActivity {
                         .setCancelable(false)
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .show();
-            } else if (1>2 &&(!Version_Upd.equals("0.0.0")) && (!Version_Upd.equals(VERSION_APK))) {
+            } else if (1>2 &&(!Version_Upd.equals("0.0.0")) && (!Version_Upd.equals(appConfig.getVERSION_APK()))) {
                 if (Force_Upd.equals("1")) {
                     new AlertDialog.Builder(Activity_Login.this)
                             .setTitle("Information")
@@ -264,7 +221,7 @@ public class Activity_Login extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        if (!checkPref(TAG_SELLERCODE)) {
+        if (!checkPref(appConfig.getTAG_SELLERCODE())) {
             setPrefSeller("-", "-");
         }
         
@@ -274,8 +231,8 @@ public class Activity_Login extends AppCompatActivity {
 
 
         InputUserName = (EditText) findViewById(R.id.Login_username);
-        if (checkPref(TAG_LASTLOGIN)) {
-            LastLogin = getPref(TAG_LASTLOGIN);
+        if (checkPref(appConfig.getTAG_LASTLOGIN())) {
+            LastLogin = getPref(appConfig.getTAG_LASTLOGIN());
             InputUserName.setText(LastLogin);
         }
         InputPasword = (EditText) findViewById(R.id.Login_pass);
@@ -288,7 +245,7 @@ public class Activity_Login extends AppCompatActivity {
                 } else if (InputPasword.getText().toString().trim().length() <= 0) {
                     InputPasword.setError("Isi dahulu password!!!");
                 } else {
-                    if (!Version_Upd.equals(VERSION_APK) && 1>2) {
+                    if (!Version_Upd.equals(appConfig.getVERSION_APK()) && 1>2) {
                         DialodKonfirmasiUpdate(Version_Upd);
                     } else {
 
@@ -310,7 +267,7 @@ public class Activity_Login extends AppCompatActivity {
 
                         session = getSession();
 
-                        Call<List<Data_Login>> call2 = myAPI.Login(InputUserName.getText().toString().trim().toUpperCase(), InputPasword.getText().toString().trim(), VERSION_APK, deviceIMEI,session);
+                        Call<List<Data_Login>> call2 = myAPI.Login(InputUserName.getText().toString().trim().toUpperCase(), InputPasword.getText().toString().trim(), appConfig.getVERSION_APK(), deviceIMEI,session);
                         call2.enqueue(new Callback<List<Data_Login>>() {
                             @Override
                             public void onResponse(Call<List<Data_Login>> call, Response<List<Data_Login>> response) {
@@ -340,7 +297,7 @@ public class Activity_Login extends AppCompatActivity {
                                     }
 
                                     if (Status.equals("1")) {
-                                        setPrefLogin(InputUserName.getText().toString().toUpperCase().trim(), SPVCode, SPVName, DownloadDate, getToday(), BranchID, BranchName, Bearer, Password, BASE_URL, LeaderName);
+                                        setPrefLogin(InputUserName.getText().toString().toUpperCase().trim(), SPVCode, SPVName, DownloadDate, getToday(), BranchID, BranchName, Bearer, Password, appConfig.getBASE_URL(), LeaderName);
                                         setPrefVersionNo(Version_Upd, Force_Upd);
 
                                         Intent in = new Intent(Activity_Login.this, Activity_MainMenu.class);
@@ -352,16 +309,16 @@ public class Activity_Login extends AppCompatActivity {
                                     dialog.dismiss();
                                     switch (response.code()) {
                                         case 404:
-                                            Toast.makeText(Activity_Login.this, "Login Gagal : "+ERROR_404, Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(Activity_Login.this, "Login Gagal : "+appConfig.getERROR_404(), Toast.LENGTH_SHORT).show();
                                             break;
                                         case 500:
-                                            Toast.makeText(Activity_Login.this, "Login Gagal : "+ERROR_500, Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(Activity_Login.this, "Login Gagal : "+appConfig.getERROR_500(), Toast.LENGTH_SHORT).show();
                                             break;
                                         case 502:
-                                            Toast.makeText(Activity_Login.this, "Login Gagal : "+ERROR_502, Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(Activity_Login.this, "Login Gagal : "+appConfig.getERROR_502(), Toast.LENGTH_SHORT).show();
                                             break;
                                         default:
-                                            Toast.makeText(Activity_Login.this, "Login Gagal : "+ERROR_500, Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(Activity_Login.this, "Login Gagal : "+appConfig.getERROR_500(), Toast.LENGTH_SHORT).show();
                                             break;
                                     }
                                 }
@@ -394,7 +351,7 @@ public class Activity_Login extends AppCompatActivity {
             }
         });
         TxtVersion = (TextView) findViewById(R.id.Login_TxtVersion);
-        TxtVersion.setText("Version " + VERSION_APK + " ( Build No " + buildNo + " )");
+        TxtVersion.setText("Version " + appConfig.getVERSION_APK() + " ( Build No " + appConfig.getBUILD_NO() + " )");
 
         btnSetting = (ImageView) findViewById(R.id.Login_ImgSetting);
 
@@ -473,7 +430,7 @@ public class Activity_Login extends AppCompatActivity {
         labelQ.setText("Apakah anda yakin akan memperbaharui aplikasi eOrder?");
 
         final TextView labelVersi = new TextView(this);
-        labelVersi.setText("Versi APK saat ini : " + VERSION_APK);
+        labelVersi.setText("Versi APK saat ini : " + appConfig.getVERSION_APK());
 
         final TextView labelVersiNew = new TextView(this);
         labelVersiNew.setText("Versi APK Update : "+VersiTerbaru);
@@ -524,42 +481,41 @@ public class Activity_Login extends AppCompatActivity {
     }
 
     public String getPref(String KEY){
-        SharedPreferences SettingPref = getSharedPreferences(TAG_PREF, Context.MODE_PRIVATE);
+        SharedPreferences SettingPref = getSharedPreferences(appConfig.getTAG_PREF(), Context.MODE_PRIVATE);
         String Value=SettingPref.getString(KEY, "0");
         return  Value;
     }
 
     public boolean checkPref(String KEY){
         boolean a = false;
-        SharedPreferences SettingPref = getSharedPreferences(TAG_PREF, Context.MODE_PRIVATE);
+        SharedPreferences SettingPref = getSharedPreferences(appConfig.getTAG_PREF(), Context.MODE_PRIVATE);
         a = SettingPref.contains(KEY);
         return  a;
     }
 
     public void setPrefLogin(String LastLogin, String SPVCode, String SPVName, String DownloadDate, String LoginTime, String BranchID, String BranchName, String Bearer, String Password, String WebService, String LeaderName){
-        SharedPreferences SettingPref = getSharedPreferences(TAG_PREF, Context.MODE_PRIVATE);
+        SharedPreferences SettingPref = getSharedPreferences(appConfig.getTAG_PREF(), Context.MODE_PRIVATE);
         SharedPreferences.Editor SettingPrefEditor = SettingPref.edit();
-        SettingPrefEditor.putString(TAG_LASTLOGIN,LastLogin);
-        SettingPrefEditor.putString(TAG_SPVCODE,SPVCode);
-        SettingPrefEditor.putString(TAG_SPVNAME,SPVName);
-        SettingPrefEditor.putString(TAG_DOWNLOADDATE,DownloadDate);
-        SettingPrefEditor.putString(TAG_LOGINTIME,LoginTime);
-        SettingPrefEditor.putString(TAG_BRANCHID,BranchID);
-        SettingPrefEditor.putString(TAG_BRANCHNAME,BranchName);
-        SettingPrefEditor.putString(TAG_BEARER,Bearer);
-        SettingPrefEditor.putString(TAG_PASSWORD,Password);
-        SettingPrefEditor.putString(TAG_WEBSERVICE,WebService);
-        SettingPrefEditor.putString(TAG_DEVICEID,deviceIMEI);
-        SettingPrefEditor.putString(TAG_SESSION,session);
-        SettingPrefEditor.putString(TAG_LEADER,LeaderName);
+        SettingPrefEditor.putString(appConfig.getTAG_LASTLOGIN(),LastLogin);
+        SettingPrefEditor.putString(appConfig.getTAG_SPVCODE(),SPVCode);
+        SettingPrefEditor.putString(appConfig.getTAG_SPVNAME(),SPVName);
+        SettingPrefEditor.putString(appConfig.getTAG_DOWNLOADDATE(),DownloadDate);
+        SettingPrefEditor.putString(appConfig.getTAG_LOGINTIME(),LoginTime);
+        SettingPrefEditor.putString(appConfig.getTAG_BRANCHID(),BranchID);
+        SettingPrefEditor.putString(appConfig.getTAG_BRANCHNAME(),BranchName);
+        SettingPrefEditor.putString(appConfig.getTAG_BEARER(),Bearer);
+        SettingPrefEditor.putString(appConfig.getTAG_PASSWORD(),Password);
+        SettingPrefEditor.putString(appConfig.getTAG_WEBSERVICE(),WebService);
+        SettingPrefEditor.putString(appConfig.getTAG_DEVICEID(),deviceIMEI);
+        SettingPrefEditor.putString(appConfig.getTAG_SESSION(),session);
+        SettingPrefEditor.putString(appConfig.getTAG_LEADER(),LeaderName);
         SettingPrefEditor.commit();
     }
-
     public void setPrefSeller(String SellerCode, String SellerName){
-        SharedPreferences SettingPref = getSharedPreferences(TAG_PREF, Context.MODE_PRIVATE);
+        SharedPreferences SettingPref = getSharedPreferences(appConfig.getTAG_PREF(), Context.MODE_PRIVATE);
         SharedPreferences.Editor SettingPrefEditor = SettingPref.edit();
-        SettingPrefEditor.putString(TAG_SELLERCODE,SellerCode);
-        SettingPrefEditor.putString(TAG_SELLERNAME,SellerName);
+        SettingPrefEditor.putString(appConfig.getTAG_SELLERCODE(),SellerCode);
+        SettingPrefEditor.putString(appConfig.getTAG_SELLERNAME(),SellerName);
         SettingPrefEditor.commit();
     }
 
@@ -572,12 +528,6 @@ public class Activity_Login extends AppCompatActivity {
                 public void onClick(DialogInterface dialog, int which) {
                     switch (which){
                         case DialogInterface.BUTTON_POSITIVE:
-                            /*if(isMyServiceRunning(Service_Location.class)){
-                                stopService(ServiceInt);
-                            }
-                            if(isMyServiceRunning(Service_LocationGFused.class)){
-                                stopService(ServiceIntGFused);
-                            }*/
                             Activity_Login.this.finish();
                             Activity_Login.this.finishAffinity();
                             break;
@@ -623,41 +573,6 @@ public class Activity_Login extends AppCompatActivity {
         }
     }
 
-    public String getDeviceID(String myIMEI){
-        final String tmDevice, androidId;
-        tmDevice = "" + myIMEI;
-        //tmSerial = "" + tm.getSimSerialNumber();
-        androidId = "" + android.provider.Settings.Secure.getString(getContentResolver(), android.provider.Settings.Secure.ANDROID_ID);
-
-        UUID deviceUuid = new UUID(androidId.hashCode(), (long)tmDevice.hashCode() << 32);
-        String deviceId = deviceUuid.toString();
-        return  deviceId;
-    }
-
-    public ArrayList<File> getAllFilesInDir(File dir) {
-        if (dir == null)
-            return null;
-
-        ArrayList<File> files = new ArrayList<File>();
-
-        Stack<File> dirlist = new Stack<File>();
-        dirlist.clear();
-        dirlist.push(dir);
-
-        while (!dirlist.isEmpty()) {
-            File dirCurrent = dirlist.pop();
-
-            File[] fileList = dirCurrent.listFiles();
-            for (File aFileList : fileList) {
-                if (aFileList.isDirectory())
-                    dirlist.push(aFileList);
-                else
-                    files.add(aFileList);
-            }
-        }
-
-        return files;
-    }
 
     public String getToday(){
         Calendar c = Calendar.getInstance();
@@ -673,73 +588,13 @@ public class Activity_Login extends AppCompatActivity {
         return  formattedDate+InputUserName.getText().toString().trim();
     }
 
-    public String getTodayDate(){
-        Calendar c = Calendar.getInstance();
-        SimpleDateFormat df = new SimpleDateFormat("ddMMyyyy");
-        String formattedDate = df.format(c.getTime());
-        return  formattedDate;
-    }
+
 
     public void setPrefVersionNo(String VersionNo, String ForceUpdate){
-        SharedPreferences SettingPref = getSharedPreferences(TAG_PREF, Context.MODE_PRIVATE);
+        SharedPreferences SettingPref = getSharedPreferences(appConfig.getTAG_PREF(), Context.MODE_PRIVATE);
         SharedPreferences.Editor SettingPrefEditor = SettingPref.edit();
-        SettingPrefEditor.putString(TAG_VERSION_UPDATE,VersionNo);
-        SettingPrefEditor.putString(TAG_FORCE_UPDATE,ForceUpdate);
+        SettingPrefEditor.putString(appConfig.getTAG_VERSION_UPDATE(),VersionNo);
+        SettingPrefEditor.putString(appConfig.getTAG_FORCE_UPDATE(),ForceUpdate);
         SettingPrefEditor.commit();
     }
-
-    public void setPrefWeekNo(String WeekNo){
-        SharedPreferences SettingPref = getSharedPreferences(TAG_PREF, Context.MODE_PRIVATE);
-        SharedPreferences.Editor SettingPrefEditor = SettingPref.edit();
-        SettingPrefEditor.putString(TAG_WEEKNUMBER,WeekNo);
-        SettingPrefEditor.commit();
-    }
-
-
-    public void ShowDialog(String Msg) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Konfirmasi");
-        builder.setCancelable(false);
-
-        LinearLayout layout = new LinearLayout(this);
-        layout.setOrientation(LinearLayout.VERTICAL);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        params.setMargins(20, 15, 30, 15);
-
-        final TextView TxtLblNama = new TextView(this);
-        TxtLblNama.setText(""+Msg);
-        TxtLblNama.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-
-
-        layout.addView(TxtLblNama, params);
-
-        builder.setView(layout);
-        setPrefActive("0",Msg);
-
-        // Set up the buttons
-        builder.setPositiveButton("Tutup", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse(
-                        "https://play.google.com/store/apps/details?id=app.bcp.supervision"));
-                intent.setPackage("com.android.vending");
-                startActivity(intent);
-                Activity_Login.this.finishAffinity();
-            }
-        });
-
-
-        builder.show();
-    }
-
-    public void setPrefActive(String Active,String Msg){
-        SharedPreferences SettingPref = getSharedPreferences(TAG_PREF, Context.MODE_PRIVATE);
-        SharedPreferences.Editor SettingPrefEditor = SettingPref.edit();
-        SettingPrefEditor.putString(TAG_ACTIVE,Active);
-        SettingPrefEditor.putString(TAG_MESSAGE,Msg);
-        SettingPrefEditor.commit();
-    }
-
 }

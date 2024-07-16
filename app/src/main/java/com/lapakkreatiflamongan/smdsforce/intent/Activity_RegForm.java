@@ -67,7 +67,7 @@ public class Activity_RegForm extends AppCompatActivity {
     private final String TAG_PREF = "SETTING_SUPERVISION_PREF";
     private final String TAG_SPVCODE = "usercode";
     int TAKE_PHOTO_CODE_EXT = 99;
-    private final String BASE_URL = "http://kakikupos.com:8081/";
+    private final String BASE_URL = "http://lapakkreatif.com:8081/";
     private final Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(ScalarsConverterFactory.create())

@@ -41,7 +41,6 @@ public class UtilsHelper {
         this.appActivity = appActivity;
     }
 
-    // TODO TUTORIAL : HANDY 08/01/2020
     public MaterialIntroView showTutorial (View target, String id, String text, Boolean performClick, MaterialIntroListener listener) {
         if (target == null) {
             return null;

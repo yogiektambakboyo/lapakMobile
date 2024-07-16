@@ -73,7 +73,7 @@ public class Activity_NewVisit extends AppCompatActivity {
     private final String TAG_CUSTOMERNAME = "customer_name";
 
     int TAKE_PHOTO_CODE_EXT = 99;
-    private final String BASE_URL = "http://kakikupos.com:8081/";
+    private final String BASE_URL = "http://lapakkreatif.com:8081/";
     private final Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(ScalarsConverterFactory.create())

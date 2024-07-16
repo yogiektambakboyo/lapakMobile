@@ -47,7 +47,7 @@ public class Activity_VisitMenu extends AppCompatActivity {
     private String VERSION_APK = "0.0.7";
     private final String TAG_CUSTOMERNAME = "customer_name";
 
-    private String BASE_URL = "http://kakikupos.com:8081/";
+    private String BASE_URL = "http://lapakkreatif.com:8081/";
 
     DecimalFormat formatter;
     DecimalFormatSymbols symbol;
