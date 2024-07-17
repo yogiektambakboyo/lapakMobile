@@ -13,8 +13,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class AppConfig {
-    private String VERSION_APK = "0.0.7";
-    private String BUILD_NO = "8";
+    private String VERSION_APK = "1.0.1";
+    private String BUILD_NO = "11";
 
     private String App_Name = "eOrder";
 
@@ -40,7 +40,12 @@ public class AppConfig {
     private final String TAG_BEARER = "bearer";
     private final String TAG_VERSION_UPDATE = "VERSION_UPD";
     private final String TAG_FORCE_UPDATE = "FORCE_UPD";
+    private final String TAG_GEOREVERSE = "georeverse";
+    private final String TAG_LATITUDE = "latitude";
+    private final String TAG_LONGITUDE = "longitude";
     private final String TAG_LEADER = "leader";
+    private final String TAG_CUSTOMERID = "customer_id";
+    private final String TAG_CUSTOMERNAME = "customer_name";
 
     private String BASE_URL = "http://lapakkreatif.com:8081/";
 
@@ -68,6 +73,21 @@ public class AppConfig {
         return  formattedDate;
     }
 
+    public String getTAG_LATITUDE() {
+        return TAG_LATITUDE;
+    }
+
+    public String getTAG_CUSTOMERID() {
+        return TAG_CUSTOMERID;
+    }
+
+    public String getTAG_CUSTOMERNAME() {
+        return TAG_CUSTOMERNAME;
+    }
+
+    public String getTAG_LONGITUDE() {
+        return TAG_LONGITUDE;
+    }
 
     public String getTAG_SELLERNAME() {
         return TAG_SELLERNAME;
@@ -92,6 +112,10 @@ public class AppConfig {
 
     public String getVERSION_APK() {
         return VERSION_APK;
+    }
+
+    public String getTAG_GEOREVERSE() {
+        return TAG_GEOREVERSE;
     }
 
     public void setVERSION_APK(String VERSION_APK) {

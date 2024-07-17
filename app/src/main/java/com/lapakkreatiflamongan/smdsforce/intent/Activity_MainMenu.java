@@ -48,6 +48,7 @@ import com.lapakkreatiflamongan.smdsforce.R;
 import com.lapakkreatiflamongan.smdsforce.api.API_SFA;
 import com.lapakkreatiflamongan.smdsforce.schema.Col_ActiveTrip;
 import com.lapakkreatiflamongan.smdsforce.schema.Data_ActiveTrip;
+import com.lapakkreatiflamongan.smdsforce.utils.AppConfig;
 import com.lapakkreatiflamongan.smdsforce.utils.UtilsHelper;
 
 import io.github.inflationx.viewpump.ViewPumpContextWrapper;
@@ -62,19 +63,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class Activity_MainMenu extends AppCompatActivity {
-    private final String TAG_PREF = "SETTING_SUPERVISION_PREF";
-    private final String TAG_SPVNAME = "username";
-    private final String TAG_SPVCODE = "usercode";
-    private final String TAG_LATITUDE = "latitude";
-    private final String TAG_LONGITUDE = "longitude";
-    private final String TAG_GEOREVERSE = "georeverse";
-    private final String TAG_LOGINTIME = "logintime";
-    private final String TAG_SELLERCODE = "sellercode";
-    private final String TAG_SELLERNAME = "sellername";
-    private final String TAG_WEEKNUMBER = "weekno";
-    private String VERSION_APK = "0.0.7";
-
-    private String BASE_URL = "http://lapakkreatif.com:8081/";
+    AppConfig appConfig = new AppConfig();
+    String VERSION_APK = "0.0.7";
+    String BASE_URL = "http://lapakkreatif.com:8081/";
 
     DecimalFormat formatter;
     DecimalFormatSymbols symbol;
@@ -86,30 +77,14 @@ public class Activity_MainMenu extends AppCompatActivity {
     String weekstring = "wk1";
     String trip_id = "0";
 
-    private final int REQUEST_CODE = 888;
-    private final String ERROR_500 = "500 Internal Server Error";
-    private final String ERROR_504 = "504 Gateway Time Out";
-    private final String ERROR_404 = "404 Request Not Found";
-    private final String ERROR_408 = "408 Request Time Out";
-    private final String ERROR_301 = "301 Moved Permanently";
-    private final String ERROR_400 = "400 Bad Request";
-    private final String ERROR_401 = "401 Unauthorized";
-    private final String ERROR_502 = "502 Bad Gateway";
-    private final String TAG_SESSION = "session";
-
     LinearLayout MainMenu_LyActiveTrip;
     TextView MainMenu_TxtActiveTripLabel,MainMenu_TxtActiveTripGeo;
     CardView MainMenu_CvTripNew,MainMenu_CvVisit,MainMenu_CvReport,MainMenu_CvActiveTrip,MainMenu_CvRegister;
     SwipeRefreshLayout SWRefresh;
     Dialog dialog;
 
-    private Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(ScalarsConverterFactory.create())
-            .addConverterFactory(GsonConverterFactory.create())
-            .build();
-
-    API_SFA myAPi = retrofit.create(API_SFA.class);
+    Retrofit retrofit;
+    API_SFA myAPi;
     UtilsHelper utilsHelper;
 
     @Override
@@ -124,11 +99,22 @@ public class Activity_MainMenu extends AppCompatActivity {
         setContentView(R.layout.p_mainmenu);
         utilsHelper = new UtilsHelper(Activity_MainMenu.this,Activity_MainMenu.this);
 
+        BASE_URL = appConfig.getBASE_URL();
+        VERSION_APK = appConfig.getVERSION_APK();
+
+        retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        myAPi = retrofit.create(API_SFA.class);
+
         dialog = new Dialog(Activity_MainMenu.this);
         dialog.setContentView(R.layout.d_logindownload);
         dialog.setCancelable(false);
 
-        SWRefresh = (SwipeRefreshLayout) findViewById(R.id.sw_refresh);
+        SWRefresh = findViewById(R.id.sw_refresh);
 
         SWRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -233,7 +219,7 @@ public class Activity_MainMenu extends AppCompatActivity {
                                                             }
 
 
-                                                            Call<Col_ActiveTrip> callData = myAPi.insertActiveTripDetail(getPref(TAG_SPVCODE),getPref(TAG_LONGITUDE),getPref(TAG_LATITUDE),trip_id,getPref(TAG_GEOREVERSE));
+                                                            Call<Col_ActiveTrip> callData = myAPi.insertActiveTripDetail(getPref(appConfig.getTAG_SPVCODE()),getPref(appConfig.getTAG_LONGITUDE()),getPref(appConfig.getTAG_LATITUDE()),trip_id,getPref(appConfig.getTAG_GEOREVERSE()));
                                                             callData.enqueue(new Callback<Col_ActiveTrip>() {
                                                                 @Override
                                                                 public void onResponse(Call<Col_ActiveTrip> call, Response<Col_ActiveTrip> response) {
@@ -248,36 +234,29 @@ public class Activity_MainMenu extends AppCompatActivity {
                                                                                 Intent in = new Intent(Activity_MainMenu.this, Activity_MainMenu.class);
                                                                                 in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                                                                 startActivity(in);
-                                                                            }else{
                                                                             }
                                                                         }
                                                                     }else{
-                                                                        switch (response.code()) {
-                                                                            case 404:
-                                                                                Toast.makeText(Activity_MainMenu.this, "Ambil Data Gagal : "+ERROR_404, Toast.LENGTH_SHORT).show();
-                                                                                break;
-                                                                            case 408:
-                                                                                Toast.makeText(Activity_MainMenu.this, "Ambil Data Gagal : "+ERROR_408, Toast.LENGTH_SHORT).show();
-                                                                                break;
-                                                                            case 500:
-                                                                                Toast.makeText(Activity_MainMenu.this, "Ambil Data Gagal : "+ERROR_500, Toast.LENGTH_SHORT).show();
-                                                                                break;
-                                                                            case 504:
-                                                                                Toast.makeText(Activity_MainMenu.this, "Ambil Data Gagal : "+ERROR_504, Toast.LENGTH_SHORT).show();
-                                                                                break;
-                                                                            case 502:
-                                                                                Toast.makeText(Activity_MainMenu.this, "Ambil Data Gagal : "+ERROR_502, Toast.LENGTH_SHORT).show();
-                                                                                break;
-                                                                            default:
-                                                                                Toast.makeText(Activity_MainMenu.this, "Ambil Data Gagal : "+ERROR_500, Toast.LENGTH_SHORT).show();
-                                                                                break;
-                                                                        }
+                                                                            switch (response.code()) {
+                                                                                case 404:
+                                                                                    Toast.makeText(Activity_MainMenu.this, "Login Gagal : "+appConfig.getERROR_404(), Toast.LENGTH_SHORT).show();
+                                                                                    break;
+                                                                                case 500:
+                                                                                    Toast.makeText(Activity_MainMenu.this, "Login Gagal : "+appConfig.getERROR_500(), Toast.LENGTH_SHORT).show();
+                                                                                    break;
+                                                                                case 502:
+                                                                                    Toast.makeText(Activity_MainMenu.this, "Login Gagal : "+appConfig.getERROR_502(), Toast.LENGTH_SHORT).show();
+                                                                                    break;
+                                                                                default:
+                                                                                    Toast.makeText(Activity_MainMenu.this, "Login Gagal : "+appConfig.getERROR_500(), Toast.LENGTH_SHORT).show();
+                                                                                    break;
+                                                                            }
                                                                     }
                                                                 }
 
                                                                 @Override
                                                                 public void onFailure(Call<Col_ActiveTrip> call, Throwable t) {
-                                                                    Toast.makeText(Activity_MainMenu.this, "Ambil Data Gagal : "+ERROR_500, Toast.LENGTH_SHORT).show();
+                                                                    Toast.makeText(Activity_MainMenu.this, "Ambil Data Gagal : "+appConfig.getERROR_500(), Toast.LENGTH_SHORT).show();
                                                                 }
                                                             });
 
@@ -317,7 +296,7 @@ public class Activity_MainMenu extends AppCompatActivity {
                                                             }
 
 
-                                                            Call<Col_ActiveTrip> callData = myAPi.insertStopActiveTrip(getPref(TAG_SPVCODE),getPref(TAG_LONGITUDE),getPref(TAG_LATITUDE),trip_id,getPref(TAG_GEOREVERSE));
+                                                            Call<Col_ActiveTrip> callData = myAPi.insertStopActiveTrip(getPref(appConfig.getTAG_SPVCODE()),getPref(appConfig.getTAG_LONGITUDE()),getPref(appConfig.getTAG_LATITUDE()),trip_id,getPref(appConfig.getTAG_GEOREVERSE()));
                                                             callData.enqueue(new Callback<Col_ActiveTrip>() {
                                                                 @Override
                                                                 public void onResponse(Call<Col_ActiveTrip> call, Response<Col_ActiveTrip> response) {
@@ -339,22 +318,16 @@ public class Activity_MainMenu extends AppCompatActivity {
                                                                     }else{
                                                                         switch (response.code()) {
                                                                             case 404:
-                                                                                Toast.makeText(Activity_MainMenu.this, "Ambil Data Gagal : "+ERROR_404, Toast.LENGTH_SHORT).show();
-                                                                                break;
-                                                                            case 408:
-                                                                                Toast.makeText(Activity_MainMenu.this, "Ambil Data Gagal : "+ERROR_408, Toast.LENGTH_SHORT).show();
+                                                                                Toast.makeText(Activity_MainMenu.this, "Login Gagal : "+appConfig.getERROR_404(), Toast.LENGTH_SHORT).show();
                                                                                 break;
                                                                             case 500:
-                                                                                Toast.makeText(Activity_MainMenu.this, "Ambil Data Gagal : "+ERROR_500, Toast.LENGTH_SHORT).show();
-                                                                                break;
-                                                                            case 504:
-                                                                                Toast.makeText(Activity_MainMenu.this, "Ambil Data Gagal : "+ERROR_504, Toast.LENGTH_SHORT).show();
+                                                                                Toast.makeText(Activity_MainMenu.this, "Login Gagal : "+appConfig.getERROR_500(), Toast.LENGTH_SHORT).show();
                                                                                 break;
                                                                             case 502:
-                                                                                Toast.makeText(Activity_MainMenu.this, "Ambil Data Gagal : "+ERROR_502, Toast.LENGTH_SHORT).show();
+                                                                                Toast.makeText(Activity_MainMenu.this, "Login Gagal : "+appConfig.getERROR_502(), Toast.LENGTH_SHORT).show();
                                                                                 break;
                                                                             default:
-                                                                                Toast.makeText(Activity_MainMenu.this, "Ambil Data Gagal : "+ERROR_500, Toast.LENGTH_SHORT).show();
+                                                                                Toast.makeText(Activity_MainMenu.this, "Login Gagal : "+appConfig.getERROR_500(), Toast.LENGTH_SHORT).show();
                                                                                 break;
                                                                         }
                                                                     }
@@ -362,7 +335,7 @@ public class Activity_MainMenu extends AppCompatActivity {
 
                                                                 @Override
                                                                 public void onFailure(Call<Col_ActiveTrip> call, Throwable t) {
-                                                                    Toast.makeText(Activity_MainMenu.this, "Ambil Data Gagal : "+ERROR_500, Toast.LENGTH_SHORT).show();
+                                                                    Toast.makeText(Activity_MainMenu.this, "Ambil Data Gagal : "+appConfig.getERROR_500(), Toast.LENGTH_SHORT).show();
                                                                 }
                                                             });
 
@@ -423,10 +396,10 @@ public class Activity_MainMenu extends AppCompatActivity {
         }
 
         TxtWelcome = (TextView) findViewById(R.id.MainMenu_WelcomeMsg);
-        TxtWelcome.setText("Selamat Datang "+getPref(TAG_SPVNAME));
+        TxtWelcome.setText("Selamat Datang "+getPref(appConfig.getTAG_SPVNAME()));
 
-        SalesName = getPref(TAG_SPVNAME);
-        SalesCode = getPref(TAG_SPVCODE);
+        SalesName = getPref("Selamat Datang "+getPref(appConfig.getTAG_SPVNAME()));
+        SalesCode = getPref(appConfig.getTAG_SPVCODE());
 
         getSupportActionBar().setTitle(" Dashboard");
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -438,7 +411,7 @@ public class Activity_MainMenu extends AppCompatActivity {
     }
 
     public void getWeekNo(){
-        Call<String> callWeekNo = myAPi.getWeekNo(getPref(TAG_SPVCODE),"30011988AA");
+        Call<String> callWeekNo = myAPi.getWeekNo(getPref(appConfig.getTAG_SPVCODE()),"30011988AA");
         callWeekNo.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
@@ -449,22 +422,16 @@ public class Activity_MainMenu extends AppCompatActivity {
                 }else{
                     switch (response.code()) {
                         case 404:
-                            Toast.makeText(Activity_MainMenu.this, "Ambil Data Gagal : "+ERROR_404, Toast.LENGTH_SHORT).show();
-                            break;
-                        case 408:
-                            Toast.makeText(Activity_MainMenu.this, "Ambil Data Gagal : "+ERROR_408, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Activity_MainMenu.this, "Login Gagal : "+appConfig.getERROR_404(), Toast.LENGTH_SHORT).show();
                             break;
                         case 500:
-                            Toast.makeText(Activity_MainMenu.this, "Ambil Data Gagal : "+ERROR_500, Toast.LENGTH_SHORT).show();
-                            break;
-                        case 504:
-                            Toast.makeText(Activity_MainMenu.this, "Ambil Data Gagal : "+ERROR_504, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Activity_MainMenu.this, "Login Gagal : "+appConfig.getERROR_500(), Toast.LENGTH_SHORT).show();
                             break;
                         case 502:
-                            Toast.makeText(Activity_MainMenu.this, "Ambil Data Gagal : "+ERROR_502, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Activity_MainMenu.this, "Login Gagal : "+appConfig.getERROR_502(), Toast.LENGTH_SHORT).show();
                             break;
                         default:
-                            Toast.makeText(Activity_MainMenu.this, "Ambil Data Gagal : "+ERROR_500, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Activity_MainMenu.this, "Login Gagal : "+appConfig.getERROR_500(), Toast.LENGTH_SHORT).show();
                             break;
                     }
                 }
@@ -472,14 +439,14 @@ public class Activity_MainMenu extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                Toast.makeText(Activity_MainMenu.this, "Ambil Data Gagal : "+ERROR_500, Toast.LENGTH_SHORT).show();
+                Toast.makeText(Activity_MainMenu.this, "Ambil Data Gagal : "+appConfig.getERROR_500(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     public void getActiveTrip(){
         MainMenu_LyActiveTrip.setVisibility(View.GONE);
-        Call<Col_ActiveTrip> callData = myAPi.getActiveTrip(getPref(TAG_SPVCODE));
+        Call<Col_ActiveTrip> callData = myAPi.getActiveTrip(getPref(appConfig.getTAG_SPVCODE()));
         callData.enqueue(new Callback<Col_ActiveTrip>() {
             @Override
             public void onResponse(Call<Col_ActiveTrip> call, Response<Col_ActiveTrip> response) {
@@ -501,22 +468,16 @@ public class Activity_MainMenu extends AppCompatActivity {
                 }else{
                     switch (response.code()) {
                         case 404:
-                            Toast.makeText(Activity_MainMenu.this, "Ambil Data Gagal : "+ERROR_404, Toast.LENGTH_SHORT).show();
-                            break;
-                        case 408:
-                            Toast.makeText(Activity_MainMenu.this, "Ambil Data Gagal : "+ERROR_408, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Activity_MainMenu.this, "Login Gagal : "+appConfig.getERROR_404(), Toast.LENGTH_SHORT).show();
                             break;
                         case 500:
-                            Toast.makeText(Activity_MainMenu.this, "Ambil Data Gagal : "+ERROR_500, Toast.LENGTH_SHORT).show();
-                            break;
-                        case 504:
-                            Toast.makeText(Activity_MainMenu.this, "Ambil Data Gagal : "+ERROR_504, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Activity_MainMenu.this, "Login Gagal : "+appConfig.getERROR_500(), Toast.LENGTH_SHORT).show();
                             break;
                         case 502:
-                            Toast.makeText(Activity_MainMenu.this, "Ambil Data Gagal : "+ERROR_502, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Activity_MainMenu.this, "Login Gagal : "+appConfig.getERROR_502(), Toast.LENGTH_SHORT).show();
                             break;
                         default:
-                            Toast.makeText(Activity_MainMenu.this, "Ambil Data Gagal : "+ERROR_500, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Activity_MainMenu.this, "Login Gagal : "+appConfig.getERROR_500(), Toast.LENGTH_SHORT).show();
                             break;
                     }
                 }
@@ -524,7 +485,7 @@ public class Activity_MainMenu extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Col_ActiveTrip> call, Throwable t) {
-                Toast.makeText(Activity_MainMenu.this, "Ambil Data Gagal : "+ERROR_500, Toast.LENGTH_SHORT).show();
+                Toast.makeText(Activity_MainMenu.this, "Ambil Data Gagal : "+appConfig.getERROR_500(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -536,7 +497,7 @@ public class Activity_MainMenu extends AppCompatActivity {
 
     public boolean checkPref(String KEY){
         boolean a = false;
-        SharedPreferences SettingPref = getSharedPreferences(TAG_PREF, Context.MODE_PRIVATE);
+        SharedPreferences SettingPref = getSharedPreferences(appConfig.getTAG_PREF(), Context.MODE_PRIVATE);
         a = SettingPref.contains(KEY);
         return  a;
     }
@@ -550,14 +511,47 @@ public class Activity_MainMenu extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.login_logout:
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which){
+                            case DialogInterface.BUTTON_POSITIVE:
+                                Activity_MainMenu.this.getSharedPreferences(appConfig.getTAG_PREF(), 0).edit().remove(appConfig.getTAG_LASTLOGIN()).commit();
+                                Activity_MainMenu.this.getSharedPreferences(appConfig.getTAG_PREF(), 0).edit().remove(appConfig.getTAG_PASSWORD()).commit();
+                                Intent in = new Intent(Activity_MainMenu.this,Activity_Login.class);
+                                in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(in);
+                                break;
+
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                break;
+                        }
+                    }
+                };
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("Konfirmasi");
+                builder.setMessage("Apakah anda yakin akan keluar?").setPositiveButton("Ya", dialogClickListener)
+                        .setNegativeButton("Tidak", dialogClickListener).show();
+
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
     public String getPref(String KEY){
-        SharedPreferences SettingPref = getSharedPreferences(TAG_PREF, Context.MODE_PRIVATE);
+        SharedPreferences SettingPref = getSharedPreferences(appConfig.getTAG_PREF(), Context.MODE_PRIVATE);
         String Value=SettingPref.getString(KEY, "0");
         return  Value;
     }
 
     public int getPrefInt(String KEY){
-        SharedPreferences SettingPref = getSharedPreferences(TAG_PREF, Context.MODE_PRIVATE);
+        SharedPreferences SettingPref = getSharedPreferences(appConfig.getTAG_PREF(), Context.MODE_PRIVATE);
         int Value= SettingPref.getInt(KEY, 0);
         return  Value;
     }
@@ -570,9 +564,8 @@ public class Activity_MainMenu extends AppCompatActivity {
                 public void onClick(DialogInterface dialog, int which) {
                     switch (which){
                         case DialogInterface.BUTTON_POSITIVE:
-                            Intent in = new Intent(Activity_MainMenu.this,Activity_Login.class);
-                            in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            startActivity(in);
+                            Activity_MainMenu.this.finishAffinity();
+                            Activity_MainMenu.this.finish();
                             break;
 
                         case DialogInterface.BUTTON_NEGATIVE:
@@ -698,9 +691,9 @@ public class Activity_MainMenu extends AppCompatActivity {
     }
 
     public void setPrefLoginTime(String LoginTime){
-        SharedPreferences SettingPref = getSharedPreferences(TAG_PREF, Context.MODE_PRIVATE);
+        SharedPreferences SettingPref = getSharedPreferences(appConfig.getTAG_PREF(), Context.MODE_PRIVATE);
         SharedPreferences.Editor SettingPrefEditor = SettingPref.edit();
-        SettingPrefEditor.putString(TAG_LOGINTIME,LoginTime);
+        SettingPrefEditor.putString(appConfig.getTAG_LOGINTIME(),LoginTime);
         SettingPrefEditor.commit();
     }
 
@@ -728,14 +721,14 @@ public class Activity_MainMenu extends AppCompatActivity {
 
 
     public void setPrefWeekNo(String WeekNo){
-        SharedPreferences SettingPref = getSharedPreferences(TAG_PREF, Context.MODE_PRIVATE);
+        SharedPreferences SettingPref = getSharedPreferences(appConfig.getTAG_PREF(), Context.MODE_PRIVATE);
         SharedPreferences.Editor SettingPrefEditor = SettingPref.edit();
-        SettingPrefEditor.putString(TAG_WEEKNUMBER,WeekNo);
+        SettingPrefEditor.putString(appConfig.getTAG_WEEKNUMBER(),WeekNo);
         SettingPrefEditor.commit();
     }
 
     public void callTracingLog(String Desc) {
-        Call<String> callLogout = myAPi.Tracing(getPref(TAG_SPVCODE).replace("/", ""), getPref(TAG_SESSION),Desc);
+        Call<String> callLogout = myAPi.Tracing(getPref(appConfig.getTAG_SPVCODE()).replace("/", ""), getPref(appConfig.getTAG_SESSION()),Desc);
         callLogout.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
@@ -744,16 +737,16 @@ public class Activity_MainMenu extends AppCompatActivity {
                 } else {
                     switch (response.code()) {
                         case 404:
-                            Toast.makeText(Activity_MainMenu.this, "Logout Gagal : " + ERROR_404, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Activity_MainMenu.this, "Login Gagal : "+appConfig.getERROR_404(), Toast.LENGTH_SHORT).show();
                             break;
                         case 500:
-                            Toast.makeText(Activity_MainMenu.this, "Logout Gagal : " + ERROR_500, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Activity_MainMenu.this, "Login Gagal : "+appConfig.getERROR_500(), Toast.LENGTH_SHORT).show();
                             break;
                         case 502:
-                            Toast.makeText(Activity_MainMenu.this, "Logout Gagal : " + ERROR_502, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Activity_MainMenu.this, "Login Gagal : "+appConfig.getERROR_502(), Toast.LENGTH_SHORT).show();
                             break;
                         default:
-                            Toast.makeText(Activity_MainMenu.this, "Logout Gagal : " + ERROR_500, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Activity_MainMenu.this, "Login Gagal : "+appConfig.getERROR_500(), Toast.LENGTH_SHORT).show();
                             break;
                     }
                 }
@@ -761,17 +754,17 @@ public class Activity_MainMenu extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                Toast.makeText(Activity_MainMenu.this, "Logout Gagal : " + ERROR_500, Toast.LENGTH_SHORT).show();
+                Toast.makeText(Activity_MainMenu.this, "Logout Gagal : " + appConfig.getERROR_500(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     public void setPrefLocation(String Longitude,String Latitude,String Georeverse){
-        SharedPreferences SettingPref = getApplicationContext().getSharedPreferences(TAG_PREF, Context.MODE_PRIVATE);
+        SharedPreferences SettingPref = getApplicationContext().getSharedPreferences(appConfig.getTAG_PREF(), Context.MODE_PRIVATE);
         SharedPreferences.Editor SettingPrefEditor = SettingPref.edit();
-        SettingPrefEditor.putString(TAG_LONGITUDE,Longitude);
-        SettingPrefEditor.putString(TAG_LATITUDE,Latitude);
-        SettingPrefEditor.putString(TAG_GEOREVERSE,Georeverse);
+        SettingPrefEditor.putString(appConfig.getTAG_LONGITUDE(),Longitude);
+        SettingPrefEditor.putString(appConfig.getTAG_LATITUDE(),Latitude);
+        SettingPrefEditor.putString(appConfig.getTAG_GEOREVERSE(),Georeverse);
         SettingPrefEditor.commit();
     }
 }

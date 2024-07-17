@@ -117,6 +117,8 @@ public class Activity_Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.p_login);
 
+        Version_Upd = appConfig.getVERSION_APK();
+
 
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -279,6 +281,8 @@ public class Activity_Login extends AppCompatActivity {
                                         Status = d.getStatus();
 
                                         if (Status.equals("1"))  {
+                                            Log.e("onResponse: ", d.getCode() );
+
                                             SPVCode = d.getCode();
                                             SPVName = d.getName();
                                             Password = d.getPassword();

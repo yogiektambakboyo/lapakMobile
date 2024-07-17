@@ -35,6 +35,7 @@ import com.daimajia.androidanimations.library.YoYo;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.lapakkreatiflamongan.smdsforce.R;
 import com.lapakkreatiflamongan.smdsforce.api.API_SFA;
+import com.lapakkreatiflamongan.smdsforce.utils.AppConfig;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -64,37 +65,20 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class Activity_RegForm extends AppCompatActivity {
-    private final String TAG_PREF = "SETTING_SUPERVISION_PREF";
-    private final String TAG_SPVCODE = "usercode";
-    int TAKE_PHOTO_CODE_EXT = 99;
-    private final String BASE_URL = "http://lapakkreatif.com:8081/";
-    private final Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(ScalarsConverterFactory.create())
-            .addConverterFactory(GsonConverterFactory.create())
-            .build();
+    AppConfig appConfig = new AppConfig();
 
-    API_SFA myAPi = retrofit.create(API_SFA.class);
+    int TAKE_PHOTO_CODE_EXT = 99;
+    String BASE_URL = "http://lapakkreatif.com:8081/";
+
     private String dir = null,dirImageFile = "", photoFile = "";
     ImageView imgCamera,imgRefresh;
     TextView txtSales,txtLocation,txtGeoReverse;
     EditText inputNotes;
     Button btnSave;
     int isValidPhoto = 0;
-
-    private final String ERROR_500 = "500 Internal Server Error";
-    private final String ERROR_504 = "504 Gateway Time Out";
-    private final String ERROR_404 = "404 Request Not Found";
-    private final String ERROR_408 = "408 Request Time Out";
-    private final String ERROR_301 = "301 Moved Permanently";
-    private final String ERROR_400 = "400 Bad Request";
-    private final String ERROR_401 = "401 Unauthorized";
-    private final String ERROR_502 = "502 Bad Gateway";
+    Retrofit retrofit;
+    API_SFA myAPi;
     String uploadedImgStore = "-";
-    private final String TAG_LATITUDE = "latitude";
-    private final String TAG_LONGITUDE = "longitude";
-    private final String TAG_GEOREVERSE = "georeverse";
-    private final String TAG_SPVNAME = "username";
 
     EditText InputName,InputAddress,InputCity,InputType,InputClass,InputContact,InputContactJob,InputContactLevel,InputNPWP,InputNIK,InputPhoneNo,InputWA,InputEmail,InputCreditLimit,InputNotes;
 
@@ -102,6 +86,16 @@ public class Activity_RegForm extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.p_regform);
+
+        BASE_URL = appConfig.getBASE_URL();
+
+        retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        myAPi = retrofit.create(API_SFA.class);
 
         getSupportActionBar().setTitle("Form Pendaftaran");
 
@@ -138,7 +132,7 @@ public class Activity_RegForm extends AppCompatActivity {
                         if (uploadedImgStore.equals("-")) {
                             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddhhmmss");
                             String date = dateFormat.format(new Date());
-                            photoFile = "PicRegForm_" + getPref(TAG_SPVCODE).trim().replaceAll("/", "") + "_" + date + ".jpg";
+                            photoFile = "PicRegForm_" + getPref(appConfig.getTAG_SPVCODE()).trim().replaceAll("/", "") + "_" + date + ".jpg";
                             dirImageFile = dir + photoFile;
 
                             ImagePicker.with(Activity_RegForm.this)
@@ -159,7 +153,7 @@ public class Activity_RegForm extends AppCompatActivity {
                             params.setMargins(20, 15, 30, 5);
 
                             final TextView TxtLblNama = new TextView(Activity_RegForm.this);
-                            TxtLblNama.setText("Sales : " + getPref(TAG_SPVNAME));
+                            TxtLblNama.setText("Sales : " + getPref(appConfig.getTAG_SPVNAME()));
                             TxtLblNama.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
                             TxtLblNama.setTextColor(Color.BLACK);
 
@@ -183,7 +177,7 @@ public class Activity_RegForm extends AppCompatActivity {
                                 public void onClick(DialogInterface dialog, int which) {
                                     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddhhmmss");
                                     String date = dateFormat.format(new Date());
-                                    photoFile = "PicRegForm_" + getPref(TAG_SPVCODE).trim().replaceAll("/", "") + "_" + date + ".jpg";
+                                    photoFile = "PicRegForm_" + getPref(appConfig.getTAG_SPVCODE()).trim().replaceAll("/", "") + "_" + date + ".jpg";
                                     dirImageFile = dir + photoFile;
 
                                     ImagePicker.with(Activity_RegForm.this)
@@ -213,11 +207,10 @@ public class Activity_RegForm extends AppCompatActivity {
             }
         });
 
-        inputNotes = findViewById(R.id.RegForm_Notes);
         txtLocation = findViewById(R.id.RegForm_Location);
         txtGeoReverse = findViewById(R.id.RegForm_GeoReverse);
         txtSales = findViewById(R.id.RegForm_Sales);
-        txtSales.setText(getPref(TAG_SPVNAME));
+        txtSales.setText(getPref(appConfig.getTAG_SPVNAME()));
         imgRefresh = findViewById(R.id.RegForm_ImgRefresh);
 
         imgRefresh.setOnClickListener(new View.OnClickListener() {
@@ -249,8 +242,8 @@ public class Activity_RegForm extends AppCompatActivity {
                                                             }else{
                                                                 setPrefLocation(location.getLongitude()+"",location.getLatitude()+"","");
                                                             }
-                                                            txtLocation.setText(getPref(TAG_LONGITUDE)+","+getPref(TAG_LATITUDE));
-                                                            txtGeoReverse.setText(getPref(TAG_GEOREVERSE));
+                                                            txtLocation.setText(getPref(appConfig.getTAG_LONGITUDE())+","+getPref(appConfig.getTAG_LATITUDE()));
+                                                            txtGeoReverse.setText(getPref(appConfig.getTAG_GEOREVERSE()));
                                                         }
                                                     });
                                         }else{
@@ -292,8 +285,8 @@ public class Activity_RegForm extends AppCompatActivity {
                                             }else{
                                                 setPrefLocation(location.getLongitude()+"",location.getLatitude()+"","");
                                             }
-                                            txtLocation.setText(getPref(TAG_LONGITUDE)+","+getPref(TAG_LATITUDE));
-                                            txtGeoReverse.setText(getPref(TAG_GEOREVERSE));
+                                            txtLocation.setText(getPref(appConfig.getTAG_LONGITUDE())+","+getPref(appConfig.getTAG_LATITUDE()));
+                                            txtGeoReverse.setText(getPref(appConfig.getTAG_GEOREVERSE()));
                                         }
                                     });
                         }else{
@@ -326,7 +319,7 @@ public class Activity_RegForm extends AppCompatActivity {
                                             dialog.dismiss();
 
                                             Call<String> callInsert = myAPi.insertReg(
-                                                    getPref(TAG_SPVCODE),
+                                                    getPref(appConfig.getTAG_SPVCODE()),
                                                     InputName.getText().toString(),
                                                     InputAddress.getText().toString(),
                                                     InputPhoneNo.getText().toString(),
@@ -342,8 +335,8 @@ public class Activity_RegForm extends AppCompatActivity {
                                                     InputType.getText().toString(),
                                                     InputClass.getText().toString(),
                                                     InputContactJob.getText().toString(),
-                                                    getPref(TAG_LONGITUDE),
-                                                    getPref(TAG_LATITUDE),
+                                                    getPref(appConfig.getTAG_LONGITUDE()),
+                                                    getPref(appConfig.getTAG_LATITUDE()),
                                                     InputContactLevel.getText().toString(),
                                                     photoFile);
 
@@ -354,7 +347,7 @@ public class Activity_RegForm extends AppCompatActivity {
                                                         AlertDialog.Builder builder = new AlertDialog.Builder(Activity_RegForm.this);
                                                         builder.setTitle("Konfirmasi");
                                                         builder.setCancelable(false);
-                                                        builder.setMessage("Data Pengajuan Toko "+getPref(TAG_SPVCODE)+" berhasil disimpan").setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                                        builder.setMessage("Data Pengajuan Toko "+getPref(appConfig.getTAG_SPVCODE())+" berhasil disimpan").setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                                             @Override
                                                             public void onClick(DialogInterface dialog, int which) {
                                                                 dialog.dismiss();
@@ -369,7 +362,7 @@ public class Activity_RegForm extends AppCompatActivity {
                                                         switch (response.code()) {
                                                             case 404:
                                                                 builder.setTitle("Warning");
-                                                                builder.setMessage("Ops, Gagal sinkron data "+ERROR_404+", Silahkan ulangi proses simpan").setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                                                builder.setMessage("Ops, Gagal sinkron data "+appConfig.getERROR_404()+", Silahkan ulangi proses simpan").setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                                                     @Override
                                                                     public void onClick(DialogInterface dialog, int which) {
                                                                         dialog.dismiss();
@@ -378,7 +371,7 @@ public class Activity_RegForm extends AppCompatActivity {
                                                                 break;
                                                             case 500:
                                                                 builder.setTitle("Warning");
-                                                                builder.setMessage("Ops, Gagal sinkron data "+ERROR_500+", Silahkan ulangi proses simpan").setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                                                builder.setMessage("Ops, Gagal sinkron data "+appConfig.getERROR_500()+", Silahkan ulangi proses simpan").setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                                                     @Override
                                                                     public void onClick(DialogInterface dialog, int which) {
                                                                         dialog.dismiss();
@@ -387,7 +380,7 @@ public class Activity_RegForm extends AppCompatActivity {
                                                                 break;
                                                             case 502:
                                                                 builder.setTitle("Warning");
-                                                                builder.setMessage("Ops, Gagal sinkron data "+ERROR_502+", Silahkan ulangi proses simpan").setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                                                builder.setMessage("Ops, Gagal sinkron data "+appConfig.getERROR_502()+", Silahkan ulangi proses simpan").setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                                                     @Override
                                                                     public void onClick(DialogInterface dialog, int which) {
                                                                         dialog.dismiss();
@@ -396,7 +389,7 @@ public class Activity_RegForm extends AppCompatActivity {
                                                                 break;
                                                             default:
                                                                 builder.setTitle("Warning");
-                                                                builder.setMessage("Ops, Gagal sinkron data "+ERROR_500+", Silahkan ulangi proses simpan").setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                                                builder.setMessage("Ops, Gagal sinkron data "+appConfig.getERROR_500()+", Silahkan ulangi proses simpan").setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                                                     @Override
                                                                     public void onClick(DialogInterface dialog, int which) {
                                                                         dialog.dismiss();
@@ -519,7 +512,7 @@ public class Activity_RegForm extends AppCompatActivity {
                                     switch (statusCode) {
                                         case 404:
                                             builder.setTitle("Konfirmasi");
-                                            builder.setMessage("Ops, Gagal upload Foto "+ERROR_404+", Silahkan ambil ulang foto").setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                            builder.setMessage("Ops, Gagal upload Foto "+appConfig.getERROR_404()+", Silahkan ambil ulang foto").setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                                 @Override
                                                 public void onClick(DialogInterface dialog, int which) {
                                                     dialog.dismiss();
@@ -528,7 +521,7 @@ public class Activity_RegForm extends AppCompatActivity {
                                             break;
                                         case 500:
                                             builder.setTitle("Konfirmasi");
-                                            builder.setMessage("Ops, Gagal upload Foto "+ERROR_500+", Silahkan ambil ulang foto").setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                            builder.setMessage("Ops, Gagal upload Foto "+appConfig.getERROR_500()+", Silahkan ambil ulang foto").setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                                 @Override
                                                 public void onClick(DialogInterface dialog, int which) {
                                                     dialog.dismiss();
@@ -537,7 +530,7 @@ public class Activity_RegForm extends AppCompatActivity {
                                             break;
                                         case 502:
                                             builder.setTitle("Konfirmasi");
-                                            builder.setMessage("Ops, Gagal upload Foto "+ERROR_502+", Silahkan ambil ulang foto").setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                            builder.setMessage("Ops, Gagal upload Foto "+appConfig.getERROR_502()+", Silahkan ambil ulang foto").setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                                 @Override
                                                 public void onClick(DialogInterface dialog, int which) {
                                                     dialog.dismiss();
@@ -546,7 +539,7 @@ public class Activity_RegForm extends AppCompatActivity {
                                             break;
                                         default:
                                             builder.setTitle("Konfirmasi");
-                                            builder.setMessage("Ops, Gagal upload Foto "+ERROR_500+", Silahkan ambil ulang foto").setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                            builder.setMessage("Ops, Gagal upload Foto "+appConfig.getERROR_500()+", Silahkan ambil ulang foto").setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                                 @Override
                                                 public void onClick(DialogInterface dialog, int which) {
                                                     dialog.dismiss();
@@ -599,7 +592,7 @@ public class Activity_RegForm extends AppCompatActivity {
     }
 
     public String getPref(String KEY){
-        SharedPreferences SettingPref = getSharedPreferences(TAG_PREF, Context.MODE_PRIVATE);
+        SharedPreferences SettingPref = getSharedPreferences(appConfig.getTAG_PREF(), Context.MODE_PRIVATE);
         String Value=SettingPref.getString(KEY, "0");
         return  Value;
     }
@@ -632,11 +625,11 @@ public class Activity_RegForm extends AppCompatActivity {
     }
 
     public void setPrefLocation(String Longitude,String Latitude,String Georeverse){
-        SharedPreferences SettingPref = getApplicationContext().getSharedPreferences(TAG_PREF, Context.MODE_PRIVATE);
+        SharedPreferences SettingPref = getApplicationContext().getSharedPreferences(appConfig.getTAG_PREF(), Context.MODE_PRIVATE);
         SharedPreferences.Editor SettingPrefEditor = SettingPref.edit();
-        SettingPrefEditor.putString(TAG_LONGITUDE,Longitude);
-        SettingPrefEditor.putString(TAG_LATITUDE,Latitude);
-        SettingPrefEditor.putString(TAG_GEOREVERSE,Georeverse);
+        SettingPrefEditor.putString(appConfig.getTAG_LONGITUDE(),Longitude);
+        SettingPrefEditor.putString(appConfig.getTAG_LATITUDE(),Latitude);
+        SettingPrefEditor.putString(appConfig.getTAG_GEOREVERSE(),Georeverse);
         SettingPrefEditor.commit();
     }
 }

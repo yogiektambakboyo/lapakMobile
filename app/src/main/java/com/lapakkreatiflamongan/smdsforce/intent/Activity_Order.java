@@ -25,6 +25,7 @@ import com.lapakkreatiflamongan.smdsforce.api.API_SFA;
 import com.lapakkreatiflamongan.smdsforce.schema.Col_ActiveTrip;
 import com.lapakkreatiflamongan.smdsforce.schema.Col_Product;
 import com.lapakkreatiflamongan.smdsforce.schema.Data_Product;
+import com.lapakkreatiflamongan.smdsforce.utils.AppConfig;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -43,44 +44,16 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class Activity_Order extends AppCompatActivity {
-    private final String TAG_PREF = "SETTING_SUPERVISION_PREF";
-    private final String TAG_CUSTOMERID = "customer_id";
-    private final String TAG_CUSTOMERNAME = "customer_name";
-    private final String TAG_SPVNAME = "username";
-    private final String TAG_SPVCODE = "usercode";
-    private final String TAG_LOGINTIME = "logintime";
-    private final String TAG_SELLERCODE = "sellercode";
-    private final String TAG_SELLERNAME = "sellername";
-    private String VERSION_APK = "0.0.7";
-    private String BASE_URL = "http://lapakkreatif.com:8081/";
+    AppConfig appConfig = new AppConfig();
+    String BASE_URL = "http://lapakkreatif.com:8081/";
 
     DecimalFormat formatter;
     DecimalFormatSymbols symbol;
-
-    String SalesName = "", SalesCode = "";
-    String weekstring = "wk1";
-    private final int REQUEST_CODE = 888;
-    private final String TAG_LASTLOGIN = "lastlogin";
-    private final String ERROR_500 = "500 Internal Server Error";
-    private final String ERROR_404 = "404 Request Not Found";
-    private final String ERROR_504 = "504 Gateway Time Out";
-    private final String ERROR_408 = "408 Request Time Out";
-    private final String ERROR_301 = "301 Moved Permanently";
-    private final String ERROR_400 = "400 Bad Request";
-    private final String ERROR_401 = "401 Unauthorized";
-    private final String ERROR_502 = "502 Bad Gateway";
-    private final String TAG_SESSION = "session";
-
     Dialog dialog;
     SpinKitView loader;
 
-    private Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(ScalarsConverterFactory.create())
-            .addConverterFactory(GsonConverterFactory.create())
-            .build();
-
-    API_SFA myAPi = retrofit.create(API_SFA.class);
+    Retrofit retrofit;
+    API_SFA myAPi;
 
     ListView listViewTrip;
     Adapter_Product adapter;
@@ -98,6 +71,17 @@ public class Activity_Order extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.p_order);
 
+        BASE_URL = appConfig.getBASE_URL();
+
+        retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        myAPi = retrofit.create(API_SFA.class);
+
+
         getSupportActionBar().setTitle("Pesanan");
 
         listViewTrip  = findViewById(R.id.Order_List);
@@ -105,7 +89,7 @@ public class Activity_Order extends AppCompatActivity {
         InputSearch     = findViewById(R.id.Order_Search);
         TxtInfo         = findViewById(R.id.Order_Total);
 
-        Order_No = getTodaySecond()+"-"+getPref(TAG_CUSTOMERID);
+        Order_No = getTodaySecond()+"-"+getPref(appConfig.getTAG_CUSTOMERID());
 
         loader.setVisibility(View.VISIBLE);
 
@@ -139,24 +123,17 @@ public class Activity_Order extends AppCompatActivity {
 
     }
 
-
-    public void setPrefCustomerID(String CustomerID, String CustomerName){
-        SharedPreferences SettingPref = getSharedPreferences(TAG_PREF, Context.MODE_PRIVATE);
-        SharedPreferences.Editor SettingPrefEditor = SettingPref.edit();
-        SettingPrefEditor.putString(TAG_CUSTOMERID,CustomerID);
-        SettingPrefEditor.putString(TAG_CUSTOMERNAME,CustomerName);
-        SettingPrefEditor.commit();
-    }
+    
 
 
     public String getPref(String KEY){
-        SharedPreferences SettingPref = getSharedPreferences(TAG_PREF, Context.MODE_PRIVATE);
+        SharedPreferences SettingPref = getSharedPreferences(appConfig.getTAG_PREF(), Context.MODE_PRIVATE);
         String Value=SettingPref.getString(KEY, "0");
         return  Value;
     }
 
     public int getPrefInt(String KEY){
-        SharedPreferences SettingPref = getSharedPreferences(TAG_PREF, Context.MODE_PRIVATE);
+        SharedPreferences SettingPref = getSharedPreferences(appConfig.getTAG_PREF(), Context.MODE_PRIVATE);
         int Value= SettingPref.getInt(KEY, 0);
         return  Value;
     }
@@ -184,7 +161,7 @@ public class Activity_Order extends AppCompatActivity {
 
     public void getData(){
         dialog.show();
-        Call<Col_Product> callData = myAPi.getProductOrder(getPref(TAG_SPVCODE),getPref(TAG_CUSTOMERID));
+        Call<Col_Product> callData = myAPi.getProductOrder(getPref(appConfig.getTAG_SPVCODE()),getPref(appConfig.getTAG_CUSTOMERID()));
         callData.enqueue(new Callback<Col_Product>() {
             @Override
             public void onResponse(Call<Col_Product> call, Response<Col_Product> response) {
@@ -198,8 +175,8 @@ public class Activity_Order extends AppCompatActivity {
                         if (col.getStatus().equals("1")){
                             List<Data_Product> data = col.getData();
                             for (int i = 0; i < data.size(); i++) {
-                                data.get(i).setCustomers_id(getPref(TAG_CUSTOMERID));
-                                data.get(i).setSales_id(getPref(TAG_SPVCODE));
+                                data.get(i).setCustomers_id(getPref(appConfig.getTAG_CUSTOMERID()));
+                                data.get(i).setSales_id(getPref(appConfig.getTAG_SPVCODE()));
                                 data.get(i).setOrder_no(Order_No);
                                 data.get(i).setTotal(""+Integer.parseInt(data.get(i).getPrice())*Integer.parseInt(data.get(i).getQty()));
                             }
@@ -293,8 +270,8 @@ public class Activity_Order extends AppCompatActivity {
                                             }
                                             adapter.getItem(i).setQty(""+InputQty.getText().toString().trim());
                                             adapter.notifyDataSetChanged();
-                                            adapter.getItem(i).setCustomers_id(getPref(TAG_CUSTOMERID));
-                                            adapter.getItem(i).setSales_id(getPref(TAG_SPVCODE));
+                                            adapter.getItem(i).setCustomers_id(getPref(appConfig.getTAG_CUSTOMERID()));
+                                            adapter.getItem(i).setSales_id(getPref(appConfig.getTAG_SPVCODE()));
                                             adapter.notifyDataSetChanged();
                                             adapter.getItem(i).setOrder_no(Order_No);
                                             adapter.getItem(i).setSeq(getTodayMiliSecond());
@@ -337,22 +314,16 @@ public class Activity_Order extends AppCompatActivity {
                     dialog.dismiss();
                     switch (response.code()) {
                         case 404:
-                            Toast.makeText(Activity_Order.this, "Ambil Data Gagal : "+ERROR_404, Toast.LENGTH_SHORT).show();
-                            break;
-                        case 408:
-                            Toast.makeText(Activity_Order.this, "Ambil Data Gagal : "+ERROR_408, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Activity_Order.this, "Login Gagal : "+appConfig.getERROR_404(), Toast.LENGTH_SHORT).show();
                             break;
                         case 500:
-                            Toast.makeText(Activity_Order.this, "Ambil Data Gagal : "+ERROR_500, Toast.LENGTH_SHORT).show();
-                            break;
-                        case 504:
-                            Toast.makeText(Activity_Order.this, "Ambil Data Gagal : "+ERROR_504, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Activity_Order.this, "Login Gagal : "+appConfig.getERROR_500(), Toast.LENGTH_SHORT).show();
                             break;
                         case 502:
-                            Toast.makeText(Activity_Order.this, "Ambil Data Gagal : "+ERROR_502, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Activity_Order.this, "Login Gagal : "+appConfig.getERROR_502(), Toast.LENGTH_SHORT).show();
                             break;
                         default:
-                            Toast.makeText(Activity_Order.this, "Ambil Data Gagal : "+ERROR_500, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Activity_Order.this, "Login Gagal : "+appConfig.getERROR_500(), Toast.LENGTH_SHORT).show();
                             break;
                     }
                 }
@@ -361,7 +332,7 @@ public class Activity_Order extends AppCompatActivity {
             @Override
             public void onFailure(Call<Col_Product> call, Throwable t) {
                 dialog.dismiss();
-                Toast.makeText(Activity_Order.this, "Ambil Data Gagal : "+ERROR_500, Toast.LENGTH_SHORT).show();
+                Toast.makeText(Activity_Order.this, "Ambil Data Gagal : "+appConfig.getERROR_500(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -392,22 +363,16 @@ public class Activity_Order extends AppCompatActivity {
                     dialog.dismiss();
                     switch (response.code()) {
                         case 404:
-                            Toast.makeText(Activity_Order.this, "Ambil Data Gagal : "+ERROR_404, Toast.LENGTH_SHORT).show();
-                            break;
-                        case 408:
-                            Toast.makeText(Activity_Order.this, "Ambil Data Gagal : "+ERROR_408, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Activity_Order.this, "Login Gagal : "+appConfig.getERROR_404(), Toast.LENGTH_SHORT).show();
                             break;
                         case 500:
-                            Toast.makeText(Activity_Order.this, "Ambil Data Gagal : "+ERROR_500, Toast.LENGTH_SHORT).show();
-                            break;
-                        case 504:
-                            Toast.makeText(Activity_Order.this, "Ambil Data Gagal : "+ERROR_504, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Activity_Order.this, "Login Gagal : "+appConfig.getERROR_500(), Toast.LENGTH_SHORT).show();
                             break;
                         case 502:
-                            Toast.makeText(Activity_Order.this, "Ambil Data Gagal : "+ERROR_502, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Activity_Order.this, "Login Gagal : "+appConfig.getERROR_502(), Toast.LENGTH_SHORT).show();
                             break;
                         default:
-                            Toast.makeText(Activity_Order.this, "Ambil Data Gagal : "+ERROR_500, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Activity_Order.this, "Login Gagal : "+appConfig.getERROR_500(), Toast.LENGTH_SHORT).show();
                             break;
                     }
                 }
@@ -416,7 +381,7 @@ public class Activity_Order extends AppCompatActivity {
             @Override
             public void onFailure(Call<Col_ActiveTrip> call, Throwable t) {
                 dialog.dismiss();
-                Toast.makeText(Activity_Order.this, "Ambil Data Gagal : "+ERROR_500, Toast.LENGTH_SHORT).show();
+                Toast.makeText(Activity_Order.this, "Ambil Data Gagal : "+appConfig.getERROR_500(), Toast.LENGTH_SHORT).show();
             }
         });
     }

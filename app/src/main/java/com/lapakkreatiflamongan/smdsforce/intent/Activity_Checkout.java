@@ -7,12 +7,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.TypedValue;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -28,9 +24,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.lapakkreatiflamongan.smdsforce.R;
 import com.lapakkreatiflamongan.smdsforce.adapter.Adapter_Product;
 import com.lapakkreatiflamongan.smdsforce.api.API_SFA;
-import com.lapakkreatiflamongan.smdsforce.schema.Col_ActiveTrip;
 import com.lapakkreatiflamongan.smdsforce.schema.Col_Product;
 import com.lapakkreatiflamongan.smdsforce.schema.Data_Product;
+import com.lapakkreatiflamongan.smdsforce.utils.AppConfig;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -49,50 +45,24 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class Activity_Checkout extends AppCompatActivity {
-    private final String TAG_PREF = "SETTING_SUPERVISION_PREF";
-    private final String TAG_CUSTOMERID = "customer_id";
-    private final String TAG_CUSTOMERNAME = "customer_name";
-    private final String TAG_SPVNAME = "username";
-    private final String TAG_SPVCODE = "usercode";
-    private final String TAG_LOGINTIME = "logintime";
-    private final String TAG_SELLERCODE = "sellercode";
-    private final String TAG_SELLERNAME = "sellername";
-    private String VERSION_APK = "0.0.7";
+    AppConfig appConfig = new AppConfig();
     private String BASE_URL = "http://lapakkreatif.com:8081/";
 
     DecimalFormat formatter;
     DecimalFormatSymbols symbol;
 
-    String SalesName = "", SalesCode = "";
-    String weekstring = "wk1";
-    private final int REQUEST_CODE = 888;
-    private final String TAG_LASTLOGIN = "lastlogin";
-    private final String ERROR_500 = "500 Internal Server Error";
-    private final String ERROR_404 = "404 Request Not Found";
-    private final String ERROR_504 = "504 Gateway Time Out";
-    private final String ERROR_408 = "408 Request Time Out";
-    private final String ERROR_301 = "301 Moved Permanently";
-    private final String ERROR_400 = "400 Bad Request";
-    private final String ERROR_401 = "401 Unauthorized";
-    private final String ERROR_502 = "502 Bad Gateway";
-    private final String TAG_SESSION = "session";
-
     Dialog dialog;
     SpinKitView loader;
     String OrderNo = "";
-    private Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(ScalarsConverterFactory.create())
-            .addConverterFactory(GsonConverterFactory.create())
-            .build();
-
-    API_SFA myAPi = retrofit.create(API_SFA.class);
 
     ListView listViewTrip;
     Adapter_Product adapter;
     EditText InputNotes,InputDeliveryDate;
     TextView TxtInfo;
     final Calendar myCalendar= Calendar.getInstance();
+
+    Retrofit retrofit;
+    API_SFA myAPi;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -103,6 +73,16 @@ public class Activity_Checkout extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.p_checkout);
+
+        BASE_URL = appConfig.getBASE_URL();
+
+        retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        myAPi = retrofit.create(API_SFA.class);
 
         getSupportActionBar().setTitle("Checkout Pesanan");
 
@@ -145,7 +125,7 @@ public class Activity_Checkout extends AppCompatActivity {
         dialog.setContentView(R.layout.d_logindownload);
         dialog.setCancelable(false);
 
-        final TextView TxtStatus = (TextView) dialog.findViewById(R.id.Login_DStatus);
+        final TextView TxtStatus = dialog.findViewById(R.id.Login_DStatus);
         TxtStatus.setText("Mohon Tunggu. . ");
 
         getData();
@@ -160,24 +140,17 @@ public class Activity_Checkout extends AppCompatActivity {
 
     }
 
-
-    public void setPrefCustomerID(String CustomerID, String CustomerName){
-        SharedPreferences SettingPref = getSharedPreferences(TAG_PREF, Context.MODE_PRIVATE);
-        SharedPreferences.Editor SettingPrefEditor = SettingPref.edit();
-        SettingPrefEditor.putString(TAG_CUSTOMERID,CustomerID);
-        SettingPrefEditor.putString(TAG_CUSTOMERNAME,CustomerName);
-        SettingPrefEditor.commit();
-    }
+    
 
 
     public String getPref(String KEY){
-        SharedPreferences SettingPref = getSharedPreferences(TAG_PREF, Context.MODE_PRIVATE);
+        SharedPreferences SettingPref = getSharedPreferences(appConfig.getTAG_PREF(), Context.MODE_PRIVATE);
         String Value=SettingPref.getString(KEY, "0");
         return  Value;
     }
 
     public int getPrefInt(String KEY){
-        SharedPreferences SettingPref = getSharedPreferences(TAG_PREF, Context.MODE_PRIVATE);
+        SharedPreferences SettingPref = getSharedPreferences(appConfig.getTAG_PREF(), Context.MODE_PRIVATE);
         int Value= SettingPref.getInt(KEY, 0);
         return  Value;
     }
@@ -191,7 +164,7 @@ public class Activity_Checkout extends AppCompatActivity {
 
     public void getData(){
         dialog.show();
-        Call<Col_Product> callData = myAPi.getProductOrderCheckout(getPref(TAG_SPVCODE),getPref(TAG_CUSTOMERID));
+        Call<Col_Product> callData = myAPi.getProductOrderCheckout(getPref(appConfig.getTAG_SPVCODE()),getPref(appConfig.getTAG_CUSTOMERID()));
         callData.enqueue(new Callback<Col_Product>() {
             @Override
             public void onResponse(Call<Col_Product> call, Response<Col_Product> response) {
@@ -218,22 +191,16 @@ public class Activity_Checkout extends AppCompatActivity {
                     dialog.dismiss();
                     switch (response.code()) {
                         case 404:
-                            Toast.makeText(Activity_Checkout.this, "Ambil Data Gagal : "+ERROR_404, Toast.LENGTH_SHORT).show();
-                            break;
-                        case 408:
-                            Toast.makeText(Activity_Checkout.this, "Ambil Data Gagal : "+ERROR_408, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Activity_Checkout.this, "Login Gagal : "+appConfig.getERROR_404(), Toast.LENGTH_SHORT).show();
                             break;
                         case 500:
-                            Toast.makeText(Activity_Checkout.this, "Ambil Data Gagal : "+ERROR_500, Toast.LENGTH_SHORT).show();
-                            break;
-                        case 504:
-                            Toast.makeText(Activity_Checkout.this, "Ambil Data Gagal : "+ERROR_504, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Activity_Checkout.this, "Login Gagal : "+appConfig.getERROR_500(), Toast.LENGTH_SHORT).show();
                             break;
                         case 502:
-                            Toast.makeText(Activity_Checkout.this, "Ambil Data Gagal : "+ERROR_502, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Activity_Checkout.this, "Login Gagal : "+appConfig.getERROR_502(), Toast.LENGTH_SHORT).show();
                             break;
                         default:
-                            Toast.makeText(Activity_Checkout.this, "Ambil Data Gagal : "+ERROR_500, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Activity_Checkout.this, "Login Gagal : "+appConfig.getERROR_500(), Toast.LENGTH_SHORT).show();
                             break;
                     }
                 }
@@ -242,14 +209,14 @@ public class Activity_Checkout extends AppCompatActivity {
             @Override
             public void onFailure(Call<Col_Product> call, Throwable t) {
                 dialog.dismiss();
-                Toast.makeText(Activity_Checkout.this, "Ambil Data Gagal : "+ERROR_500, Toast.LENGTH_SHORT).show();
+                Toast.makeText(Activity_Checkout.this, "Ambil Data Gagal : "+appConfig.getERROR_500(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     public void setData(){
         dialog.show();
-        Call<String> callData = myAPi.confirmOrder(getPref(TAG_SPVCODE),getPref(TAG_CUSTOMERID),OrderNo,InputNotes.getText().toString(),InputDeliveryDate.getText().toString().trim());
+        Call<String> callData = myAPi.confirmOrder(getPref(appConfig.getTAG_SPVCODE()),getPref(appConfig.getTAG_CUSTOMERID()),OrderNo,InputNotes.getText().toString(),InputDeliveryDate.getText().toString().trim());
         callData.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
@@ -272,7 +239,7 @@ public class Activity_Checkout extends AppCompatActivity {
                         params.setMargins(20, 15, 30, 15);
 
                         final TextView TxtLblNama = new TextView(Activity_Checkout.this);
-                        TxtLblNama.setText("Pesanan atas nama "+getPref(TAG_CUSTOMERNAME)+" berhasil disimpan dengan No. "+OrderNo);
+                        TxtLblNama.setText("Pesanan atas nama "+getPref(appConfig.getTAG_CUSTOMERNAME())+" berhasil disimpan dengan No. "+OrderNo);
                         TxtLblNama.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
 
                         layout.addView(TxtLblNama, params);
@@ -298,22 +265,16 @@ public class Activity_Checkout extends AppCompatActivity {
                     dialog.dismiss();
                     switch (response.code()) {
                         case 404:
-                            Toast.makeText(Activity_Checkout.this, "Ambil Data Gagal : "+ERROR_404, Toast.LENGTH_SHORT).show();
-                            break;
-                        case 408:
-                            Toast.makeText(Activity_Checkout.this, "Ambil Data Gagal : "+ERROR_408, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Activity_Checkout.this, "Login Gagal : "+appConfig.getERROR_404(), Toast.LENGTH_SHORT).show();
                             break;
                         case 500:
-                            Toast.makeText(Activity_Checkout.this, "Ambil Data Gagal : "+ERROR_500, Toast.LENGTH_SHORT).show();
-                            break;
-                        case 504:
-                            Toast.makeText(Activity_Checkout.this, "Ambil Data Gagal : "+ERROR_504, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Activity_Checkout.this, "Login Gagal : "+appConfig.getERROR_500(), Toast.LENGTH_SHORT).show();
                             break;
                         case 502:
-                            Toast.makeText(Activity_Checkout.this, "Ambil Data Gagal : "+ERROR_502, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Activity_Checkout.this, "Login Gagal : "+appConfig.getERROR_502(), Toast.LENGTH_SHORT).show();
                             break;
                         default:
-                            Toast.makeText(Activity_Checkout.this, "Ambil Data Gagal : "+ERROR_500, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Activity_Checkout.this, "Login Gagal : "+appConfig.getERROR_500(), Toast.LENGTH_SHORT).show();
                             break;
                     }
                 }
@@ -322,7 +283,7 @@ public class Activity_Checkout extends AppCompatActivity {
             @Override
             public void onFailure(Call<String> call, Throwable t) {
                 dialog.dismiss();
-                Toast.makeText(Activity_Checkout.this, "Ambil Data Gagal : "+ERROR_500, Toast.LENGTH_SHORT).show();
+                Toast.makeText(Activity_Checkout.this, "Ambil Data Gagal : "+appConfig.getERROR_500(), Toast.LENGTH_SHORT).show();
             }
         });
     }
