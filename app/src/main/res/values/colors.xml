@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <color name="colorPrimary">#68D2DF</color>
-  <color name="colorPrimaryDark">#05C3DE</color>
-  <color name="colorAccent">#008EAA</color>
+  <color name="colorPrimaryDark">#8CE1EB</color>
+  <color name="colorAccent">#26C6DA</color>
   <color name="blue">#008EAA</color>
   <color name="colorWhite">#FFFFFF</color>
   <color name="colorBlack">#000000</color>
@@ -18,4 +18,13 @@
   <color name="purple_700">#7B1FA2</color>
   <color name="teal_200">#80CBC4</color>
   <color name="teal_700">#00796B</color>
+
+  <color name="app_1">#E3F8FA</color>
+  <color name="app_2">#8CE1EB</color>
+  <color name="app_3">#26C6DA</color>
+  <color name="app_4">#4070EA</color>
+  <color name="app_5">#3EF2F7</color>
+  <color name="app_6">#8CECF8</color>
+  <color name="app_7">#5F83FA</color>
+
 </resources>

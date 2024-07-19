@@ -70,7 +70,7 @@
                             android:id="@+id/MainMenu_Profile"
                             android:layout_width="48dip"
                             android:layout_height="48dip"
-                            app:srcCompat="@drawable/sfa_pelanggan" />
+                            app:srcCompat="@drawable/mainmenu_profile" />
                     </LinearLayout>
 
 
@@ -109,7 +109,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:padding="10dp"
-                                    card_view:srcCompat="@drawable/trip_new" />
+                                    card_view:srcCompat="@drawable/mainmenu_tripactive" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -149,14 +149,13 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center_vertical"
                     android:gravity="center_horizontal"
-                    android:orientation="horizontal"
+                    android:orientation="vertical"
                     android:padding="10dp">
 
                     <LinearLayout
-                        android:layout_width="160dp"
-                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dip"
                         android:layout_gravity="top"
-                        android:layout_marginRight="10dp"
                         android:gravity="center_horizontal|center_vertical"
                         android:orientation="vertical">
 
@@ -165,84 +164,208 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:padding="5dp"
+                            card_view:cardCornerRadius="5dip"
                             card_view:cardUseCompatPadding="true">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
+                                android:layout_gravity="center_horizontal|center_vertical"
                                 android:layout_margin="5dp"
-                                android:orientation="vertical"
+                                android:orientation="horizontal"
                                 android:padding="5dp">
 
                                 <ImageView
-                                    android:layout_width="100dp"
-                                    android:layout_height="100dp"
-                                    android:layout_gravity="center_horizontal"
-                                    android:layout_marginBottom="10dp"
-                                    card_view:srcCompat="@drawable/trip" />
+                                    android:layout_width="48dp"
+                                    android:layout_height="48dp"
+                                    android:layout_gravity="center_horizontal|center_vertical"
+                                    card_view:srcCompat="@drawable/mainmenu_trip" />
 
-                                <TextView
+                                <LinearLayout
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="left"
-                                    android:text="New Trip"
-                                    android:textSize="20sp"
-                                    android:textStyle="bold" />
+                                    android:layout_height="match_parent"
+                                    android:orientation="vertical"
+                                    android:paddingLeft="15dip">
 
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="Buat perjalanan baru" />
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="left"
+                                        android:text="New Trip"
+                                        android:textSize="20sp"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="Buat perjalanan baru" />
+                                </LinearLayout>
+
                             </LinearLayout>
                         </androidx.cardview.widget.CardView>
 
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="200dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dip"
                         android:layout_gravity="top"
-                        android:layout_marginLeft="10dip"
                         android:gravity="center_horizontal|center_vertical"
                         android:orientation="vertical">
 
                         <androidx.cardview.widget.CardView
                             android:id="@+id/MainMenu_CvVisit"
-                            android:layout_width="173dp"
+                            android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:padding="5dp"
+                            card_view:cardCornerRadius="5dip"
                             card_view:cardUseCompatPadding="true">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_margin="5dp"
-                                android:orientation="vertical"
+                                android:orientation="horizontal"
                                 android:padding="5dp">
 
                                 <ImageView
-                                    android:layout_width="80dp"
-                                    android:layout_height="100dp"
+                                    android:layout_width="48dip"
+                                    android:layout_height="48dip"
                                     android:layout_gravity="center_horizontal"
                                     android:layout_marginBottom="10dp"
-                                    card_view:srcCompat="@drawable/online_shop" />
+                                    card_view:srcCompat="@drawable/mainmenu_store" />
 
-                                <TextView
+                                <LinearLayout
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="left"
-                                    android:text="Kunjungan Toko"
-                                    android:textSize="20sp"
-                                    android:textStyle="bold" />
+                                    android:layout_height="match_parent"
+                                    android:orientation="vertical"
+                                    android:paddingLeft="15dip">
 
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="Check in ke toko" />
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="left"
+                                        android:text="Kunjungan Toko"
+                                        android:textSize="20sp"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="Check in ke toko" />
+                                </LinearLayout>
+
                             </LinearLayout>
                         </androidx.cardview.widget.CardView>
 
                     </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:layout_gravity="top"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:orientation="vertical">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/MainMenu_CvRegister"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="5dp"
+                            card_view:cardCornerRadius="5dip"
+                            card_view:cardUseCompatPadding="true">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_margin="5dp"
+                                android:orientation="horizontal"
+                                android:padding="5dp">
+
+                                <ImageView
+                                    android:layout_width="48dip"
+                                    android:layout_height="48dip"
+                                    android:layout_gravity="center_horizontal"
+                                    android:layout_marginBottom="10dp"
+                                    card_view:srcCompat="@drawable/mainmenu_registerstore" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="vertical"
+                                    android:paddingLeft="15dip">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="left"
+                                        android:text="Pendaftaran Toko"
+                                        android:textSize="20sp"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="Buat pengajuan toko baru" />
+                                </LinearLayout>
+
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dip"
+                        android:orientation="vertical">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/MainMenu_CvReport"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="5dp"
+                            card_view:cardCornerRadius="5dip"
+                            card_view:cardUseCompatPadding="true">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_margin="5dp"
+                                android:orientation="horizontal"
+                                android:padding="5dp">
+
+                                <ImageView
+                                    android:layout_width="48dip"
+                                    android:layout_height="48dip"
+                                    android:layout_gravity="center_horizontal"
+                                    android:layout_marginBottom="10dp"
+                                    card_view:srcCompat="@drawable/mainmenu_report" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="left"
+                                        android:paddingLeft="15dip"
+                                        android:text="Laporan"
+                                        android:textSize="20sp"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:paddingLeft="15dip"
+                                        android:text="Pencapaian penjualan " />
+                                </LinearLayout>
+
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+                    </LinearLayout>
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -250,97 +373,8 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center_vertical"
                     android:gravity="center_horizontal"
-                    android:orientation="horizontal"
+                    android:orientation="vertical"
                     android:padding="10dp">
-
-                    <LinearLayout
-                        android:layout_width="160dip"
-                        android:layout_height="200dp"
-                        android:layout_gravity="top"
-                        android:layout_marginRight="10dp"
-                        android:gravity="center_horizontal|center_vertical"
-                        android:orientation="vertical">
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/MainMenu_CvRegister"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:padding="5dp"
-                            card_view:cardUseCompatPadding="true">
-
-                            <LinearLayout
-                                android:layout_width="150dip"
-                                android:layout_height="match_parent"
-                                android:layout_margin="5dp"
-                                android:orientation="vertical"
-                                android:padding="5dp">
-
-                                <ImageView
-                                    android:layout_width="80dp"
-                                    android:layout_height="100dp"
-                                    android:layout_gravity="center_horizontal"
-                                    android:layout_marginBottom="10dp"
-                                    card_view:srcCompat="@drawable/registration" />
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="left"
-                                    android:text="Daftar Toko"
-                                    android:textSize="20sp"
-                                    android:textStyle="bold" />
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="Buat pengajuan toko baru" />
-                            </LinearLayout>
-                        </androidx.cardview.widget.CardView>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="200dip"
-                        android:layout_marginLeft="10dp"
-                        android:orientation="vertical">
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/MainMenu_CvReport"
-                            android:layout_width="160dp"
-                            android:layout_height="match_parent"
-                            android:padding="5dp"
-                            card_view:cardUseCompatPadding="true">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_margin="5dp"
-                                android:orientation="vertical"
-                                android:padding="5dp">
-
-                                <ImageView
-                                    android:layout_width="80dp"
-                                    android:layout_height="100dp"
-                                    android:layout_gravity="center_horizontal"
-                                    android:layout_marginBottom="10dp"
-                                    card_view:srcCompat="@drawable/research" />
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="left"
-                                    android:text="Laporan"
-                                    android:textSize="20sp"
-                                    android:textStyle="bold" />
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="Pencapaian penjualan " />
-                            </LinearLayout>
-                        </androidx.cardview.widget.CardView>
-                    </LinearLayout>
 
                 </LinearLayout>
 

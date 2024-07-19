@@ -1,28 +1,20 @@
 package com.lapakkreatiflamongan.smdsforce.intent;
 
-import android.Manifest;
 import android.animation.Animator;
 import android.annotation.SuppressLint;
-import android.app.ActivityManager;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.content.res.Configuration;
 import android.location.Location;
-import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
 import android.provider.Settings;
-import android.telephony.SubscriptionInfo;
-import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.KeyEvent;
@@ -37,7 +29,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 import androidx.work.ExistingPeriodicWorkPolicy;
 import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkInfo;
@@ -51,11 +42,8 @@ import com.google.common.util.concurrent.ListenableFuture;
 import java.io.File;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Stack;
-import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
@@ -63,7 +51,6 @@ import com.lapakkreatiflamongan.smdsforce.service.Worker_RealtimeTracking;
 import com.lapakkreatiflamongan.smdsforce.utils.AppConfig;
 import com.lapakkreatiflamongan.smdsforce.utils.Fn_DBHandler;
 import com.lapakkreatiflamongan.smdsforce.R;
-import com.lapakkreatiflamongan.smdsforce.utils.TelephonyInfo;
 import com.lapakkreatiflamongan.smdsforce.api.API_SFA;
 import com.lapakkreatiflamongan.smdsforce.schema.Data_Login;
 import io.github.inflationx.viewpump.ViewPumpContextWrapper;
@@ -87,9 +74,9 @@ public class Activity_Login extends AppCompatActivity {
     List<Data_Login> listValLogin = null;
 
     Button btnSubmit;
-    ImageView btnSetting, btnUpdate;
+    ImageView btnUpdate;
     EditText InputUserName, InputPasword;
-    TextView TxtVersion,TxtForgotPassword;
+    TextView TxtVersion;
 
     final String dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/picFolderSuperVision/";
 
@@ -229,8 +216,6 @@ public class Activity_Login extends AppCompatActivity {
         
         btnSubmit = (Button) findViewById(R.id.Login_Submit);
         btnSubmit.setText("Login");
-        TxtForgotPassword = findViewById(R.id.Login_ResetPassword);
-
 
         InputUserName = (EditText) findViewById(R.id.Login_username);
         if (checkPref(appConfig.getTAG_LASTLOGIN())) {
@@ -356,8 +341,6 @@ public class Activity_Login extends AppCompatActivity {
         });
         TxtVersion = (TextView) findViewById(R.id.Login_TxtVersion);
         TxtVersion.setText("Version " + appConfig.getVERSION_APK() + " ( Build No " + appConfig.getBUILD_NO() + " )");
-
-        btnSetting = (ImageView) findViewById(R.id.Login_ImgSetting);
 
 
         btnUpdate = (ImageView) findViewById(R.id.Login_Update);
