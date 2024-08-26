@@ -86,6 +86,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
+                                    android:paddingRight="3dip"
                                     android:text="Masih mencari data lokasi, pastikan internet aktif" />
                             </LinearLayout>
 
@@ -128,6 +129,7 @@
                                 android:layout_width="250dip"
                                 android:layout_height="130dip"
                                 android:layout_gravity="center_horizontal"
+                                android:layout_marginTop="10dip"
                                 android:layout_weight="1"
                                 app:srcCompat="@drawable/sfa_camera" />
                         </LinearLayout>
@@ -163,13 +165,18 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_marginTop="10dip"
                         android:orientation="vertical">
 
                         <Button
                             android:id="@+id/NewTrip_Save"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="SIMPAN" />
+                            android:background="@drawable/btn_bluegradient"
+                            android:text="SIMPAN"
+                            android:textColor="#FFFFFF"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
                     </LinearLayout>
 
                 </LinearLayout>

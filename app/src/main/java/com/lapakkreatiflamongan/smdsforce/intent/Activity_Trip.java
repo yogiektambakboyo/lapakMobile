@@ -3,6 +3,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -100,6 +101,7 @@ public class Activity_Trip extends AppCompatActivity {
                 android.Manifest.permission.ACCESS_NETWORK_STATE,
                 android.Manifest.permission.ACCESS_WIFI_STATE,
                 android.Manifest.permission.WAKE_LOCK,
+                Manifest.permission.POST_NOTIFICATIONS,
                 android.Manifest.permission.CHANGE_NETWORK_STATE
         };
 

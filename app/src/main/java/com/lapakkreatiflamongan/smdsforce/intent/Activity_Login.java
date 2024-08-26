@@ -1,16 +1,22 @@
 package com.lapakkreatiflamongan.smdsforce.intent;
 
+import android.Manifest;
 import android.animation.Animator;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
@@ -29,6 +35,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.work.ExistingPeriodicWorkPolicy;
 import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkInfo;
@@ -53,6 +62,7 @@ import com.lapakkreatiflamongan.smdsforce.utils.Fn_DBHandler;
 import com.lapakkreatiflamongan.smdsforce.R;
 import com.lapakkreatiflamongan.smdsforce.api.API_SFA;
 import com.lapakkreatiflamongan.smdsforce.schema.Data_Login;
+
 import io.github.inflationx.viewpump.ViewPumpContextWrapper;
 import io.nlopez.smartlocation.OnLocationUpdatedListener;
 import io.nlopez.smartlocation.SmartLocation;
@@ -69,7 +79,7 @@ public class Activity_Login extends AppCompatActivity {
     Fn_DBHandler dbMaster;
     AppConfig appConfig = new AppConfig();
 
-    String Bearer="7",LastLogin = "", SPVCode = "", SPVName = "", Status = "0", Password = "", DownloadDate = "", BranchID = "", BranchName = "";
+    String Bearer = "7", LastLogin = "", SPVCode = "", SPVName = "", Status = "0", Password = "", DownloadDate = "", BranchID = "", BranchName = "";
     String deviceIMEI = "undefined";
     List<Data_Login> listValLogin = null;
 
@@ -80,14 +90,14 @@ public class Activity_Login extends AppCompatActivity {
 
     final String dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/picFolderSuperVision/";
 
-    String LeaderName = "",Force_Upd = "0", Version_Upd = "0.0.7", Link = "", Desc = "", ReadMeLink = "", LinkWeb = "http://sfa.borwita.co.id/supervision/", LinkUpload = "http://sfa.borwita.co.id:3000/api/upload/photo", LinkUploadPHP = "http://sfa.borwita.co.id/supervision/api/v1/uploadfile.php";
+    String LeaderName = "", Force_Upd = "0", Version_Upd = "0.0.7", Link = "", Desc = "", ReadMeLink = "", LinkWeb = "http://sfa.borwita.co.id/supervision/", LinkUpload = "http://sfa.borwita.co.id:3000/api/upload/photo", LinkUploadPHP = "http://sfa.borwita.co.id/supervision/api/v1/uploadfile.php";
 
     private int dpScreen = 0;
     int valid = 0;
     int isAutoDate = 0;
     int isAutoZonaTime = 0;
     int isAirPlaneMode = 0;
-    private  String session = "";
+    private String session = "";
 
     Retrofit retrofits;
     API_SFA myAPI;
@@ -105,6 +115,15 @@ public class Activity_Login extends AppCompatActivity {
         setContentView(R.layout.p_login);
 
         Version_Upd = appConfig.getVERSION_APK();
+
+        int PERMISSION_ALL = 1;
+        String[] PERMISSIONS = {
+                Manifest.permission.POST_NOTIFICATIONS
+        };
+
+        if (!hasPermissions(this, PERMISSIONS)) {
+            ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSION_ALL);
+        }
 
 
         if (android.os.Build.VERSION.SDK_INT > 9) {
@@ -286,6 +305,7 @@ public class Activity_Login extends AppCompatActivity {
                                     }
 
                                     if (Status.equals("1")) {
+                                        dialog.dismiss();
                                         setPrefLogin(InputUserName.getText().toString().toUpperCase().trim(), SPVCode, SPVName, DownloadDate, getToday(), BranchID, BranchName, Bearer, Password, appConfig.getBASE_URL(), LeaderName);
                                         setPrefVersionNo(Version_Upd, Force_Upd);
 
@@ -584,4 +604,17 @@ public class Activity_Login extends AppCompatActivity {
         SettingPrefEditor.putString(appConfig.getTAG_FORCE_UPDATE(),ForceUpdate);
         SettingPrefEditor.commit();
     }
+
+    public static boolean hasPermissions(Context context, String... permissions) {
+        if (context != null && permissions != null) {
+            for (String permission : permissions) {
+                if (ActivityCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
+                    Log.e("onCreate ", "hasPermissions: "+permission );
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
 }

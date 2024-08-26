@@ -1,5 +1,6 @@
 package com.lapakkreatiflamongan.smdsforce.intent;
 
+import android.Manifest;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -120,6 +121,7 @@ public class Activity_Visit extends AppCompatActivity {
                 android.Manifest.permission.ACCESS_NETWORK_STATE,
                 android.Manifest.permission.ACCESS_WIFI_STATE,
                 android.Manifest.permission.WAKE_LOCK,
+                Manifest.permission.POST_NOTIFICATIONS,
                 android.Manifest.permission.CHANGE_NETWORK_STATE
         };
 

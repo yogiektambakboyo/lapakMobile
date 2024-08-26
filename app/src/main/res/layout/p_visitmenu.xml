@@ -25,10 +25,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_margin="10dip"
+                android:layout_marginBottom="1dip"
                 android:padding="10dip"
                 app:cardCornerRadius="5dp"
-                app:cardElevation="5dp">
+                app:cardElevation="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -40,14 +40,20 @@
                     <ImageView
                         android:layout_width="32dip"
                         android:layout_height="match_parent"
-                        app:srcCompat="@drawable/sfa_reports_camera" />
+                        app:srcCompat="@drawable/sfa_camera" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:padding="10dip"
                         android:text="Ambil Photo"
                         android:textColor="@color/colorBlack" />
+
+                    <ImageView
+                        android:layout_width="32dip"
+                        android:layout_height="match_parent"
+                        app:srcCompat="@drawable/arrow" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -55,10 +61,10 @@
                 android:id="@+id/VisitMenu_Order"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dip"
+                android:layout_marginBottom="1dip"
                 android:padding="10dip"
                 app:cardCornerRadius="5dp"
-                app:cardElevation="5dp">
+                app:cardElevation="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -70,14 +76,21 @@
                     <ImageView
                         android:layout_width="32dip"
                         android:layout_height="match_parent"
-                        app:srcCompat="@drawable/sfa_reports_order" />
+                        app:srcCompat="@drawable/invoices" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:padding="10dip"
                         android:text="Pesanan"
                         android:textColor="@color/colorBlack" />
+
+                    <ImageView
+                        android:layout_width="32dip"
+                        android:layout_height="match_parent"
+                        app:srcCompat="@drawable/arrow" />
+
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -85,10 +98,9 @@
                 android:id="@+id/VisitMenu_CallAnalys"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dip"
                 android:padding="10dip"
                 app:cardCornerRadius="5dp"
-                app:cardElevation="5dp">
+                app:cardElevation="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -100,14 +112,20 @@
                     <ImageView
                         android:layout_width="32dip"
                         android:layout_height="match_parent"
-                        app:srcCompat="@drawable/sfa_reports_mtd" />
+                        app:srcCompat="@drawable/timer" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:padding="10dip"
                         android:text="Tutup Kunjungan"
                         android:textColor="@color/colorBlack" />
+
+                    <ImageView
+                        android:layout_width="32dip"
+                        android:layout_height="match_parent"
+                        app:srcCompat="@drawable/arrow" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 

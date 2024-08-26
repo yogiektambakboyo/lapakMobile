@@ -1,9 +1,5 @@
 package com.lapakkreatiflamongan.smdsforce.utils;
 
-/**
- * Created by handi on 22/04/19.
- */
-
 public class NetworkUtils {
 
     public static String code(String code) {

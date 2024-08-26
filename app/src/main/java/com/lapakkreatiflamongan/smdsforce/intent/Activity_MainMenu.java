@@ -78,7 +78,7 @@ public class Activity_MainMenu extends AppCompatActivity {
     String trip_id = "0";
 
     LinearLayout MainMenu_LyActiveTrip;
-    TextView MainMenu_TxtActiveTripLabel,MainMenu_TxtActiveTripGeo;
+    TextView MainMenu_TxtActiveTripLabel,MainMenu_TxtActiveTripID,MainMenu_TxtActiveTripGeo;
     CardView MainMenu_CvTripNew,MainMenu_CvVisit,MainMenu_CvReport,MainMenu_CvActiveTrip,MainMenu_CvRegister;
     SwipeRefreshLayout SWRefresh;
     Dialog dialog;
@@ -128,6 +128,7 @@ public class Activity_MainMenu extends AppCompatActivity {
         MainMenu_LyActiveTrip = findViewById(R.id.MainMenu_LyActiveTrip);
         MainMenu_TxtActiveTripGeo = findViewById(R.id.MainMenu_TxtActiveTripGeo);
         MainMenu_TxtActiveTripLabel = findViewById(R.id.MainMenu_TxtActiveTripLabel);
+        MainMenu_TxtActiveTripID = findViewById(R.id.MainMenu_TxtActiveTripID);
 
         MainMenu_CvActiveTrip = findViewById(R.id.MainMenu_CvActiveTrip);
         MainMenu_CvRegister = findViewById(R.id.MainMenu_CvRegister);
@@ -183,7 +184,7 @@ public class Activity_MainMenu extends AppCompatActivity {
                 params.setMargins(20, 5, 30, 0);
 
                 final TextView labelQuestion = new TextView(Activity_MainMenu.this);
-                labelQuestion.setText("Trip aktif saat ini adalah "+MainMenu_TxtActiveTripLabel.getText().toString());
+                labelQuestion.setText("Trip aktif saat ini adalah "+MainMenu_TxtActiveTripID.getText().toString());
 
                 layout.addView(labelQuestion,params);
 
@@ -401,10 +402,10 @@ public class Activity_MainMenu extends AppCompatActivity {
         SalesName = getPref("Selamat Datang "+getPref(appConfig.getTAG_SPVNAME()));
         SalesCode = getPref(appConfig.getTAG_SPVCODE());
 
-        getSupportActionBar().setTitle(" Dashboard");
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setDisplayUseLogoEnabled(true);
-        getSupportActionBar().setLogo(R.drawable.x_house);
+        getSupportActionBar().setTitle(" Beranda");
+        //getSupportActionBar().setDisplayShowHomeEnabled(true);
+        //getSupportActionBar().setDisplayUseLogoEnabled(true);
+        //getSupportActionBar().setLogo(R.drawable.x_house);
 
         TxtTransactionDate = (TextView) findViewById(R.id.MainMenu_TglTransaksi);
         TxtTransactionDate.setText("Date : "+DownloadDate+" ("+weekstring+")");
@@ -460,7 +461,8 @@ public class Activity_MainMenu extends AppCompatActivity {
                             MainMenu_LyActiveTrip.setVisibility(View.VISIBLE);
                             trip_id = data.get(0).getId();
                             MainMenu_TxtActiveTripGeo.setText(""+data.get(0).getGeoreverse());
-                            MainMenu_TxtActiveTripLabel.setText("Trip #"+data.get(0).getId()+" Durasi ("+data.get(0).getDuration()+" Menit)");
+                            MainMenu_TxtActiveTripLabel.setText(" Durasi "+data.get(0).getDuration()+" Menit");
+                            MainMenu_TxtActiveTripID.setText("Trip #"+data.get(0).getId());
                         }else{
                             MainMenu_LyActiveTrip.setVisibility(View.GONE);
                         }
@@ -593,7 +595,7 @@ public class Activity_MainMenu extends AppCompatActivity {
         params.setMargins(20, 15, 30, 15);
 
         final TextView TxtLblNama = new TextView(this);
-        TxtLblNama.setText("SMD SForce v "+VERSION_APK);
+        TxtLblNama.setText("eOrder v "+VERSION_APK);
         TxtLblNama.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
         TxtLblNama.setTextColor(Color.BLACK);
 

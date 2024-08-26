@@ -576,7 +576,7 @@ public class Activity_NewTrip extends AppCompatActivity {
 
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("Konfirmasi");
-            builder.setMessage("Apakah anda yakin akan keluar dari menu New Trip?").setPositiveButton("Ya", dialogClickListener)
+            builder.setMessage("Apakah anda yakin akan keluar dari menu Perjalanan Baru?").setPositiveButton("Ya", dialogClickListener)
                     .setNegativeButton("Tidak", dialogClickListener).show();
         }
         return false;

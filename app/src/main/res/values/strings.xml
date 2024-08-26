@@ -64,7 +64,9 @@
     <string name="changepassword">Change Password</string>
     <string name="resetpassword">Reset Password</string>
     <string name="requestedit">Perubahan Data</string>
-    <string name="newtrip">New Trip</string>
+    <string name="newtrip">Perjalanan Baru</string>
     <string name="title_activity_report">Activity_Report</string>
+    <string name="default_notification_channel_id">firebaseChan</string>
+    <string name="default_notification_channel_desc">firebaseChan</string>
 </resources>
 

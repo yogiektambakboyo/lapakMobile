@@ -1,16 +1,23 @@
 package com.lapakkreatiflamongan.smdsforce.intent;
 
+import static android.content.ContentValues.TAG;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
 import android.animation.Animator;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,9 +25,13 @@ import android.widget.Toast;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.lapakkreatiflamongan.smdsforce.R;
 import com.lapakkreatiflamongan.smdsforce.api.API_SFA;
 import com.lapakkreatiflamongan.smdsforce.schema.Data_Login;
+import com.lapakkreatiflamongan.smdsforce.service.FirebaseService;
 import com.lapakkreatiflamongan.smdsforce.utils.AppConfig;
 
 import java.lang.reflect.Method;
@@ -49,6 +60,8 @@ public class Activity_Loading extends AppCompatActivity {
     String Bearer="7",LastLogin = "", SPVCode = "", SPVName = "", Status = "0", Password = "", DownloadDate = "", BranchID = "", BranchName = "";
     String  deviceIMEI = "undefined";
     int isAirPlaneMode = 0;
+    String title = "";
+    String message = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +76,6 @@ public class Activity_Loading extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         myAPI = retrofits.create(API_SFA.class);
-
         YoYo.with(Techniques.FadeIn).duration(3000).withListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animator) {
@@ -72,10 +84,11 @@ public class Activity_Loading extends AppCompatActivity {
 
             @Override
             public void onAnimationEnd(Animator animator) {
-
-                if (checkPref(appConfig.getTAG_PASSWORD())){
+               if (checkPref(appConfig.getTAG_PASSWORD())){
                     passStored = getPref(appConfig.getTAG_PASSWORD());
                     userStored = getPref(appConfig.getTAG_LASTLOGIN());
+
+                    setPrefNotif("0","");
 
                     if(!passStored.equals("") && !userStored.equals("")){
                         // Download
@@ -124,6 +137,7 @@ public class Activity_Loading extends AppCompatActivity {
                                     }
 
                                     if (Status.equals("1")) {
+                                        dialog.dismiss();
                                         setPrefLogin(userStored, SPVCode, SPVName, DownloadDate, getToday(), BranchID, BranchName, Bearer, Password, appConfig.getBASE_URL(), "");
                                         //setPrefVersionNo(Version_Upd, Force_Upd);
 
@@ -170,6 +184,7 @@ public class Activity_Loading extends AppCompatActivity {
 
 
                 }else{
+                    setPrefNotif("0","");
                     Intent intent = new Intent(Activity_Loading.this,Activity_Login.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
@@ -187,8 +202,7 @@ public class Activity_Loading extends AppCompatActivity {
 
             }
         }).playOn(ImgLoading);
-
-
+        getCurrentFirebaseToken();
     }
 
     public boolean checkPref(String KEY){
@@ -225,11 +239,34 @@ public class Activity_Loading extends AppCompatActivity {
         SettingPrefEditor.commit();
     }
 
+    public void setPrefNotif(String Title, String Msg){
+        SharedPreferences SettingPref = getSharedPreferences(appConfig.getTAG_PREF(), Context.MODE_PRIVATE);
+        SharedPreferences.Editor SettingPrefEditor = SettingPref.edit();
+        SettingPrefEditor.putString(appConfig.getTAG_NOTIFTITLE(),Title);
+        SettingPrefEditor.putString(appConfig.getTAG_NOTIFMSG(),Msg);
+        SettingPrefEditor.commit();
+    }
+
+    private void getCurrentFirebaseToken(){
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, "Fetching FCM registration token failed", task.getException());
+                            return;
+                        }
+                    }
+                });
+    }
+
     public String getPref(String KEY){
         SharedPreferences SettingPref = getSharedPreferences(appConfig.getTAG_PREF(), Context.MODE_PRIVATE);
         String Value=SettingPref.getString(KEY, "0");
         return  Value;
     }
+
+
 
     public String getSession(){
         Calendar c = Calendar.getInstance();

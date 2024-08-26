@@ -39,7 +39,11 @@
                 android:layout_width="80dip"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dip"
-                android:text="Cari" />
+                android:background="@drawable/btn_blue"
+                android:text="Cari"
+                android:textColor="@color/colorWhite"
+                android:textSize="16sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <ListView

@@ -13,8 +13,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class AppConfig {
-    private String VERSION_APK = "1.0.1";
-    private String BUILD_NO = "11";
+    private String VERSION_APK = "1.1.1";
+    private String BUILD_NO = "13";
 
     private String App_Name = "eOrder";
 
@@ -25,6 +25,9 @@ public class AppConfig {
     private final String TAG_SELLERNAME = "sellername";
 
     private final String TAG_LASTLOGIN = "lastlogin";
+    private final String TAG_NOTIFTITLE = "notiftitle";
+    private final String TAG_NOTIFMSG = "notifmsg";
+
     private final String TAG_ACTIVE = "active";
     private final String TAG_MESSAGE = "message";
     private final String TAG_SESSION = "session";
@@ -200,6 +203,14 @@ public class AppConfig {
 
     public String getTAG_FORCE_UPDATE() {
         return TAG_FORCE_UPDATE;
+    }
+
+    public String getTAG_NOTIFTITLE() {
+        return TAG_NOTIFTITLE;
+    }
+
+    public String getTAG_NOTIFMSG() {
+        return TAG_NOTIFMSG;
     }
 
     public String getTAG_LEADER() {
